@@ -63,7 +63,6 @@ export default class UserRepositoryMongo implements UserRepository {
         const result = await collection.findOne({
             username: user.username
         })
-        console.log(result)
         return result as unknown as UserData
     }
 }
