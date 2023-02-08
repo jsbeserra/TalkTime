@@ -1,4 +1,3 @@
-
 import * as jwt from 'jsonwebtoken'
 import { Payload, TokenManager } from '../../domain/token-manager'
 
