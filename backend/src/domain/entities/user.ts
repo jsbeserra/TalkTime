@@ -4,7 +4,7 @@ import Password from "../password"
 import Username from "../username"
 
 export default class User {
-    constructor(readonly email: Email,readonly password: Password,readonly name: Name,readonly username: Username) {
+    constructor(readonly email: Email,readonly password: Password,readonly name: Name,readonly username: Username,readonly id?:string) {
     }
 
     public getUser() {
@@ -12,7 +12,8 @@ export default class User {
             name:this.name.value,
             username:this.username.value,
             password:this.password.value,
-            email:this.email.value
+            email:this.email.value,
+            id: this.id
         }
         return user
     }
