@@ -1,20 +1,25 @@
 
-import {describe,test,expect,beforeAll,afterEach} from 'vitest'
+import {describe,test,expect,beforeAll,afterEach, afterAll} from 'vitest'
 import { faker } from '@faker-js/faker';
 import UserRepositoryMongo from '../../../../../src/infra/repository/user-repository-mongo';
 import { InputAddUser } from '../../../../../src/aplication/use-case/user/add-user/input-add-user';
 import ConnectionMongoDb from '../../../../../src/infra/connection/connectionMongoDb';
 import UserAddUseCase from '../../../../../src/aplication/use-case/user/add-user/user-add-usecase';
 import EncoderAdpterBcrypt from '../../../../../src/infra/adpters/encoder-adpter-bcrypt';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 
 describe('UserAddUseCase', () => {
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let encoderAdpterBcrypt: EncoderAdpterBcrypt
+    let mongod:MongoMemoryServer
+
     beforeAll(async () => {
+        mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
-        connection = new ConnectionMongoDb('mongodb://admin:admin@localhost:27017', 'chat_api')
+        connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
     })
 
@@ -22,6 +27,11 @@ describe('UserAddUseCase', () => {
         const collection = await connection.getCollection('users')
         await collection.deleteMany({})
         await connection.disconnect()
+
+    })
+    
+    afterAll(async()=>{
+        await mongod.stop()
     })
 
     test('Deve criar um usuário', async () => {

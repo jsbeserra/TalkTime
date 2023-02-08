@@ -1,3 +1,4 @@
+import { MongoMemoryServer } from "mongodb-memory-server";
 import { describe, test, beforeAll, expect, afterAll } from "vitest";
 import { InputAddUser } from "../../../../../src/aplication/use-case/user/add-user/input-add-user";
 import UserAddUseCase from "../../../../../src/aplication/use-case/user/add-user/user-add-usecase";
@@ -10,8 +11,11 @@ describe('UserUpdateUsecase', () => {
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let encoderAdpterBcrypt:EncoderAdpterBcrypt
+    let mongod:MongoMemoryServer
     beforeAll(async () => {
-        connection = new ConnectionMongoDb('mongodb://admin:admin@localhost:27017', 'chat_api')
+        mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
         const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
@@ -29,6 +33,7 @@ describe('UserUpdateUsecase', () => {
         const collection = await connection.getCollection('users')
         await collection.deleteMany({})
         await connection.disconnect()
+        await mongod.stop()
     })
 
     test('Deve atualizar o e-mail do usuário', async () => {
@@ -43,4 +48,5 @@ describe('UserUpdateUsecase', () => {
         const result = await userUpdateUsecase.exec(input)
         expect(result.email).toBe('fakeEmailUpdated@gmail.com')
     })
+    
 })
