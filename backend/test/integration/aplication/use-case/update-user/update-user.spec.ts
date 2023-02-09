@@ -45,7 +45,7 @@ describe('UserUpdateUsecase', () => {
             username: 'fakeUsername',
             name: 'fakename'
         }
-        const result = await userUpdateUsecase.exec(input)
+        const result = await userUpdateUsecase.handle(input)
         expect(result.email).toBe('fakeEmailUpdated@gmail.com')
     })
     

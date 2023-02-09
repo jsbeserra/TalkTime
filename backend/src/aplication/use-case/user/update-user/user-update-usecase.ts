@@ -5,13 +5,14 @@ import Name from "../../../../domain/name";
 import Password from "../../../../domain/password";
 import { UserRepository } from "../../../../domain/repository/users/user-repository";
 import Username from "../../../../domain/username";
+import { UseCase } from "../../use-case";
 import { InputUpdateUser } from "./input-user-update";
 import { OutputUpdateUser } from "./output-user-update";
 
-export default class UserUpdateUsecase {
+export default class UserUpdateUsecase implements UseCase {
     constructor(readonly userRepository: UserRepository, private encoder: Encoder) { }
 
-    async exec(inputData: InputUpdateUser): Promise<OutputUpdateUser> {
+    async handle(inputData: InputUpdateUser): Promise<OutputUpdateUser> {
         const exists = await this.userRepository.findByUserName(inputData.username)
         if (!exists) throw new Error('User not found')
         const updatedUser = new User(new Email(inputData.email ?? exists.email.value), new Password(inputData.password), new Name(exists.name.value), new Username(exists.username.value))
