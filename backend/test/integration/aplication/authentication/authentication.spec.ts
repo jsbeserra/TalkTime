@@ -40,32 +40,32 @@ describe('AuthenticationUseCase', () => {
 
     test('Deve autenticar um usuário', async () => {
         const jwtTokenManager = new JwtTokenManager("secrete")
-        const userUpdateUsecase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
+        const authenticationUseCase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
         const input = {
             email: 'fakeEmail@gmail.com',
             password: '12aSx#',
         }
-        const result = await userUpdateUsecase.auth(input)
+        const result = await authenticationUseCase.auth(input)
         expect(result).toBeTruthy()
     })
 
     test('Não deve autenticar o usuário se o email não existir', async () => {
         const jwtTokenManager = new JwtTokenManager("secrete")
-        const userUpdateUsecase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
+        const authenticationUseCase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
         const input = {
             email: 'fakeEmail123@gmail.com',
             password: '12aSx#',
         }
-        expect(async ()=>await userUpdateUsecase.auth(input)).rejects.toThrow(new Error('User not found'))
+        expect(async ()=>await authenticationUseCase.auth(input)).rejects.toThrow(new Error('User not found'))
     })
 
     test('Não deve autenticar o usuário se a senha estiver errada', async () => {
         const jwtTokenManager = new JwtTokenManager("secrete")
-        const userUpdateUsecase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
+        const authenticationUseCase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
         const input = {
             email: 'fakeEmail@gmail.com',
             password: '00aAx#',
         }
-        expect(async ()=>await userUpdateUsecase.auth(input)).rejects.toThrow(new Error('Invalid email or password'))
+        expect(async ()=>await authenticationUseCase.auth(input)).rejects.toThrow(new Error('Invalid email or password'))
     })
 })
