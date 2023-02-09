@@ -6,9 +6,9 @@ import { WebController } from "src/infra/http/web-controller"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import { environment } from "../config/config"
 import { SignUpController } from "../../presentation/controllers/sign-up"
-import SignInUseCase from "src/aplication/use-case/sing-up/sign-in"
+import SignInUseCase from "src/aplication/use-case/sing-ip/sign-in"
 
-export const makeSignUpController = (): WebController => {
+export const makeSignInController = (): WebController => {
     const mongoDbDriveAdpter: ConnectionMongoDb = new ConnectionMongoDb(environment.MONGODB_URI,environment.MONGODB_NAME)
     const userRepository = new UserRepositoryMongo(mongoDbDriveAdpter)
     const jwtTokenManager = new JwtTokenManager(environment.SECRETE)

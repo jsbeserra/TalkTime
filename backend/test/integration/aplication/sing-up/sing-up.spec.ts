@@ -7,7 +7,9 @@ import { JwtTokenManager } from "../../../../src/infra/adpters/token-manager-jso
 import ConnectionMongoDb from "../../../../src/infra/connection/connectionMongoDb";
 import UserRepositoryMongo from "../../../../src/infra/repository/user-repository-mongo";
 import {MongoMemoryServer} from 'mongodb-memory-server'
-import SignInUseCase from "src/aplication/use-case/authentication/sing-up/sign-in";
+import SignInUseCase from "src/aplication/use-case/sing-ip/sign-in";
+
+
 
 describe('SignInUseCase', () => {
     let userRepository: UserRepositoryMongo
