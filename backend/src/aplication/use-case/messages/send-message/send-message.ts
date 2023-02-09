@@ -1,6 +1,6 @@
-import Message from "../../../domain/entities/message";
-import { MessagesRepository } from "../../../domain/repository/users/messages-repository";
-import { UserRepository } from "../../../domain/repository/users/user-repository";
+import Message from "../../../../domain/entities/message";
+import { MessagesRepository } from "../../../../domain/repository/users/messages-repository";
+import { UserRepository } from "../../../../domain/repository/users/user-repository";
 import InputSendMessage from "./input-send-message";
 
 export default class SendMessage {

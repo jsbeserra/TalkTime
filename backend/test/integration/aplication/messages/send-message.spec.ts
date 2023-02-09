@@ -1,6 +1,6 @@
 import MongoMemoryServer from "mongodb-memory-server-core";
 import { describe, beforeAll, test,expect, afterAll, afterEach } from "vitest";
-import SendMessage from "../../../../src/aplication/use-case/messages/send-message";
+import SendMessage from "../../../../src/aplication/use-case/messages/send-message/send-message";
 import UserAddUseCase from "../../../../src/aplication/use-case/user/add-user/user-add-usecase";
 import Message from "../../../../src/domain/entities/message";
 import { MessagesRepository } from "../../../../src/domain/repository/users/messages-repository";
