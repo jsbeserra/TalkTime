@@ -1,0 +1,57 @@
+import { describe, test, beforeAll, expect, afterAll } from "vitest";
+import AuthenticationUseCase from "../../../../src/aplication/use-case/authentication/authentication";
+import { InputAddUser } from "../../../../src/aplication/use-case/user/add-user/input-add-user";
+import UserAddUseCase from "../../../../src/aplication/use-case/user/add-user/user-add-usecase";
+import EncoderAdpterBcrypt from "../../../../src/infra/adpters/encoder-adpter-bcrypt";
+import { JwtTokenManager } from "../../../../src/infra/adpters/token-manager-jsonweToken-adpter";
+import ConnectionMongoDb from "../../../../src/infra/connection/connectionMongoDb";
+import UserRepositoryMongo from "../../../../src/infra/repository/user-repository-mongo";
+import {MongoMemoryServer} from 'mongodb-memory-server'
+import SignInUseCase from "src/aplication/use-case/authentication/sing-up/sign-in";
+
+describe('SignInUseCase', () => {
+    let userRepository: UserRepositoryMongo
+    let connection: ConnectionMongoDb
+    let encoderAdpterBcrypt:EncoderAdpterBcrypt
+    let mongod:MongoMemoryServer
+
+    beforeAll(async () => {
+        mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        connection = new ConnectionMongoDb(uri, 'chat_api')
+        userRepository = new UserRepositoryMongo(connection)
+        encoderAdpterBcrypt = new EncoderAdpterBcrypt()
+        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const fakeEmail = 'fakeEmail@gmail.com'
+        const userInputData: InputAddUser = {
+            email: fakeEmail,
+            password: '12aSx#',
+            username: 'fakeUsername',
+            name: 'fakename'
+        }
+        await userAdd.handle(userInputData)
+    })
+
+    afterAll(async () => {
+        const collection = await connection.getCollection('users')
+        await collection.deleteMany({})
+        await connection.disconnect()
+        await mongod.stop()
+    })
+
+    test('Deve logar um usuário', async () => {
+        const jwtTokenManager = new JwtTokenManager("secrete")
+        const authenticationUseCase = new AuthenticationUseCase(userRepository,encoderAdpterBcrypt,jwtTokenManager)
+        const signInUseCase = new SignInUseCase(authenticationUseCase,userRepository)
+        const input = {
+            email: 'fakeEmail@gmail.com',
+            password: '12aSx#',
+        }
+        const result = await signInUseCase.handle(input)
+        expect(result).toMatchObject({
+            email: 'fakeEmail@gmail.com',
+            username: 'fakeUsername',
+            name: 'fakename'
+        })
+    })
+})
