@@ -7,9 +7,10 @@ import Name from "../../../../domain/name";
 import Password from "../../../../domain/password";
 import { UserRepository } from "../../../../domain/repository/users/user-repository";
 import Username from "../../../../domain/username";
+import { UseCase } from "../../use-case";
 import { InputAddUser } from "./input-add-user";
 
-export default class UserAddUseCase {
+export default class UserAddUseCase implements UseCase{
     constructor(readonly userRepository: UserRepository, private encoder:Encoder) { }
 
     async handle(inputData: InputAddUser): Promise<void> {

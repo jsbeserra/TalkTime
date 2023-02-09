@@ -1,3 +1,3 @@
 export interface UseCase {
-    exec (request: any): Promise<any>
-  }
+  handle(request: any): Promise<any>
+}

@@ -12,7 +12,7 @@ export class SignUpController implements ControllerOperation {
 
     async operation(request: HttpRequest): Promise<HttpResponse> {
         try {
-            const result = await this.useCase.exec(request.params)
+            const result = await this.useCase.handle(request.params)
             return ok(result)
         } catch (err: any) {
             return badRequest(err.message)
