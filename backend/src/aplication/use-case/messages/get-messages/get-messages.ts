@@ -1,7 +1,7 @@
-import { MessagesRepository } from "../../../domain/repository/users/messages-repository";
-import { UserRepository } from "../../../domain/repository/users/user-repository";
-import InputGetMessages from "./input-get-messages";
-import OutputGetMessages from "./output-get-messages";
+import { MessagesRepository } from "../../../../domain/repository/users/messages-repository";
+import { UserRepository } from "../../../../domain/repository/users/user-repository";
+import InputGetMessages from "../input-get-messages";
+import OutputGetMessages from "../output-get-messages";
 
 export default class GetMessages {
     constructor(private messagesRepository:MessagesRepository,private userRepository: UserRepository){}

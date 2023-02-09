@@ -1,7 +1,7 @@
 import MongoMemoryServer from "mongodb-memory-server-core";
 import { describe, beforeAll, test, expect, afterAll, afterEach } from "vitest";
-import GetMessages from "../../../../src/aplication/use-case/messages/get-messages";
-import SendMessage from "../../../../src/aplication/use-case/messages/send-message";
+import GetMessages from "../../../../src/aplication/use-case/messages/get-messages/get-messages";
+import SendMessage from "../../../../src/aplication/use-case/messages/send-message/send-message";
 import UserAddUseCase from "../../../../src/aplication/use-case/user/add-user/user-add-usecase";
 import { MessagesRepository } from "../../../../src/domain/repository/users/messages-repository";
 import EncoderAdpterBcrypt from "../../../../src/infra/adpters/encoder-adpter-bcrypt";
