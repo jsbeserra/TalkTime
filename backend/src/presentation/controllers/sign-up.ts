@@ -14,8 +14,8 @@ export class SignUpController implements ControllerOperation {
         try {
             const result = await this.useCase.handle(request.body)
             return ok(result)
-        } catch (err: any) {
-            return badRequest(err.message)
+        } catch (err: any) {   
+            return badRequest(err)
         }
     }
 
