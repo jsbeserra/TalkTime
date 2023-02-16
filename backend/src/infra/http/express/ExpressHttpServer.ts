@@ -1,10 +1,10 @@
 import HttpServer from "./HttpServer";
-import express from "express";
+import express,{Express} from "express";
 import cors from "cors";
 import setupRoutes from "src/main/config/setup-routes";
 
 export default class ExpressHttpServer implements HttpServer {
-	app: any;
+	app: Express;
 
 	constructor () {
 		this.app = express();
@@ -13,7 +13,7 @@ export default class ExpressHttpServer implements HttpServer {
 		setupRoutes(this.app)
 	}
 	
-	listen(port: number): void {
+	listen(port: number): any {
 		return this.app.listen(port);
 	}
 }
