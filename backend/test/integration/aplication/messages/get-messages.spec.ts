@@ -1,4 +1,5 @@
 import MongoMemoryServer from "mongodb-memory-server-core";
+import FakeMessager from "test/infra/fake-messager";
 import { describe, beforeAll, test, expect, afterAll, afterEach } from "vitest";
 import GetMessages from "../../../../src/aplication/use-case/messages/get-messages/get-messages";
 import SendMessage from "../../../../src/aplication/use-case/messages/send-message/send-message";
@@ -25,7 +26,8 @@ describe('GetMessages', () => {
         userRepository = new UserRepositoryMongo(connection)
         messagesRepository = new MessagesRepositoryMongoDb(connection)
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
-        sendMessage = new SendMessage(messagesRepository, userRepository)
+        const fakeMessager = new FakeMessager()
+        sendMessage = new SendMessage(messagesRepository, userRepository,fakeMessager)
         sut = new GetMessages(messagesRepository, userRepository)
         const userAdd = new UserAddUseCase(userRepository, encoderAdpterBcrypt)
         const userInputData1 = {
