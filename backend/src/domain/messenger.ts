@@ -1,4 +1,4 @@
 export default interface Messenger {
-    deliver(recipient:string,message:string):Promise<void>
+    deliver(senderUsername:string, recipientUsername: string, message: string,send_at:Date):Promise<void>
     collect(callback:any):Promise<void>
 }

@@ -14,6 +14,6 @@ export default class SendMessage {
         if(!sender) throw new Error('Sender user not found')
         const message = new Message(input.senderUsername,input.recipientUsername,input.message, input.send_at)
         await this.messagesRepository.save(message)
-        await this.messenger.deliver(input.recipientUsername,input.message)
+        await this.messenger.deliver(input.senderUsername,input.recipientUsername,input.message,input.send_at)
     }
 }
