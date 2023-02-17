@@ -1,14 +1,18 @@
+import http from "http";
 import SocketIoAdpter from "src/infra/adpters/socketio-adpter";
 import ExpressHttpServer from "../infra/http/express/ExpressHttpServer";
 import { makeSendMessage } from "./factories/send-message-factory";
+import 'dotenv/config';
 
 async function main() {
-	const httpServer = new ExpressHttpServer();
-	httpServer.listen(3003);
-	const socketIoAdpter = new SocketIoAdpter(httpServer.app)
+	const httpServerExpress = new ExpressHttpServer();
+	const httpServer = http.createServer(httpServerExpress.app)
+	const socketIoAdpter = new SocketIoAdpter(httpServer)
 	const sendMessage = makeSendMessage(socketIoAdpter)
 	socketIoAdpter.collect(sendMessage)
-	console.log("Server started")
+	httpServer.listen(process.env.PORT,()=>{
+		console.log("Server started")
+	})	
 }
 
 main();
