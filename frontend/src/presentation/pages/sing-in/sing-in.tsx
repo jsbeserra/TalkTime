@@ -1,26 +1,32 @@
-import { Grid, Input, Text, HStack, Flex, Button, FormControl, FormLabel } from '@chakra-ui/react';
+import { Grid, Input, HStack, VStack, Flex, Button, FormControl, FormLabel, Container, Card, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import SignInUseCase from '../../../aplication/usecase/sign-in';
 
 interface ISingIn {
-    signInUseCase:SignInUseCase
+    signInUseCase: SignInUseCase
 }
-const SingIn: React.FC<ISingIn> = ({signInUseCase}) => {
-    const [email,setemail] = useState<string>("")
-    const [password,setpassword] = useState<string>("")
+const SingIn: React.FC<ISingIn> = ({ signInUseCase }) => {
+    const [email, setemail] = useState<string>("")
+    const [password, setpassword] = useState<string>("")
     return (
-        <HStack w='full' h={'100vh'}>
-            <Flex w={'full'} h={'100vh'} borderRadius={1}>
-                <Grid height={200}>
-                    <Text>E-mail</Text>
-                    <Input name='email' type='email' onChange={(e)=>setemail(e.currentTarget.value)}/>
-                    <Text>Senha</Text>
-                    <Input name='password' type='password' onChange={(e)=>setpassword(e.currentTarget.value)}/>
-                    <Button onClick={async()=> await signInUseCase.handle({email,password})}>Login</Button>
-                </Grid >
-            </Flex>
-            <Flex w={'full'} h={'100vh'} borderRadius={1}>
-                <Grid height={200}>
+        <Flex bg={''} w='100vw' h='100vh' alignItems={'center'} justifyContent={'center'}>
+            <Card w={'50vw'} justifyContent={'center'} flexDirection='row'>
+                <VStack w={'50%'} spacing={4} justifyContent='flex-start' alignItems={'flex-start'} p='10'>
+                    <Heading>
+                        Entrar
+                    </Heading>
+                    <FormControl>
+                        <FormLabel>Email</FormLabel>
+                        <Input placeholder="Email" value={email} />
+                        <FormLabel>Password</FormLabel>
+                        <Input placeholder="Password" value={password} />
+                        <Button onClick={async () => await signInUseCase.handle({ email, password })}>Login</Button>
+                    </FormControl>
+                </VStack>
+                <VStack w={'50%'} spacing={4} justifyContent='flex-start' alignItems={'flex-start'} p='10'>
+                    <Heading>
+                        Cadastrar
+                    </Heading>
                     <FormControl>
                         <FormLabel>Nome</FormLabel>
                         <Input />
@@ -36,10 +42,9 @@ const SingIn: React.FC<ISingIn> = ({signInUseCase}) => {
                         <Input />
                         <Button>Criar</Button>
                     </FormControl>
-
-                </Grid >
-            </Flex>
-        </HStack>
+                </VStack>
+            </Card>
+        </Flex>
     );
 }
 
