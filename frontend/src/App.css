@@ -1,42 +1,56 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+} */
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3264c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.content {
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #E0E0E0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+::-webkit-scrollbar {
+  width: 3px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6F7179; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+@media screen and (min-width: 1441px) {
+  .content {
+    top: 19px;
+    width: calc(100% - 38px);
+    max-width: 1600px;
+    height: calc(100% - 38px);
   }
-  to {
-    transform: rotate(360deg);
+
+  /* html[dir] .app-wrapper-web ._1jJ70 {
+      margin: 0 auto;
+      box-shadow: 0 6px 18px rgba(var(--shadow-rgb),.05)
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  html[dir] .app-wrapper-web.safari-fix ._1jJ70 {
+      border-radius: 4px
+  } */
 }

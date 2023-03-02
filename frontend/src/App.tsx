@@ -1,11 +1,16 @@
 import Router from './main/routes/routes'
-import { ChakraProvider} from '@chakra-ui/react'
+import { ChakraProvider, Container, HStack } from '@chakra-ui/react'
 import { customtheme } from './infra/theme/custom-theme'
-
+import './App.css'
 function App() {
   return (
     <ChakraProvider theme={customtheme}>
-      <Router></Router>
+      <HStack className={'app'}>
+        <HStack className='content'>
+          <Router></Router>
+        </HStack>
+        {/* <Router></Router> */}
+      </HStack>
     </ChakraProvider>
   )
 }
