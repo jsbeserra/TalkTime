@@ -7,7 +7,11 @@
 .app {
   width: 100vw;
   height: 100vh;
-  background-color: #3264c7;
+  /* background-color: #3264c7; */
+  background-color: #82fcf0;
+  /* background: linear-gradient(180deg, rgba(130,252,240,1) 0%, rgba(0,153,137,1) 100%); */
+  background: linear-gradient(180deg, rgba(108,218,207,1) 0%, rgba(0,153,137,1) 100%);
+  /* background: linear-gradient(180deg, rgba(0,93,119,1) 0%, rgba(0,112,100,1) 35%, rgba(0,17,35,1) 100%); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,12 +34,12 @@
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6F7179; 
+  background: #5693A1; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #025E73; 
 }
 @media screen and (min-width: 1441px) {
   .content {

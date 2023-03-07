@@ -9,17 +9,17 @@ import React from 'react';
 const SideMenu: React.FC = () => {
     return (
         <VStack w={'100%'} alignItems={'center'} flexDir='column' justifyContent={'flex-start'}>
-            <Button borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
-                <AiFillMessage size={25} color='#383838' />
+            <Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
+                <AiFillMessage size={25}  />
             </Button>
-            <Button borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
-                <FaUsers size={25} color='#383838' />
+            <Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
+                <FaUsers size={25}  />
             </Button>
-            <Button borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
-                <IoCallSharp size={25} color='#383838' />
+            <Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
+                <IoCallSharp size={25}  />
             </Button>
-            <Button borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
-                <IoMdSettings size={30} color='#383838' />
+            <Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
+                <IoMdSettings size={30}  />
             </Button>
         </VStack>
     );
