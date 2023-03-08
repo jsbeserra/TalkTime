@@ -1,4 +1,4 @@
-import { ISignGateway } from "../../domain/gateways/sing/sign-gateway";
+import { ISignGateway } from "../../../domain/gateways/sing/sign-gateway";
 import { InputSignIn } from "./input-sign-in";
 
 export default class SignInUseCase {
