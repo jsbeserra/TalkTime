@@ -15,7 +15,7 @@ export default class SignGateway implements ISignGateway {
     }
 
     async singUp(input: inputSingUp): Promise<Either<ResponseError, singUpOutPut>> {
-        const response = await this.httpClient.post('/sign-up', { input })
+        const response = await this.httpClient.post('/sign-up', { ...input })
         if(response.isLeft()) return left(response.value)
         return right(response.value)
     }
