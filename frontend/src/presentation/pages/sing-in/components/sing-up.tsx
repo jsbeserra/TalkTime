@@ -1,16 +1,21 @@
-import { VStack, FormControl, FormLabel, Input, Button, Flex, Divider, Heading,Text } from '@chakra-ui/react';
+import { VStack, FormControl, FormLabel, Input, Button, Flex, Divider, Heading, Text, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { object, string } from 'yup'
 import { useFormik } from 'formik';
+import SingUpUseCase from '../../../../aplication/usecase/sign-up/sign-up';
 
 let userSchema = object().shape({
-    name: string().min(4,'Minímo de 4 letras').required('Campo obrigatório'),
-    username: string().min(4,'Minímo de 4 letras').required('Campo obrigatório'),
+    name: string().min(4, 'Minímo de 4 letras').required('Campo obrigatório'),
+    username: string().min(4, 'Minímo de 4 letras').required('Campo obrigatório'),
     email: string().email().required('Campo obrigatório'),
-    password: string().min(6,'Minímo de 6 letras').required('Campo obrigatório'),
+    password: string().min(6, 'Minímo de 6 letras').required('Campo obrigatório'),
 });
+interface ISingUp {
+    signUpUseCase: SingUpUseCase
+}
 
-const SignUp: React.FC = () => {
+const SignUp: React.FC<ISingUp> = ({ signUpUseCase }) => {
+    const toast = useToast()
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -19,8 +24,19 @@ const SignUp: React.FC = () => {
             password: ''
         },
         validationSchema: userSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            try {
+                await signUpUseCase.handle(values)
+            } catch (err: any) {
+                toast({
+                    title: 'Erro',
+                    description: err.message,
+                    position: 'top-right',
+                    status: 'error',
+                    duration: 2000,
+                    isClosable: true,
+                })
+            }
         },
     });
 
@@ -58,7 +74,7 @@ const SignUp: React.FC = () => {
                             <Input type='password' name='password' placeholder="Password" onChange={formik.handleChange} />
                             {formik.errors.password ? <Text variant={'error'}>{formik.errors.password}</Text> : null}
                         </FormControl>
-                        <Button type='submit' variant={'default'} w='100%'>Login</Button>
+                        <Button type='submit' variant={'default'} w='100%'>Cadastrar</Button>
                     </VStack>
                 </form>
             </Flex>
