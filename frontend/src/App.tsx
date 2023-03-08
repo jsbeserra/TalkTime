@@ -1,7 +1,8 @@
 import Router from './main/routes/routes'
-import { ChakraProvider, Container, HStack } from '@chakra-ui/react'
+import { ChakraProvider, HStack } from '@chakra-ui/react'
 import { customtheme } from './infra/theme/custom-theme'
 import './App.css'
+
 function App() {
   return (
     <ChakraProvider theme={customtheme}>
@@ -9,7 +10,6 @@ function App() {
         <HStack className='content'>
           <Router></Router>
         </HStack>
-        {/* <Router></Router> */}
       </HStack>
     </ChakraProvider>
   )
