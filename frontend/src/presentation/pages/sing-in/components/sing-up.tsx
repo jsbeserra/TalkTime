@@ -25,12 +25,11 @@ const SignUp: React.FC<ISingUp> = ({ signUpUseCase }) => {
         },
         validationSchema: userSchema,
         onSubmit: async (values) => {
-            try {
-                await signUpUseCase.handle(values)
-            } catch (err: any) {
+            const result = await signUpUseCase.handle(values)
+            if (result.isLeft()) {
                 toast({
                     title: 'Erro',
-                    description: err.message,
+                    description: result.value.message,
                     position: 'top-right',
                     status: 'error',
                     duration: 2000,

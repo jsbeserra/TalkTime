@@ -1,11 +1,13 @@
-import { inputSingUp, ISignGateway } from "../../../domain/gateways/sing/sign-gateway";
+import { inputSingUp, ISignGateway, singUpOutPut } from "../../../domain/gateways/sing/sign-gateway";
+import { Either, left, right } from "../../../shared/either";
+import ResponseError from "../../../shared/response-error";
 
 export default class SingUpUseCase {
-    constructor(private signGateway:ISignGateway){}
+    constructor(private signGateway: ISignGateway) { }
 
-    public async handle(input:inputSingUp){
+    public async handle(input: inputSingUp): Promise<Either<ResponseError, singUpOutPut>> {
         const result = await this.signGateway.singUp(input)
-        if(result.statuscode === 201) return
-        throw new Error(result.message)
+        if (result.isLeft()) return left(result.value)
+        return right(result.value)
     }
 }

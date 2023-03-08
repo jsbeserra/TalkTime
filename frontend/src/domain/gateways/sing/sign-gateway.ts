@@ -1,10 +1,10 @@
 import Account from "../../account";
-
+import { Either } from '../../../shared/either'
+import ResponseError from '../../../shared/response-error'
 export interface ISignGateway {
-    singIn(email: string, password: string): Promise<Account>
-    singUp(input:inputSingUp): Promise<singUpOutPut>
+    singIn(email: string, password: string): Promise<Either<ResponseError, Account>>
+    singUp(input: inputSingUp): Promise<Either<ResponseError, singUpOutPut>>
 }
-
 export interface inputSingUp {
     username: string,
     name: string,
@@ -13,7 +13,7 @@ export interface inputSingUp {
 }
 
 export interface singUpOutPut {
-    data?:any,
+    data?: any,
     statuscode: number,
-    message?:string
+    message?: string
 }
