@@ -1,6 +1,6 @@
 import { Grid, Input, HStack, VStack, Flex, Button, FormControl, FormLabel, Image, Card, Heading, Container, Divider } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import SignInUseCase from '../../../../aplication/usecase/sign-in';
+import SignInUseCase from '../../../../aplication/usecase/sign-in/sign-in';
 
 interface ISingIn {
     signInUseCase: SignInUseCase
