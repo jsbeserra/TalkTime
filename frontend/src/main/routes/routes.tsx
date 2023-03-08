@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Chat from '../../presentation/pages/chat'
-import MakeSingIn from '../factories/sing-in-factory'
+import Sing from '../../presentation/pages/sing-in/sing'
 
 const Router: React.FC = () => {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MakeSingIn/>} />
+                <Route path="/" element={<Sing/>} />
                 <Route path="/chat" element={<Chat/>} />
             </Routes>
         </BrowserRouter>
