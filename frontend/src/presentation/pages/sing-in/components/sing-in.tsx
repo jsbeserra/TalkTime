@@ -3,6 +3,7 @@ import { Input, VStack, Flex, Button, FormControl, FormLabel, Heading, Divider, 
 import SignInUseCase from '../../../../aplication/usecase/sign-in/sign-in';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
+import { useAuth } from '../../../../main/context/auth-context';
 interface ISingIn {
     signInUseCase: SignInUseCase
 }
@@ -13,6 +14,7 @@ let userSchema = object().shape({
 });
 
 const SingIn: React.FC<ISingIn> = ({ signInUseCase }) => {
+    const {authenticate} = useAuth();
     const toast = useToast()
     const formik = useFormik({
         initialValues: {
@@ -31,7 +33,9 @@ const SingIn: React.FC<ISingIn> = ({ signInUseCase }) => {
                     duration: 2000,
                     isClosable: true,
                 })
+                return
             }
+            authenticate(true)
         },
     });
 
