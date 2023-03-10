@@ -57,6 +57,6 @@ describe('FindUserByUsername',()=>{
 
         const fakeUsername ='bill'
         const findUser = new FindUserByUsername(userRepository)
-        expect(async()=>await findUser.handle(fakeUsername)).rejects.toThrow(new Error("User Not Found: bill"))
+        expect(async()=>await findUser.handle(fakeUsername)).rejects.toThrow(new Error("User Not Found."))
     })
 })
