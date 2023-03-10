@@ -9,6 +9,6 @@ export default class FindUserByEmail implements UseCase {
     async handle(email: string): Promise<User | undefined> {
         const user = await this.usersRepository.findByEmail(email);
         if(user) return user
-        throw new Error("User Not Found: " + email);
+        throw new Error("User Not Found");
     } 
 }

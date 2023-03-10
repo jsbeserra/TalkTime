@@ -1,9 +1,7 @@
 import { Router } from "express"
 import { adaptRoute } from "src/infra/http/express/express-route-adapter"
-import { makeSignInController } from "../factories/sign-in-factory"
-import { makeSignUpController } from "../factories/sign-up-factory"
+import { makeFindUserByEmailController } from "../factories/find-user-by-email-factory"
 
 export default (router: Router): void => {
-    router.post('/sign-in', adaptRoute(makeSignInController()))
-    router.post('/sign-up', adaptRoute(makeSignUpController()))
+    router.get('/user-by-email', adaptRoute(makeFindUserByEmailController()))
 }

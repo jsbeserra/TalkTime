@@ -5,11 +5,11 @@ import { badRequest, serverError } from "./util"
 export class WebController {
   private controllerOp: ControllerOperation
 
-  constructor (controllerOp: ControllerOperation) {
+  constructor(controllerOp: ControllerOperation) {
     this.controllerOp = controllerOp
   }
 
-  public async handle (request: HttpRequest): Promise<HttpResponse> {
+  public async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       const missingParams: string = WebController.getMissingParams(request, this.controllerOp.requiredParams)
       if (missingParams) {
@@ -21,12 +21,20 @@ export class WebController {
     }
   }
 
-  public static getMissingParams (request: HttpRequest, requiredParams: string[]): string {
+  public static getMissingParams(request: HttpRequest, requiredParams: string[]): string {
     const missingParams: string[] = []
     requiredParams.forEach(function (name) {
-      if (!Object.keys(request.body).includes(name)) {
-        missingParams.push(name)
+      let notExistParam = false
+      if (Object.keys(request.body).includes(name)) {
+        if (!notExistParam) notExistParam = true
       }
+      if (Object.keys(request.query).includes(name)) {
+        if (!notExistParam) notExistParam = true
+      }
+      if (Object.keys(request.params).includes(name)) {
+        if (!notExistParam) notExistParam = true
+      }
+      if (!notExistParam) missingParams.push(name)
     })
     return missingParams.join(', ')
   }

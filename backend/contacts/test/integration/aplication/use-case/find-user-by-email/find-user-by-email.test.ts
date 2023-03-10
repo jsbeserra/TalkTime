@@ -57,6 +57,6 @@ describe('FindUserByEmail',()=>{
 
         const fakeEmail ='fakeEmail@gmail.com'
         const findUser = new FindUserByEmail(userRepository)
-        expect(async()=>await findUser.handle(fakeEmail)).rejects.toThrow(new Error("User Not Found: fakeEmail@gmail.com"))
+        expect(async()=>await findUser.handle(fakeEmail)).rejects.toThrow(new Error("User Not Found"))
     })
 })
