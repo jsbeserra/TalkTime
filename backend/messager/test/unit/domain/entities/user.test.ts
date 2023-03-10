@@ -1,5 +1,4 @@
 
-import {describe,test,expect} from 'vitest'
 import { faker } from '@faker-js/faker';
 import User from '../../../../src/domain/entities/user';
 import Username from '../../../../src/domain/username';

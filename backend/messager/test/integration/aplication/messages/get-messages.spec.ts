@@ -1,6 +1,5 @@
 import MongoMemoryServer from "mongodb-memory-server-core";
 import FakeMessager from "test/infra/fake-messager";
-import { describe, beforeAll, test, expect, afterAll, afterEach } from "vitest";
 import GetMessages from "../../../../src/aplication/use-case/messages/get-messages/get-messages";
 import SendMessage from "../../../../src/aplication/use-case/messages/send-message/send-message";
 import { MessagesRepository } from "../../../../src/domain/repository/users/messages-repository";
