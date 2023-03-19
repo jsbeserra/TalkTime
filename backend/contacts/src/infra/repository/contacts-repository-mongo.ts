@@ -11,7 +11,7 @@ export default class ContactsRepositoryMongo implements ContactsRepository {
         const result = await collection.findOne({ ownerUsername: ownerUsername })
         const contacts = new Contacts(ownerUsername)
         for(const user of result.contacts){
-            contacts.addContact(user.userName)
+            contacts.addContact(user)
         }
         return contacts
     }
