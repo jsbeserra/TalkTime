@@ -25,13 +25,13 @@ export class WebController {
     const missingParams: string[] = []
     requiredParams.forEach(function (name) {
       let notExistParam = false
-      if (Object.keys(request.body).includes(name)) {
+      if (request.body && Object.keys(request.body).includes(name)) {
         if (!notExistParam) notExistParam = true
       }
-      if (Object.keys(request.query).includes(name)) {
+      if (request.query && Object.keys(request?.query)?.includes(name)) {
         if (!notExistParam) notExistParam = true
       }
-      if (Object.keys(request.params).includes(name)) {
+      if (request.params && Object.keys(request?.params).includes(name)) {
         if (!notExistParam) notExistParam = true
       }
       if (!notExistParam) missingParams.push(name)
