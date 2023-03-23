@@ -2,14 +2,12 @@ import User from "src/domain/entities/user";
 import { ContactsRepository } from "src/domain/repository/contacts-repository";
 import { UserRepository } from "src/domain/repository/users/user-repository";
 import { UseCase } from "../use-case";
-import { InputFindContacts } from "./input-find-contacts";
 import { OutputFindContacts } from "./output-find-contacts";
-
 export default class FindContatcs implements UseCase {
 
     constructor(private usersRepository: UserRepository, private contactsRepository: ContactsRepository) { }
 
-    public async handle({ username }: InputFindContacts): Promise<OutputFindContacts[]> {
+    public async handle(username: string): Promise<OutputFindContacts[]> {
         const existOwner = await this.usersRepository.findByUserName(username);
         if (!existOwner) throw new Error(`User ${username} does not exist`);
         const contacts = await this.contactsRepository.find(username);
