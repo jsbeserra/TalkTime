@@ -56,7 +56,7 @@ describe('FindContacts',()=>{
             contacts:['fakeUser1','fakeUser2']
         }
         await collectionContacts.insertOne(contactsFake)
-        const input = {username:'fakeUser'}
+        const input = 'fakeUser'
         const contacts = await sut.handle(input)
         expect(contacts).length(2)
     })
@@ -78,7 +78,7 @@ describe('FindContacts',()=>{
             contacts:['fakeUser1','fakeUser2']
         }
         await collectionContacts.insertOne(contact)
-        const input = {username:'fakeUser'}
+        const input = 'fakeUser'
         const contacts = await sut.handle(input)
         expect(contacts).length(0)
     })
@@ -94,8 +94,7 @@ describe('FindContacts',()=>{
         await collection.insertMany([
             userInputData1
         ])
-        const owner = 'fakeUserx';
-        const input = {username:owner}
-        expect(async()=>await sut.handle(input)).rejects.toThrow(new Error(`User ${owner} does not exist`))
+        const input = 'fakeUserx';
+        expect(async()=>await sut.handle(input)).rejects.toThrow(new Error(`User ${input} does not exist`))
     })
 })
