@@ -1,10 +1,10 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { InputAddUser } from "../../../../../src/aplication/use-case/user/add-user/input-add-user";
-import UserAddUseCase from "../../../../../src/aplication/use-case/user/add-user/user-add-usecase";
-import UserUpdateUsecase from "../../../../../src/aplication/use-case/user/update-user/user-update-usecase";
-import EncoderAdpterBcrypt from "../../../../../src/infra/adpters/encoder-adpter-bcrypt";
-import ConnectionMongoDb from "../../../../../src/infra/connection/connectionMongoDb";
-import UserRepositoryMongo from "../../../../../src/infra/repository/user-repository-mongo";
+import { InputAddUser } from "src/aplication/use-case/sing-up/input-add-user";
+import SingUpAddUseCase from "src/aplication/use-case/sing-up/sing-up-usecase";
+import UserUpdateUsecase from "src/aplication/use-case/update-user/user-update-usecase";
+import EncoderAdpterBcrypt from "src/infra/adpters/encoder-adpter-bcrypt";
+import ConnectionMongoDb from "src/infra/connection/connectionMongoDb";
+import UserRepositoryMongo from "src/infra/repository/user-repository-mongo";
 
 describe('UserUpdateUsecase', () => {
     let userRepository: UserRepositoryMongo
@@ -17,7 +17,7 @@ describe('UserUpdateUsecase', () => {
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
-        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const userAdd = new SingUpAddUseCase(userRepository,encoderAdpterBcrypt)
         const fakeEmail = 'fakeEmailForUpdate@gmail.com'
         const userInputData: InputAddUser = {
             email: fakeEmail,

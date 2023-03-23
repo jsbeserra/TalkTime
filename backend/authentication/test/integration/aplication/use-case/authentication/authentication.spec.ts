@@ -1,10 +1,10 @@
-import AuthenticationUseCase from "../../../../src/aplication/use-case/authentication/authentication";
-import { InputAddUser } from "../../../../src/aplication/use-case/user/add-user/input-add-user";
-import UserAddUseCase from "../../../../src/aplication/use-case/user/add-user/user-add-usecase";
-import EncoderAdpterBcrypt from "../../../../src/infra/adpters/encoder-adpter-bcrypt";
-import { JwtTokenManager } from "../../../../src/infra/adpters/token-manager-jsonweToken-adpter";
-import ConnectionMongoDb from "../../../../src/infra/connection/connectionMongoDb";
-import UserRepositoryMongo from "../../../../src/infra/repository/user-repository-mongo";
+import AuthenticationUseCase from "../../../../../src/aplication/use-case/authentication/authentication";
+import { InputAddUser } from "../../../../../src/aplication/use-case/sing-up/input-add-user";
+import SingUpAddUseCase from "../../../../../src/aplication/use-case/sing-up/sing-up-usecase";
+import EncoderAdpterBcrypt from "../../../../../src/infra/adpters/encoder-adpter-bcrypt";
+import { JwtTokenManager } from "../../../../../src/infra/adpters/token-manager-jsonweToken-adpter";
+import ConnectionMongoDb from "../../../../../src/infra/connection/connectionMongoDb";
+import UserRepositoryMongo from "../../../../../src/infra/repository/user-repository-mongo";
 import {MongoMemoryServer} from 'mongodb-memory-server'
 
 describe('AuthenticationUseCase', () => {
@@ -19,7 +19,7 @@ describe('AuthenticationUseCase', () => {
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
-        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const userAdd = new SingUpAddUseCase(userRepository,encoderAdpterBcrypt)
         const fakeEmail = 'fakeEmail@gmail.com'
         const userInputData: InputAddUser = {
             email: fakeEmail,
