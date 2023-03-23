@@ -1,7 +1,7 @@
 import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import {MongoMemoryServer} from 'mongodb-memory-server'
-import FindUserByUsername from "src/aplication/use-case/find-users-by-username/FindUserByUsername"
+import FindUserByUsername from "src/aplication/use-case/find-users-by-username/find-user-by-username"
 
 describe('FindUserByUsername',()=>{
     let userRepository: UserRepositoryMongo
