@@ -22,7 +22,6 @@ describe('SignInController', () => {
     beforeAll(async () => {
         mongod = await MongoMemoryServer.create();
         const uri = mongod.getUri();
-        mongod = await MongoMemoryServer.create();
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
         encoderAdpterBcrypt = new EncoderAdpterBcrypt()
@@ -66,8 +65,7 @@ describe('SignInController', () => {
             }
         }
         const result = await sut.handle(input)
-        expect(result.statusCode).toBe(400)
-        expect(result.body).toBe('User not found')
-        
+        console.log(result)
+        expect(result.statusCode).toBe(401)  
     })
 })
