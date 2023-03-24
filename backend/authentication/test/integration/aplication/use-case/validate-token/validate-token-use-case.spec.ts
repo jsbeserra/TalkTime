@@ -1,4 +1,4 @@
-import ValidateTokenUseCase from "../../../../../src/aplication/use-case/validate_token/validate-token-use-case"
+import ValidateTokenUseCase from "../../../../../src/aplication/use-case/validate-token/validate-token-use-case"
 import { JwtTokenManager } from "../../../../../src/infra/adpters/token-manager-jsonweToken-adpter"
 
 describe("ValidateTokenUseCase", () => {

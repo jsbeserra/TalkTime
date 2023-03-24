@@ -1,6 +1,6 @@
 import { UseCase } from "../../aplication/use-case/use-case";
 import { ControllerOperation, HttpRequest, HttpResponse } from "../../infra/http/ports";
-import { badRequest, ok } from "../../infra/http/util";
+import { unauthorized, ok } from "../../infra/http/util";
 
 export class SignInController implements ControllerOperation {
     readonly requiredParams: string[] = ['email', 'password'];
@@ -15,7 +15,7 @@ export class SignInController implements ControllerOperation {
             const result = await this.useCase.handle(request.body)
             return ok(result)
         } catch (err: any) {
-            return badRequest(err)
+            return unauthorized(err)
         }
     }
 

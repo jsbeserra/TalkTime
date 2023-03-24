@@ -1,9 +1,9 @@
 import { UseCase } from "src/aplication/use-case/use-case";
 import { ControllerOperation, HttpRequest, HttpResponse } from "src/infra/http/ports";
-import { badRequest, created } from "../../infra/http/util";
+import { badRequest, ok } from "../../infra/http/util";
 
-export class SignUpController implements ControllerOperation {
-    readonly requiredParams: string[] = ['email', 'password', 'name','username'];
+export class ValidateTokenController implements ControllerOperation {
+    readonly requiredParams: string[] = ['token'];
     private useCase: UseCase;
 
     constructor(useCase: UseCase) {
@@ -12,8 +12,8 @@ export class SignUpController implements ControllerOperation {
 
     async operation(request: HttpRequest): Promise<HttpResponse> {
         try {
-            const result = await this.useCase.handle(request.body)
-            return created(result)
+            const result = await this.useCase.handle(request.body.token)
+            return ok(result)
         } catch (err: any) {   
             return badRequest(err)
         }
