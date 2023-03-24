@@ -1,6 +1,6 @@
 import { UseCase } from "src/aplication/use-case/use-case";
 import { ControllerOperation, HttpRequest, HttpResponse } from "src/infra/http/ports";
-import { badRequest, created } from "src/infra/http/util";
+import { badRequest, created } from "../../infra/http/util";
 
 export class SignUpController implements ControllerOperation {
     readonly requiredParams: string[] = ['email', 'password', 'name','username'];
