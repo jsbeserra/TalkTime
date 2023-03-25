@@ -1,4 +1,4 @@
-import Contact from "../../../domain/contact";
+import Contact from "../../../domain/entities/contact";
 import { IContactsGateway } from "../../../domain/gateways/contacts/contacts-gateway";
 import { Either, left, right } from "../../../shared/either";
 import ResponseError from "../../../shared/response-error";
