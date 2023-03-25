@@ -1,14 +1,14 @@
 
 import { faker } from '@faker-js/faker';
 import UserRepositoryMongo from '../../../../../src/infra/repository/user-repository-mongo';
-import { InputAddUser } from '../../../../../src/aplication/use-case/user/add-user/input-add-user';
+import { InputAddUser } from '../../../../../src/aplication/use-case/sing-up/input-add-user';
 import ConnectionMongoDb from '../../../../../src/infra/connection/connectionMongoDb';
-import UserAddUseCase from '../../../../../src/aplication/use-case/user/add-user/user-add-usecase';
+import SingUpAddUseCase from '../../../../../src/aplication/use-case/sing-up/sing-up-usecase';
 import EncoderAdpterBcrypt from '../../../../../src/infra/adpters/encoder-adpter-bcrypt';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
 
-describe('UserAddUseCase', () => {
+describe('SingUpAddUseCase', () => {
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let encoderAdpterBcrypt: EncoderAdpterBcrypt
@@ -34,7 +34,7 @@ describe('UserAddUseCase', () => {
     })
 
     test('Deve criar um usuário', async () => {
-        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const userAdd = new SingUpAddUseCase(userRepository,encoderAdpterBcrypt)
         const fakeEmail = faker.internet.email()
         const fakeUsername = faker.internet.userName()
         const userInputData: InputAddUser = {
@@ -48,7 +48,7 @@ describe('UserAddUseCase', () => {
     })
 
     test('Deve lançar um erro se o username já existir', async () => {
-        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const userAdd = new SingUpAddUseCase(userRepository,encoderAdpterBcrypt)
         const userInputData: InputAddUser = {
             email: 'fakeunico@Email.com',
             password: '12aSx#',
@@ -60,7 +60,7 @@ describe('UserAddUseCase', () => {
     })
 
     test('Deve lançar um erro se o email já existir', async ()=>{
-        const userAdd = new UserAddUseCase(userRepository,encoderAdpterBcrypt)
+        const userAdd = new SingUpAddUseCase(userRepository,encoderAdpterBcrypt)
         const userInputData:InputAddUser = {
             email:'fake2@gmail.com',
             password:'12aSx#',

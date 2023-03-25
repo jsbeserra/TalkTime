@@ -3,6 +3,7 @@ import { ChakraProvider, HStack } from '@chakra-ui/react'
 import { customtheme } from './infra/theme/custom-theme'
 import './App.css'
 import { AuthProvider } from './main/context/auth-context'
+import { SearchContactsProvider } from './main/context/search-contacts-context'
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <HStack className={'app'}>
         <HStack className='content'>
           <AuthProvider>
-            <Router></Router>
+            <SearchContactsProvider>
+              <Router></Router>
+            </SearchContactsProvider>
           </AuthProvider>
         </HStack>
       </HStack>

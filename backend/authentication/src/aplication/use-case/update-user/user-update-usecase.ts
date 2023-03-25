@@ -1,11 +1,11 @@
-import Email from "../../../../domain/email";
-import Encoder from "../../../../domain/encoder";
-import User from "../../../../domain/entities/user";
-import Name from "../../../../domain/name";
-import Password from "../../../../domain/password";
-import { UserRepository } from "../../../../domain/repository/users/user-repository";
-import Username from "../../../../domain/username";
-import { UseCase } from "../../use-case";
+import Email from "../../../domain/email";
+import Encoder from "../../../domain/encoder";
+import User from "../../../domain/entities/user";
+import Name from "../../../domain/name";
+import Password from "../../../domain/password";
+import { UserRepository } from "../../../domain/repository/users/user-repository";
+import Username from "../../../domain/username";
+import { UseCase } from "../use-case";
 import { InputUpdateUser } from "./input-user-update";
 import { OutputUpdateUser } from "./output-user-update";
 
