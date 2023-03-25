@@ -6,6 +6,17 @@ export default class UserRepositoryMongo implements UserRepository {
 
     constructor(readonly connectionMongoDb: ConnectionMongoDb) { }
 
+    async find(identifier: string): Promise<User[]> {
+        const collection = await this.connectionMongoDb.getCollection('users')
+        const result = await collection.find({$or: [ { username: {$regex:`.*${identifier}.*`} }, { email: {$regex:`.*${identifier}.*`} } ]}).limit(15).toArray()
+        let users: User[] = []
+        for (const user of result) {
+            const addUser = new User(user.email, user.name, user.username, user._id.toString())
+            users.push(addUser)
+        }
+        return users
+    }
+
     async findByUserName(username: string): Promise<User | undefined> {
         const collection = await this.connectionMongoDb.getCollection('users')
         const result = await collection.findOne({ username: username })
