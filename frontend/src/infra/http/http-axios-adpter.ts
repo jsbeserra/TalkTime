@@ -1,20 +1,20 @@
 import HttpClient from "../http/http-client";
 import axios, { AxiosInstance } from "axios";
-import { environment } from "../../main/config/config";
 import { Either, right, left } from "../../shared/either";
 import ResponseError from "../../shared/response-error";
 export default class AxiosAdapter implements HttpClient {
     private apiAxios: AxiosInstance
 
-    constructor() {
+    constructor(private baseurl: string) {
         let axiosInstance = axios.create({});
-        axiosInstance.defaults.baseURL = environment.API_URL
+        axiosInstance.defaults.baseURL = baseurl
         this.apiAxios = axiosInstance
+        const jwt = sessionStorage.getItem('jwt')
+        if (jwt) this.apiAxios.defaults.headers.Authorization = jwt
     }
 
     async get(url: string): Promise<Either<ResponseError, any>> {
         try {
-            const jwt = sessionStorage.getItem('jwt')
             const response = await this.apiAxios.get(url)
             return right(response.data)
         } catch (err: any) {
@@ -24,7 +24,6 @@ export default class AxiosAdapter implements HttpClient {
 
     async post(url: string, body: any): Promise<Either<ResponseError, any>> {
         try {
-            const jwt = sessionStorage.getItem('jwt')
             const response = await this.apiAxios.post(url, body)
             return right(response.data)
         } catch (err: any) {
@@ -34,7 +33,6 @@ export default class AxiosAdapter implements HttpClient {
 
     async put(url: string, body: any): Promise<Either<ResponseError, any>> {
         try {
-            const jwt = sessionStorage.getItem('jwt')
             const response = await this.apiAxios.put(url, body)
             return right(response.data)
         } catch (err: any) {
@@ -44,7 +42,6 @@ export default class AxiosAdapter implements HttpClient {
 
     async delete(url: string): Promise<Either<ResponseError, any>> {
         try {
-            const jwt = sessionStorage.getItem('jwt')
             const response = await this.apiAxios.delete(url)
             return right(response.data)
         } catch (err: any) {
