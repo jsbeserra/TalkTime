@@ -1,9 +1,9 @@
 import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import {MongoMemoryServer} from 'mongodb-memory-server'
-import FindUserByUsername from "src/aplication/use-case/find-users-by-username/find-user-by-username"
+import FindUsers from "src/aplication/use-case/find-users/find-user"
 
-describe('FindUserByUsername',()=>{
+describe('FindUsers',()=>{
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let mongod:MongoMemoryServer
@@ -38,25 +38,15 @@ describe('FindUserByUsername',()=>{
         ])
 
         const fakeUsername ='fakeUser'
-        const findUser = new FindUserByUsername(userRepository)
+        const findUser = new FindUsers(userRepository)
         const user = await findUser.handle(fakeUsername)
-        expect(user).toBeTruthy()
+        expect(user.length).toBe(1)
     })
     
-    test('Deve retornar uma mensagem de erro se o usuário não for encontrado',async ()=>{
-        const userInputData1 = {
-            email: 'fake123@gmail.com',
-            password: '18aSx#',
-            username: 'fakeUser',
-            name: 'fakeName'
-        }
-        const collection = await connection.getCollection('users')
-        await collection.insertMany([
-            userInputData1
-        ])
-
-        const fakeUsername ='bill'
-        const findUser = new FindUserByUsername(userRepository)
-        expect(async()=>await findUser.handle(fakeUsername)).rejects.toThrow(new Error("User Not Found."))
+    test('Deve retornar um array vazio se nenhum usuário for encontrado',async ()=>{
+        const fakeUsername ="bill"
+        const findUser = new FindUsers(userRepository)
+        const user = await findUser.handle(fakeUsername)
+        expect(user.length).toBe(0)
     })
 })
