@@ -1,9 +1,9 @@
 import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import {MongoMemoryServer} from 'mongodb-memory-server'
-import FindUserByUsername from "src/aplication/use-case/find-users-by-username/find-user-by-username"
+import FindUsers from "src/aplication/use-case/find-users/find-user"
 
-describe('FindUserByUsername',()=>{
+describe('FindUsers',()=>{
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let mongod:MongoMemoryServer
@@ -38,7 +38,7 @@ describe('FindUserByUsername',()=>{
         ])
 
         const fakeUsername ='fakeUser'
-        const findUser = new FindUserByUsername(userRepository)
+        const findUser = new FindUsers(userRepository)
         const user = await findUser.handle(fakeUsername)
         expect(user).toBeTruthy()
     })
@@ -56,7 +56,7 @@ describe('FindUserByUsername',()=>{
         ])
 
         const fakeUsername ='bill'
-        const findUser = new FindUserByUsername(userRepository)
+        const findUser = new FindUsers(userRepository)
         expect(async()=>await findUser.handle(fakeUsername)).rejects.toThrow(new Error("User Not Found."))
     })
 })
