@@ -1,12 +1,13 @@
 import { MongoMemoryServer } from "mongodb-memory-server"
-import FindUserByUsername from "src/aplication/use-case/find-users-by-username/find-user-by-username"
+import FindUsers from "src/aplication/use-case/find-users/find-user"
 import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import { HttpRequest } from "src/infra/http/ports"
 import { WebController } from "src/infra/http/web-controller"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
-import { FindUserByUsernameController } from "src/presentation/controllers/find-user-by-username"
+import { FindUsersController } from "src/presentation/controllers/find-users"
 
-describe('FindUserByUsernameController', () => {
+
+describe('FindUserController', () => {
     let userRepository: UserRepositoryMongo
     let connection: ConnectionMongoDb
     let mongod: MongoMemoryServer
@@ -16,8 +17,8 @@ describe('FindUserByUsernameController', () => {
         const uri = mongod.getUri();
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
-        const usecase = new FindUserByUsername(userRepository)
-        sut = new WebController(new FindUserByUsernameController(usecase))
+        const usecase = new FindUsers(userRepository)
+        sut = new WebController(new FindUsersController(usecase))
     })
 
     afterEach(async () => {
@@ -35,10 +36,10 @@ describe('FindUserByUsernameController', () => {
         await collection.insertMany([
             userInputData1
         ])
-        const input: HttpRequest = { query: { username: 'fakeUser' } }
+        const input: HttpRequest = { query: { identifier: 'fakeUser' } }
         const result = await sut.handle(input)
         expect(result.statusCode).toBe(200)
-        expect(result.body).toMatchObject(
+        expect(result.body[0]).toMatchObject(
             {
                 email: 'fakeEmail@gmail.com',
                 name: 'fakeName',
@@ -47,10 +48,10 @@ describe('FindUserByUsernameController', () => {
         )
     })
 
-    test('Deve buscar um usuário não encontrar e retornar codigo 400', async () => {
-        const input: HttpRequest = { query: { username: 'fakeUser' } }
+    test('Deve buscar um usuário não encontrar e retornar codigo 200', async () => {
+        const input: HttpRequest = { query: { identifier: 'fakeUser' } }
         const result = await sut.handle(input)
-        expect(result.statusCode).toBe(400)
-        expect(result.body).toBe('User Not Found.')
+        expect(result.statusCode).toBe(200)
+        expect(result.body).toBeTruthy()
     })
 })
