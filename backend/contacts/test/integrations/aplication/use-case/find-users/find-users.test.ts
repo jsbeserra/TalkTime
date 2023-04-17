@@ -40,23 +40,13 @@ describe('FindUsers',()=>{
         const fakeUsername ='fakeUser'
         const findUser = new FindUsers(userRepository)
         const user = await findUser.handle(fakeUsername)
-        expect(user).toBeTruthy()
+        expect(user.length).toBe(1)
     })
     
-    test('Deve retornar uma mensagem de erro se o usuário não for encontrado',async ()=>{
-        const userInputData1 = {
-            email: 'fake123@gmail.com',
-            password: '18aSx#',
-            username: 'fakeUser',
-            name: 'fakeName'
-        }
-        const collection = await connection.getCollection('users')
-        await collection.insertMany([
-            userInputData1
-        ])
-
-        const fakeUsername ='bill'
+    test('Deve retornar um array vazio se nenhum usuário for encontrado',async ()=>{
+        const fakeUsername ="bill"
         const findUser = new FindUsers(userRepository)
-        expect(async()=>await findUser.handle(fakeUsername)).rejects.toThrow(new Error("User Not Found."))
+        const user = await findUser.handle(fakeUsername)
+        expect(user.length).toBe(0)
     })
 })
