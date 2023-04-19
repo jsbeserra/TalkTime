@@ -3,6 +3,7 @@ import FindUsers from "src/aplication/use-case/find-users/find-user"
 import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import { HttpRequest } from "src/infra/http/ports"
 import { WebController } from "src/infra/http/web-controller"
+import ContactsRepositoryMongo from "src/infra/repository/contacts-repository-mongo"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import { FindUsersController } from "src/presentation/controllers/find-users"
 
@@ -17,7 +18,8 @@ describe('FindUserController', () => {
         const uri = mongod.getUri();
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
-        const usecase = new FindUsers(userRepository)
+        const contactsRepository = new ContactsRepositoryMongo(connection)
+        const usecase = new FindUsers(userRepository, contactsRepository)
         sut = new WebController(new FindUsersController(usecase))
     })
 
@@ -36,21 +38,24 @@ describe('FindUserController', () => {
         await collection.insertMany([
             userInputData1
         ])
-        const input: HttpRequest = { query: { identifier: 'fakeUser' } }
+
+        const input: HttpRequest = { query: { identifier: 'fakeUser', ownerUsername: 'fakeownerUsername' } }
         const result = await sut.handle(input)
         expect(result.statusCode).toBe(200)
         expect(result.body[0]).toMatchObject(
             {
                 email: 'fakeEmail@gmail.com',
                 name: 'fakeName',
-                username: 'fakeUser'
+                username: 'fakeUser',
+                isAContact: false
             }
         )
     })
 
     test('Deve buscar um usuário não encontrar e retornar codigo 200', async () => {
-        const input: HttpRequest = { query: { identifier: 'fakeUser' } }
+        const input: HttpRequest = { query: { identifier: 'fakeUser', ownerUsername: 'fakeownerUsername' } }
         const result = await sut.handle(input)
+        console.log(result)
         expect(result.statusCode).toBe(200)
         expect(result.body).toBeTruthy()
     })
