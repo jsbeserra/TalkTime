@@ -9,6 +9,7 @@ export default class ContactsRepositoryMongo implements ContactsRepository {
     async find(ownerUsername: string): Promise<Contacts | undefined> {
         const collection = await this.connectionMongoDb.getCollection('contacts')
         const result = await collection.findOne({ ownerUsername: ownerUsername })
+        if(!result) return
         const contacts = new Contacts(ownerUsername)
         for(const user of result.contacts){
             contacts.addContact(user)
