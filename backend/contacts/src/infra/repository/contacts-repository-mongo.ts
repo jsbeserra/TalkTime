@@ -22,16 +22,14 @@ export default class ContactsRepositoryMongo implements ContactsRepository {
         const result = await collection.findOne({ ownerUsername: ownerUsername })
         if(result){
             await collection.updateOne({ownerUsername: ownerUsername},{
-                $set:{
-                    contacts:{contactUsername}
+                $addToSet:{
+                    contacts:contactUsername
                 }
             })
         }else{
             await collection.insertOne({
                 ownerUsername: ownerUsername,
-                $set:{
-                    contacts:{contactUsername}
-                }
+                contacts:[contactUsername]
             })
         }
     }
