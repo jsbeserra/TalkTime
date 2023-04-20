@@ -4,6 +4,7 @@ import ConnectionMongoDb from "src/infra/connection/connectionMongoDb"
 import { HttpRequest } from "src/infra/http/ports"
 import { WebController } from "src/infra/http/web-controller"
 import ContactsRepositoryMongo from "src/infra/repository/contacts-repository-mongo"
+import InviteRepositoryMongoDb from "src/infra/repository/invite-repository"
 import UserRepositoryMongo from "src/infra/repository/user-repository-mongo"
 import { FindUsersController } from "src/presentation/controllers/find-users"
 
@@ -19,7 +20,8 @@ describe('FindUserController', () => {
         connection = new ConnectionMongoDb(uri, 'chat_api')
         userRepository = new UserRepositoryMongo(connection)
         const contactsRepository = new ContactsRepositoryMongo(connection)
-        const usecase = new FindUsers(userRepository, contactsRepository)
+        const inviteRepository = new InviteRepositoryMongoDb(connection)
+        const usecase = new FindUsers(userRepository, contactsRepository, inviteRepository)
         sut = new WebController(new FindUsersController(usecase))
     })
 
@@ -55,7 +57,6 @@ describe('FindUserController', () => {
     test('Deve buscar um usuário não encontrar e retornar codigo 200', async () => {
         const input: HttpRequest = { query: { identifier: 'fakeUser', ownerUsername: 'fakeownerUsername' } }
         const result = await sut.handle(input)
-        console.log(result)
         expect(result.statusCode).toBe(200)
         expect(result.body).toBeTruthy()
     })
