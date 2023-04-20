@@ -58,7 +58,7 @@ describe('FindContacts',()=>{
         await collectionContacts.insertOne(contactsFake)
         const input = 'fakeUser'
         const contacts = await sut.handle(input)
-        expect(contacts).length(2)
+        expect(contacts.length).toBe(2)
     })
 
     test('Deve retornar um array vazio se nenhum contato for encontrado',async ()=>{
@@ -80,7 +80,7 @@ describe('FindContacts',()=>{
         await collectionContacts.insertOne(contact)
         const input = 'fakeUser'
         const contacts = await sut.handle(input)
-        expect(contacts).length(0)
+        expect(contacts.length).toBe(0)
     })
 
     test('Deve retornar erro se o usuário owner não for encontrado',async ()=>{
