@@ -3,5 +3,7 @@ export default interface OutputFindUser{
     name: string,
     username: string,
     id: string,
-    isAContact: boolean
+    isAContact: boolean,
+    invited:boolean,
+    invitePending?: boolean
 }
