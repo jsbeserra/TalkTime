@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand ",
+    "test:verbose": "jest --passWithNoTests --runInBand",
     "coverage": "jest --coverage",
     "dev": "tsx watch src/main/main.ts --ignore node_modules"
   },
