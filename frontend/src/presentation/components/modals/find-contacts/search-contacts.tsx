@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure, Text, ModalOverlay, Input, Divider, VStack } from '@chakra-ui/react';
 import ContactButton from './components/contact';
-import Contact from '../../../../domain/entities/contact';
-import FindContacts from '../../../../aplication/usecase/find-contacts/find-contact';
-import { useSearchContacts } from '../../../../main/context/search-contacts-context';
+import Contact from '@domain/entities/contact';
+import FindContacts from '@aplication/usecase/find-contacts/find-contact';
+import { useSearchContacts } from '@main/context/search-contacts-context';
 
 interface ISearchContacts {
     findContactsUsecase: FindContacts
@@ -23,7 +23,8 @@ const SearchContacts: React.FC<ISearchContacts> = ({ findContactsUsecase }) => {
     }, [visible])
 
     const findUsers = useCallback(async (identifier: string) => {
-        const usersList = await findContactsUsecase.handle(identifier)
+        const ownerUsername = sessionStorage.getItem('username') ||  ""
+        const usersList = await findContactsUsecase.handle({identifier,ownerUsername})
         if (usersList.isRight()) setUsers(usersList.value)
     }, [])
 
