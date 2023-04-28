@@ -18,7 +18,7 @@ export default class AxiosAdapter implements HttpClient {
             const response = await this.apiAxios.get(url)
             return right(response.data)
         } catch (err: any) {
-            return left(new ResponseError(err.message, err.statusCode))
+            return left(new ResponseError(err.response.data, err.statusCode))
         }
     }
 
@@ -27,7 +27,7 @@ export default class AxiosAdapter implements HttpClient {
             const response = await this.apiAxios.post(url, body)
             return right(response.data)
         } catch (err: any) {
-            return left(new ResponseError(err.message, err.statusCode))
+            return left(new ResponseError(err.response.data, err.statusCode))
         }
     }
 
@@ -36,7 +36,7 @@ export default class AxiosAdapter implements HttpClient {
             const response = await this.apiAxios.put(url, body)
             return right(response.data)
         } catch (err: any) {
-            return left(new ResponseError(err.message, err.statusCode))
+            return left(new ResponseError(err.response.data, err.statusCode))
         }
     }
 
@@ -45,7 +45,7 @@ export default class AxiosAdapter implements HttpClient {
             const response = await this.apiAxios.delete(url)
             return right(response.data)
         } catch (err: any) {
-            return left(new ResponseError(err.message, err.statusCode))
+            return left(new ResponseError(err.response.data, err.statusCode))
         }
     }
 }

@@ -23,7 +23,8 @@ const SearchContacts: React.FC<ISearchContacts> = ({ findContactsUsecase }) => {
     }, [visible])
 
     const findUsers = useCallback(async (identifier: string) => {
-        const usersList = await findContactsUsecase.handle(identifier)
+        const ownerUsername = sessionStorage.getItem('username') ||  ""
+        const usersList = await findContactsUsecase.handle({identifier,ownerUsername})
         if (usersList.isRight()) setUsers(usersList.value)
     }, [])
 

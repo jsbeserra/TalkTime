@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    //"types": ["jest", "node"],
     "rootDirs": ["src", "tests"],
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
