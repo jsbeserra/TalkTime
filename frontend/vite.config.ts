@@ -7,5 +7,15 @@ export default defineConfig({
   plugins: [react(),EnvironmentPlugin('all')],
   define: {
     'process.env': {}
-  }
+  },
+  resolve: {
+    alias: {
+      '@domain': '/src/domain',
+      '@aplication': '/src/aplication',
+      '@infra': '/src/infra',
+      '@main': '/src/main',
+      '@presentation': '/src/presentation',
+      '@shared': '/src/shared',
+    },
+  },
 })

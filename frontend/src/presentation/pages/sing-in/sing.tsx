@@ -1,10 +1,10 @@
 import { HStack, VStack, Button } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import MakeSingIn from '../../../main/factories/sing-in-factory';
-import MakeSingUp from '../../../main/factories/sing-up-factory';
+import MakeSingIn from '@main/factories/sing-in-factory';
+import MakeSingUp from '@main/factories/sing-up-factory';
 
 const Sing: React.FC = () => {
-    const [toogle, settoogle] = useState<boolean>(false)
+    const [toogle, settoogle] = useState<boolean>(true)
 
     return (
         <HStack bg='#FAFCFF' w='100%' h='100%'>
@@ -14,7 +14,7 @@ const Sing: React.FC = () => {
                 backgroundSize='cover'
                 backgroundPosition={'center'}
             >
-                <Button onClick={() => settoogle(!toogle)}>{toogle ? 'Entrar' : 'Cadastrar'}</Button>
+                <Button onClick={() => settoogle(!toogle)}>{toogle ? 'Cadastrar' : 'Entrar'}</Button>
             </VStack>
         </HStack>
     );

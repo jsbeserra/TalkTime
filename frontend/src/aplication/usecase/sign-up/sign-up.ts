@@ -1,6 +1,6 @@
-import { inputSingUp, ISignGateway, singUpOutPut } from "../../../domain/gateways/sing/sign-gateway";
-import { Either, left, right } from "../../../shared/either";
-import ResponseError from "../../../shared/response-error";
+import { inputSingUp, ISignGateway, singUpOutPut } from "@domain/gateways/sing/sign-gateway";
+import { Either, left, right } from "@shared/either";
+import ResponseError from "@shared/response-error";
 
 export default class SingUpUseCase {
     constructor(private signGateway: ISignGateway) { }

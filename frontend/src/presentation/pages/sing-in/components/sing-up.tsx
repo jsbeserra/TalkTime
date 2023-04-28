@@ -2,7 +2,9 @@ import { VStack, FormControl, FormLabel, Input, Button, Flex, Divider, Heading, 
 import React from 'react';
 import { object, string } from 'yup'
 import { useFormik } from 'formik';
-import SingUpUseCase from '../../../../aplication/usecase/sign-up/sign-up';
+import SingUpUseCase from '@aplication/usecase/sign-up/sign-up';
+import SignInUseCase from '@aplication/usecase/sign-in/sign-in';
+import { useAuth } from '@main/context/auth-context';
 
 let userSchema = object().shape({
     name: string().min(4, 'Minímo de 4 letras').required('Campo obrigatório'),
@@ -10,12 +12,15 @@ let userSchema = object().shape({
     email: string().email().required('Campo obrigatório'),
     password: string().min(6, 'Minímo de 6 letras').required('Campo obrigatório'),
 });
+
 interface ISingUp {
     signUpUseCase: SingUpUseCase
+    signInUseCase: SignInUseCase
 }
 
-const SignUp: React.FC<ISingUp> = ({ signUpUseCase }) => {
+const SignUp: React.FC<ISingUp> = ({ signUpUseCase, signInUseCase }) => {
     const toast = useToast()
+    const { authenticate } = useAuth();
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -36,8 +41,27 @@ const SignUp: React.FC<ISingUp> = ({ signUpUseCase }) => {
                     isClosable: true,
                 })
             }
+            if (result.isRight()) {
+                toast({
+                    title: 'Sucesso',
+                    description: "Cadastro realizado com sucesso",
+                    position: 'top-right',
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                })
+                singIn(values.email,values.password)
+                
+            }
         },
     });
+
+    const singIn = async (email:string,password:string) => {
+        const success = await signInUseCase.handle({ email, password })
+        if(success.isRight()){
+            authenticate(true)
+        }
+    }
 
     return (
         <VStack w={'50%'} spacing={4} justifyContent='center' alignItems={'center'} p='10'>

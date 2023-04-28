@@ -4,7 +4,7 @@ import Contact from './components/contact';
 import { SearchIcon, SettingsIcon, PhoneIcon, ArrowForwardIcon, } from '@chakra-ui/icons';
 import ContentMessages from './components/content-messages';
 import HeaderCurrentChat from './components/header-current-chat';
-import SideMenu from './components/side-menu';
+import MakeSideMenu from '@main/factories/sideMenu-factory';
 
 
 const Chat: React.FC = () => {
@@ -15,7 +15,7 @@ const Chat: React.FC = () => {
     return (
         <Flex w='100%' h='100%' alignItems={'center'} justifyContent={'flex-start'}  >
             <HStack h={'100%'} w={'60px'} bg='#F6F8FC'>
-                <SideMenu />
+                <MakeSideMenu />
             </HStack>
             <Divider orientation='vertical' />
             <HStack h={'100%'} w={'350px'} bg='#FAFCFF' flexDir={'column'} p='5' >
