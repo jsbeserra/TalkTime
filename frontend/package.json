@@ -6,9 +6,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand ",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --watchAll",
     "coverage": "jest --coverage",
-    "test:verbose": "jest --passWithNoTests --runInBand"
+    "test:verbose": "jest --passWithNoTests --runInBand  --watchAll"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
