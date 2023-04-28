@@ -1,8 +1,8 @@
 import React from 'react'
-import FindContacts from '../../aplication/usecase/find-contacts/find-contact';
-import ContactsGateway from '../../infra/gateways/contacts/contacts-gateway';
-import AxiosAdapter from '../../infra/http/http-axios-adpter';
-import SearchContacts from '../../presentation/components/modals/find-contacts/search-contacts';
+import FindContacts from '@aplication/usecase/find-contacts/find-contact';
+import ContactsGateway from '@infra/gateways/contacts/contacts-gateway';
+import AxiosAdapter from '@infra/http/http-axios-adpter';
+import SearchContacts from '@presentation/components/modals/find-contacts/search-contacts';
 import { environment } from '../config/config';
 
 const MakeFindContacts: React.FC = () => {

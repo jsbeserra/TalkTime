@@ -1,3 +1,4 @@
+
 module.exports = {
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   collectCoverageFrom: [
@@ -16,9 +17,12 @@ module.exports = {
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest'
   },
-  moduleNameMapper: {
-    '@/tests/(.*)': '<rootDir>/tests/$1',
-    '@/(.*)': '<rootDir>/src/$1',
-    '\\.scss$': 'identity-obj-proxy'
-  }
+  'moduleNameMapper': {
+    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
+    '^@aplication/(.*)$': '<rootDir>/src/aplication/$1',
+    '^@infra/(.*)$': '<rootDir>/src/infra/$1',
+    '^@main/(.*)$': '<rootDir>/src/main/$1',
+    '^@presentation/(.*)$': '<rootDir>/src/presentation/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1'
+  },
 }

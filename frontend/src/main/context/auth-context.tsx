@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<PropsAuthProvider> = ({ children }) => {
     useEffect(()=>{
         hasAuthenticated()
     },[])
-    const authenticate = (value:boolean) =>{
+    const authenticate = (value:boolean = false) =>{
         setAuthenticated(value)
     }
     const hasAuthenticated = () => {

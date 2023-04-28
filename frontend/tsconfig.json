@@ -16,8 +16,20 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "target": "ESNext",
-    "module": "ESNext"
+    "module": "ESNext",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@domain/*":["./src/domain/*"],
+      "@aplication/*":["./src/aplication/*"],
+      "@infra/*":["./src/infra/*"],
+      "@main/*":["./src/main/*"],
+      "@presentation/*":["./src/presentation/*"],
+      "@shared/*":["./src/shared/*"],
+      "@test/*": ["./tests/*"]
+    }
   },
-  //"include": ["src","test"],
+  "include": ["tests","src","vite.config.ts"],
+
   //"references": [{ "path": "./tsconfig.node.json" }]
 }
