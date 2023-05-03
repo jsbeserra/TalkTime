@@ -1,6 +1,7 @@
 export interface AppStorage {
     saveUser(user:userStorage):void
     clear():void
+    getUser():userStorage
 }
 
 export interface userStorage {
