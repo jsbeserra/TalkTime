@@ -1,17 +1,23 @@
 import React from 'react'
-import { Circle, Heading, HStack, VStack, Text,Image } from '@chakra-ui/react'
+import { Circle, Heading, HStack, VStack, Text,Image, Button } from '@chakra-ui/react'
 
-const Contact: React.FC = () => {
+interface IContactUi{
+	name:string
+	username:string
+}
+const ContactUi: React.FC <IContactUi>= ({name,username}) => {
+	
 	return (
-		<HStack bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%'>
+		<Button bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%' h='auto'>
 			<Image
 				borderRadius='full'
 				boxSize='60px'
+				marginRight={5}
 				src='https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_960_720.jpg'>
 			</Image>
 			<VStack w='100%' alignItems='flex-start' justifyContent='flex-start'>
 				<HStack w='100%' justifyContent='space-between'>
-					<Heading fontSize='5xs' fontWeight={'medium'}>Fake name</Heading >
+					<Heading fontSize='5xs' fontWeight={'medium'}>{name}</Heading >
 					<Text fontSize='14px'>13:28</Text>
 				</HStack>
 				<HStack w='100%' justifyContent='space-between'>
@@ -19,8 +25,9 @@ const Contact: React.FC = () => {
 					<Circle bg='green' size='20px' color='white' fontSize='14px'>2</Circle>
 				</HStack>
 			</VStack>
-		</HStack>
+		</Button>
+
 	)
 }
 
-export default Contact
+export default ContactUi
