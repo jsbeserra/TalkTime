@@ -1,13 +1,35 @@
-import { Heading, HStack, VStack, Image, Button } from '@chakra-ui/react'
 import React from 'react'
-import { IoMdPersonAdd } from 'react-icons/io'
+import { Heading, HStack, VStack, Image, Button } from '@chakra-ui/react'
+import { IoMdPersonAdd, IoMdPeople } from 'react-icons/io'
+import {MdPendingActions} from 'react-icons/md'
 
 interface IContactButton {
     name: string,
     username: string,
-    email: string
+    email: string,
+	isAContact: boolean,
+    invited:boolean,
+    invitePending?: boolean
+	action: Function
 }
-const ContactButton: React.FC<IContactButton> = ({ email, name, username }) => {
+
+const ContactButton: React.FC<IContactButton> = ({ email, name, username, isAContact, invited , action, invitePending}) => {
+	function renderActionButton(){
+		if (isAContact){
+			return <Button disabled={true}>
+				<IoMdPeople size={25} color="#008000"/>
+			</Button>
+		}	
+		if (invitePending){
+			return <Button disabled={true}>
+				<MdPendingActions size={25} color="#008000"/>
+			</Button>
+		}
+		return <Button onClick={()=>action()}>
+			<IoMdPersonAdd size={25} color="#008000"/>
+		</Button>
+	}
+
 	return (
 		<HStack bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%'>
 			<Image
@@ -21,9 +43,7 @@ const ContactButton: React.FC<IContactButton> = ({ email, name, username }) => {
 					<Heading fontSize='sm' fontWeight={'light'}>{username}</Heading >
 					<Heading fontSize='sm' fontWeight={'light'}>{email}</Heading >
 				</VStack>
-				<Button>
-					<IoMdPersonAdd size={25} color="#008000"/>
-				</Button>
+				{renderActionButton()}
 			</HStack>
 		</HStack>
 	)

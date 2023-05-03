@@ -12,7 +12,7 @@ export class FindContactsController implements ControllerOperation {
 
     async operation(request: HttpRequest): Promise<HttpResponse> {
         try {
-            const result = await this.useCase.handle(request.params.username)
+            const result = await this.useCase.handle(request.query.username)
             return ok(result)
         } catch (err: any) {
             return badRequest(err)

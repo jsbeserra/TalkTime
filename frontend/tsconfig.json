@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": ["node", "jest","@testing-library/jest-dom"],
     "rootDirs": ["src", "tests"],
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -29,7 +29,7 @@
       "@test/*": ["./tests/*"]
     }
   },
-  "include": ["tests","src","vite.config.ts"],
+  "include": ["tests","src","vite.config.ts"]
 
   //"references": [{ "path": "./tsconfig.node.json" }]
 }
