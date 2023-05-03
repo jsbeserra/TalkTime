@@ -14,7 +14,8 @@ export default class ContactsGateway implements IContactsGateway {
 		const users:Contact[] = []
 		if (result.value){
 			for (const user of result.value){
-				users.push(new Contact(user.email,user.name,user.username,user.id))
+				console.log(user)
+				users.push(new Contact(user.email,user.name,user.username,user.id,user.isAContact,user.invited,user.invitePending))
 			}
 		}
 		return right(users)
