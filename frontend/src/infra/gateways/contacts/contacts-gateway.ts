@@ -28,4 +28,16 @@ export default class ContactsGateway implements IContactsGateway {
 	async invite(requester_username: string, targuet_username: string): Promise<Either<ResponseError, any>> {
 		return await this.httpClient.post('invite',{requester_username,targuet_username})
 	}
+
+	async listContacts(username: string): Promise<Either<ResponseError, Contact[]>> {
+		const result = await this.httpClient.get(`contacts?username=${username}`)
+		if (result.isLeft()) return left(new ResponseError(result.value.message,result.value.statusCode))
+		const users:Contact[] = []
+		if (result.isRight()){
+			for (const user of result.value){
+				users.push(new Contact(user.email,user.name,user.username,user.id,user.isAContact,user.invited,user.invitePending))
+			}
+		}
+		return right(users)
+	}
 }
