@@ -1,4 +1,4 @@
-export default interface InputFindContact{
+export default interface InputSearchContacts{
     identifier: string,
     ownerUsername:string
 }
