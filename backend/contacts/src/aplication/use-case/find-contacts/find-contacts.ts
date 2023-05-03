@@ -22,7 +22,7 @@ export default class FindContatcs implements UseCase {
     }
 
     private convertToOutput(users: User[]): OutputFindContacts[] {
-        const output = users.map(user => { return { username: user.username, email: user.email } })
+        const output = users.map(user => { return { username: user.username, email: user.email, name:user.name } })
         return output
     }
 
