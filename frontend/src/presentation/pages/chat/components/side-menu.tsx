@@ -1,13 +1,13 @@
+import React from 'react'
 import { FaUsers } from 'react-icons/fa'
 import { AiFillMessage } from 'react-icons/ai'
 import { IoCallSharp,IoExit } from 'react-icons/io5'
 import { IoMdSettings } from 'react-icons/io'
 import { Button, VStack } from '@chakra-ui/react'
-import React from 'react'
-import MakeFindContacts from '@main/factories/find-contacts-factory'
 import { useSearchContacts } from '@main/context/search-contacts-context'
 import Exit from '@aplication/usecase/exit/exit'
 import { useAuth } from '@main/context/auth-context'
+import MakeSearchContacts from '@main/factories/search-contacts-factory'
 
 interface ISideMenu {
     exit:Exit
@@ -19,7 +19,7 @@ const SideMenu: React.FC<ISideMenu>= ({exit}) => {
 
 	return (
 		<VStack w={'100%'} alignItems={'center'} flexDir='column' justifyContent={'flex-start'}>
-			<MakeFindContacts/>
+			<MakeSearchContacts/>
 			<Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0}>
 				<AiFillMessage size={25} />
 			</Button>
