@@ -5,6 +5,7 @@ import { customtheme } from './infra/theme/custom-theme'
 import './App.css'
 import { AuthProvider } from './main/context/auth-context'
 import { SearchContactsProvider } from './main/context/search-contacts-context'
+import { SideMenuProvider } from '@main/context/side-menu-context'
 
 function App() {
 	return (
@@ -12,9 +13,11 @@ function App() {
 			<HStack className={'app'}>
 				<HStack className='content'>
 					<AuthProvider>
-						<SearchContactsProvider>
-							<Router></Router>
-						</SearchContactsProvider>
+						<SideMenuProvider>
+							<SearchContactsProvider>
+								<Router></Router>
+							</SearchContactsProvider>
+						</SideMenuProvider>
 					</AuthProvider>
 				</HStack>
 			</HStack>
