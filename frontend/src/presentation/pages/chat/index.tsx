@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Flex, HStack, Heading, Circle, Text, VStack, Input, InputGroup, InputRightElement, Divider, Button } from '@chakra-ui/react'
-import Contact from './components/contact'
 import { SearchIcon, ArrowForwardIcon, } from '@chakra-ui/icons'
 import ContentMessages from './components/content-messages'
 import HeaderCurrentChat from './components/header-current-chat'
 import MakeSideMenu from '@main/factories/sideMenu-factory'
+import MakeContentContacts from '@main/factories/content-contacts-factory'
+import { useSideMenu } from '@main/context/side-menu-context'
 
 
 const Chat: React.FC = () => {
 	const [showUserDetails, setShowUserDetails] = useState<boolean>(false)
+	const {isOpenContentContacts} = useSideMenu()
 	function showContact() {
 		setShowUserDetails(!showUserDetails)
 	}
@@ -18,7 +20,7 @@ const Chat: React.FC = () => {
 				<MakeSideMenu />
 			</HStack>
 			<Divider orientation='vertical' />
-			<HStack h={'100%'} w={'350px'} bg='#FAFCFF' flexDir={'column'} p='5' >
+			<HStack h={'100%'} w={'350px'} bg='#FAFCFF' flexDir={'column'} p='5' hidden={!isOpenContentContacts}>
 				<VStack alignItems='flex-start' w='100%'>
 					<HStack pb='3'>
 						<Heading fontSize='3xl' variant='h1'>Mensagens</Heading >
@@ -31,33 +33,8 @@ const Chat: React.FC = () => {
 						/>
 						<Input variant='default' type='tel' placeholder='Phone number' />
 					</InputGroup>
-					{/* <Divider orientation='horizontal' /> */}
 				</VStack>
-
-				<VStack w='100%' spacing='4' p='5' overflowY="auto">
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-					<Contact />
-				</VStack>
+				<MakeContentContacts />
 			</HStack>
 			<Divider orientation='vertical' />
 			<HStack bg='#FAFCFF' h={'100%'} flex='1' width={'auto'} flexDir={'column'} >
