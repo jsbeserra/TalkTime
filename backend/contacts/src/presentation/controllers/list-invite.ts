@@ -1,9 +1,9 @@
 import { UseCase } from '../../aplication/use-case/use-case'
 import { ControllerOperation, HttpRequest, HttpResponse } from '../../infra/http/ports'
-import { badRequest, created } from '../../infra/http/util'
+import { badRequest, ok } from '../../infra/http/util'
 
-export class AddContactController implements ControllerOperation {
-	readonly requiredParams: string[] = ['ownerUserName','contactUserName']
+export class ListInviteController implements ControllerOperation {
+	readonly requiredParams: string[] = ['username']
 	private useCase: UseCase
 
 	constructor(useCase: UseCase) {
@@ -12,8 +12,8 @@ export class AddContactController implements ControllerOperation {
 
 	async operation(request: HttpRequest): Promise<HttpResponse> {
 		try {
-			const result = await this.useCase.handle(request.body)
-			return created(result)
+			const result = await this.useCase.handle(request.query.username)
+			return ok(result)
 		} catch (err: any) {
 			return badRequest(err)
 		}
