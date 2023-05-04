@@ -6,6 +6,8 @@ import HeaderCurrentChat from './components/header-current-chat'
 import MakeSideMenu from '@main/factories/sideMenu-factory'
 import MakeContentContacts from '@main/factories/content-contacts-factory'
 import { useSideMenu } from '@main/context/side-menu-context'
+import MakeSearchContacts from '@main/factories/search-contacts-factory'
+import MakeNotifications from '@main/factories/notification-factory'
 
 
 const Chat: React.FC = () => {
@@ -16,6 +18,8 @@ const Chat: React.FC = () => {
 	}
 	return (
 		<Flex w='100%' h='100%' alignItems={'center'} justifyContent={'flex-start'} >
+			<MakeSearchContacts/>
+			<MakeNotifications/>
 			<HStack h={'100%'} w={'60px'} bg='#F6F8FC'>
 				<MakeSideMenu />
 			</HStack>

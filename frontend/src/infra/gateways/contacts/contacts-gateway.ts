@@ -3,10 +3,10 @@ import Contact from '@domain/entities/contact'
 import { Either, left, right } from '@shared/either'
 import ResponseError from '@shared/response-error'
 import HttpClient from '../../http/http-client'
+import { invite } from '@domain/entities/invite'
 
 export default class ContactsGateway implements IContactsGateway {
 	constructor(readonly httpClient: HttpClient){}
-
 
 	async find(identifier: string,ownerUsername:string): Promise<Either<ResponseError, Contact[]>>{
 		const result = await this.httpClient.get(`users?identifier=${identifier}&ownerUsername=${ownerUsername}`)
@@ -27,6 +27,10 @@ export default class ContactsGateway implements IContactsGateway {
 
 	async invite(requester_username: string, targuet_username: string): Promise<Either<ResponseError, any>> {
 		return await this.httpClient.post('invite',{requester_username,targuet_username})
+	}
+
+	async listInvites(username: string): Promise<Either<ResponseError, invite[]>> {
+		return await this.httpClient.get(`invites?username=${username}`)
 	}
 
 	async listContacts(username: string): Promise<Either<ResponseError, Contact[]>> {

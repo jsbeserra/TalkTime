@@ -13,7 +13,7 @@ interface IContactButton {
 	action: Function
 }
 
-const ContactButton: React.FC<IContactButton> = ({ email, name, username, isAContact, invited , action, invitePending}) => {
+const ContactButton: React.FC<IContactButton> = ({ email, name, username, isAContact , action, invitePending}) => {
 	function renderActionButton(){
 		if (isAContact){
 			return <Button disabled={true}>
