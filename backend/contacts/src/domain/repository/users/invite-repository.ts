@@ -5,4 +5,5 @@ export interface InviteRepository {
     accept(invite:Invite):Promise<void>
     find(requester_username:string):Promise<Invite[]>
     findOne(requester_username:string,targuet_username:string):Promise<Invite | undefined>
+    list(username:string):Promise<Invite[]>
 }

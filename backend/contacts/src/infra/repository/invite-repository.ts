@@ -36,4 +36,15 @@ export default class InviteRepositoryMongoDb implements InviteRepository{
     public async accept(invite:Invite):Promise<void>{
         
     }
+
+    public async list(username: string): Promise<Invite[]> {
+        const collection = await this.connectionMongoDb.getCollection('invites')
+        const invitesDocuments = await collection.find({targuet_username:username}).toArray()
+        let invites:Invite[] = []
+        for(const invite of invitesDocuments){
+            invites.push(new Invite(invite.requester_username,invite.targuet_username,invite.accepted,invite._id.toString()))
+        }
+        return invites
+    }
+
 }
