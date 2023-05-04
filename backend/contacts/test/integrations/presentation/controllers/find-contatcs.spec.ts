@@ -61,7 +61,7 @@ describe('find-contacts controller', () => {
         }
         await collectionContacts.insertOne(contact)
         const input: HttpRequest = {
-            params: {
+            query: {
                 username: 'fakeUser'
             }
         }
