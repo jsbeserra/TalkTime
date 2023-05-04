@@ -1,4 +1,4 @@
-import { UseCase } from "src/aplication/use-case/use-case"
+import { UseCase } from 'src/aplication/use-case/use-case'
 
 export interface Queue {
     connect(): Promise<void>

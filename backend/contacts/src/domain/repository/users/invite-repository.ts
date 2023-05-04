@@ -1,4 +1,4 @@
-import Invite from "src/domain/entities/invite"
+import Invite from 'src/domain/entities/invite'
 
 export interface InviteRepository {
     save(invite:Invite):Promise<void>
