@@ -15,6 +15,8 @@ export default class ListInvites implements UseCase {
 			output.push({
 				requester_username: invite.requester_username,
 				targuet_username: invite.targuet_username,
+				requester_name: invite.requester_name,
+				targuet_name:invite.targuet_name
 			})
 		}
 		return output

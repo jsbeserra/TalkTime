@@ -29,6 +29,8 @@ export default class InviteRepositoryMongoDb implements InviteRepository{
 		await collection.insertOne({
 			requester_username:invite.requester_username,
 			targuet_username:invite.targuet_username,
+			requester_name:invite.requester_name,
+			targuet_name:invite.targuet_name,
 			accepted:invite.accepted
 		})  
 	}
@@ -39,10 +41,10 @@ export default class InviteRepositoryMongoDb implements InviteRepository{
 
 	public async list(username: string): Promise<Invite[]> {
 		const collection = await this.connectionMongoDb.getCollection('invites')
-		const invitesDocuments = await collection.find({targuet_username:username}).toArray()
+		const invitesDocuments = await collection.find({targuet_username:username, accepted:false}).toArray()
 		const invites:Invite[] = []
 		for (const invite of invitesDocuments){
-			invites.push(new Invite(invite.requester_username,invite.targuet_username,invite.accepted,invite._id.toString()))
+			invites.push(new Invite(invite.requester_username,invite.targuet_username,invite.requester_name,invite.targuet_name,invite.accepted,invite._id.toString()))
 		}
 		return invites
 	}
