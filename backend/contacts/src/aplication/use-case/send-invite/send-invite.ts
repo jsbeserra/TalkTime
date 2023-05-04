@@ -14,7 +14,7 @@ export default class SendInvite implements UseCase {
 		if (!existisRequester) throw new Error('requester_username not found')
 		const existisTarguet = await this.usersRepository.findByUserName(input.targuet_username)
 		if (!existisTarguet) throw new Error('targuet_username not found')
-		await this.inviteRepository.save(new Invite(input.requester_username,input.targuet_username))
+		await this.inviteRepository.save(new Invite(input.requester_username,input.targuet_username,existisRequester.name,existisTarguet.name))
 	}
 
 }

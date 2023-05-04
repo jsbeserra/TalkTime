@@ -12,11 +12,12 @@ export default class FindContatcs implements UseCase {
 		if (!existOwner) throw new Error(`User ${username} does not exist`)
 		const contacts = await this.contactsRepository.find(username)
 		const users: User[] = []
-		for (const username of contacts.contacts) {
-			const user = await this.usersRepository.findByUserName(username)
-			if (!user) continue
-			users.push(user)
-		}
+		if (contacts?.contacts)
+			for (const username of contacts.contacts) {
+				const user = await this.usersRepository.findByUserName(username)
+				if (!user) continue
+				users.push(user)
+			}
 		const output = this.convertToOutput(users)
 		return output
 	}
