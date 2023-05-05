@@ -36,7 +36,11 @@ export default class InviteRepositoryMongoDb implements InviteRepository{
 	}
     
 	public async accept(invite:Invite):Promise<void>{
-        
+		const collection = await this.connectionMongoDb.getCollection('invites')
+		await collection.deleteOne({
+			requester_username:invite.requester_username,
+			targuet_username:invite.targuet_username
+		})
 	}
 
 	public async list(username: string): Promise<Invite[]> {
