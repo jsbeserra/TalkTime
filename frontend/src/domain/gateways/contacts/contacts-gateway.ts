@@ -9,4 +9,5 @@ export interface IContactsGateway {
     invite(requester_username: string,targuet_username: string): Promise<Either<ResponseError, void>>
     listInvites(username:string): Promise<Either<ResponseError, invite[]>>
     listContacts(username:string): Promise<Either<ResponseError, Contact[]>>
+    acceptInvite(requester_username: string, targuet_username: string): Promise<Either<ResponseError, void>>
 }

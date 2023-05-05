@@ -5,6 +5,7 @@ import { useSideMenu } from '@main/context/side-menu-context'
 import React, { useCallback, useEffect, useState } from 'react'
 import InviteItem from './components/invite-item'
 import { invite } from '@domain/entities/invite'
+import MakeInviteItem from '@main/factories/invite-item-factory'
 
 interface INotifications {
     listInvites:UseCase
@@ -47,7 +48,7 @@ const Notifications: React.FC <INotifications>= ({listInvites,appStorage}) => {
 					<VStack>
 						<Divider />
 						<VStack h={400} w={'100%'} spacing="4" p="5" overflowY="auto">
-							{invites.map(e=> <InviteItem key={e.targuet_username} username={e.targuet_username} name={e.targuet_name} />)}  
+							{invites.map(e=> <MakeInviteItem key={e.requester_username} username={e.requester_username} name={e.requester_name} />)}  
 						</VStack>
 					</VStack>
 				</ModalBody>
