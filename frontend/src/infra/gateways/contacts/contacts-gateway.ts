@@ -8,6 +8,7 @@ import { invite } from '@domain/entities/invite'
 export default class ContactsGateway implements IContactsGateway {
 	constructor(readonly httpClient: HttpClient){}
 
+
 	async find(identifier: string,ownerUsername:string): Promise<Either<ResponseError, Contact[]>>{
 		const result = await this.httpClient.get(`users?identifier=${identifier}&ownerUsername=${ownerUsername}`)
 		if (result.isLeft()) return left(new ResponseError(result.value.message,result.value.statusCode))
@@ -43,5 +44,11 @@ export default class ContactsGateway implements IContactsGateway {
 			}
 		}
 		return right(users)
+	}
+
+	async acceptInvite(requester_username: string, targuet_username: string): Promise<Either<ResponseError, void>> {
+		const result = await this.httpClient.post('accept/invite',{requester_username,targuet_username})
+		if (result.isLeft()) return left(new ResponseError(result.value.message,result.value.statusCode))
+		return right(undefined)
 	}
 }
