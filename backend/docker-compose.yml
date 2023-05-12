@@ -1,6 +1,16 @@
 
 version: '3'
 services:
+  redis:
+    image: redis
+    container_name: redis-chat
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass 123@Mudar
+
+
+      
   mongo:
     image: mongo
     container_name: mongo-chat
