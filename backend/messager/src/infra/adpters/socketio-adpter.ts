@@ -2,12 +2,13 @@ import { Server as ServerHttp } from 'http'
 import { AppSocket } from 'src/domain/appSocket'
 import { Server, Socket } from 'socket.io'
 import { SocketRepository } from 'src/domain/repository/users/socket-repository'
+import { Queue } from '../queue/queue'
 
 
 export default class SocketIoAdpter implements AppSocket {
 	private io:Server
 
-	constructor(readonly sockerRepository:SocketRepository){}
+	constructor(private sockerRepository:SocketRepository, private queue:Queue){}
 
 	async start(server: ServerHttp) {
 		this.io = new Server(server,{
@@ -22,6 +23,7 @@ export default class SocketIoAdpter implements AppSocket {
 			this.addUsers(username,id)
 			socket.on('messages', async (body: any) => {
 				const { senderUsername, recipientUsername, message, send_at } = body
+				this.queue.publish('messages',body)
 				const target = await this.sockerRepository.get(recipientUsername)
 				if (target) socket.to(target.id).emit('messages', { senderUsername, message, send_at, id:target.id})
 			})
