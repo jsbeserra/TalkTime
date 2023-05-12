@@ -1,18 +1,15 @@
-import http from "http";
-import SocketIoAdpter from "src/infra/adpters/socketio-adpter";
-import ExpressHttpServer from "../infra/http/express/ExpressHttpServer";
-import { makeSendMessage } from "./factories/send-message-factory";
-import 'dotenv/config';
+import 'dotenv/config'
 
-async function main() {
-	const httpServerExpress = new ExpressHttpServer();
-	const httpServer = http.createServer(httpServerExpress.app)
-	const socketIoAdpter = new SocketIoAdpter(httpServer)
-	const sendMessage = makeSendMessage(socketIoAdpter)
-	socketIoAdpter.collect(sendMessage)
-	httpServer.listen(process.env.PORT,()=>{
-		console.log("Server started")
-	})	
-}
+import express from 'express'
+import { createServer } from 'http'
+import { makeSocketIo } from './factories/socketio-factory'
 
-main();
+const app = express()
+const httpServer = createServer(app)
+
+const socket = makeSocketIo()
+socket.start(httpServer)
+
+httpServer.listen(process.env.PORT, () => {
+	console.log('Servidor Socket.IO está ouvindo na porta ' + process.env.PORT)
+})
