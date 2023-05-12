@@ -1,5 +1,5 @@
 import MongoMemoryServer from 'mongodb-memory-server-core'
-import FakeMessager from 'test/infra/fake-messager'
+import FakeMessager from '../../../infra/fake-messager'
 import SendMessage from '../../../../src/aplication/use-case/messages/send-message/send-message'
 import { MessagesRepository } from '../../../../src/domain/repository/users/messages-repository'
 import ConnectionMongoDb from '../../../../src/infra/connection/connectionMongoDb'
