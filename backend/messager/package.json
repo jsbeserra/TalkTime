@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "dev": "tsx watch src/main/main.ts --ignore node_modules"
+    "dev": "tsx watch src/main/main.ts --ignore node_modules",
+    "lint": "eslint . --ext .ts --fix"
   },
   "dependencies": {
     "@types/express": "^4.17.17",
