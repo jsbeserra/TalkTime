@@ -6,18 +6,24 @@ import './App.css'
 import { AuthProvider } from './main/context/auth-context'
 import { SearchContactsProvider } from './main/context/search-contacts-context'
 import { SideMenuProvider } from '@main/context/side-menu-context'
+import MakeSocketProvider from '@main/factories/socket-context-factory'
+import { ContactsProvider } from '@main/context/contacts-context'
 
 function App() {
 	return (
 		<ChakraProvider theme={customtheme}>
 			<HStack className={'app'}>
 				<HStack className='content'>
-					<AuthProvider>
-						<SideMenuProvider>
-							<SearchContactsProvider>
-								<Router></Router>
-							</SearchContactsProvider>
-						</SideMenuProvider>
+					<AuthProvider>						
+						<ContactsProvider>
+							<MakeSocketProvider>
+								<SideMenuProvider>
+									<SearchContactsProvider>
+										<Router></Router>
+									</SearchContactsProvider>
+								</SideMenuProvider>
+							</MakeSocketProvider>
+						</ContactsProvider>
 					</AuthProvider>
 				</HStack>
 			</HStack>
