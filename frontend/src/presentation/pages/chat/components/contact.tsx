@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Circle, Heading, HStack, VStack, Text,Image, Button } from '@chakra-ui/react'
 import { useAppSelector } from '@infra/adpters/redux/store'
 
@@ -9,7 +9,11 @@ interface IContactUi{
 }
 const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 	const chat = useAppSelector(state=>state.messagesCache.chat.find(e=>e.username == username))
-	const time = chat?.lastMessage ? new Date(chat?.lastMessage.sendAt) : null
+	let time
+	useEffect(()=>{
+		time = chat?.lastMessage ? new Date(chat?.lastMessage.sendAt) : null
+	},[chat])
+
 	return (
 		<Button bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
 			<Image
@@ -21,7 +25,9 @@ const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 			<VStack w='100%' alignItems='flex-start' justifyContent='flex-start'>
 				<HStack w='100%' justifyContent='space-between'>
 					<Heading fontSize='5xs' fontWeight={'medium'}>{name}</Heading >
-					<Text fontSize='14px'>{time && time.getHours() + ':' + time.getSeconds() }</Text>
+					{time && (
+						<Text fontSize='14px'>{time != null && time.getHours() + ':' + time.getSeconds() }</Text>
+					)}
 				</HStack>
 				<HStack w='100%' justifyContent='space-between' >
 					<Text textColor="#909294" maxW="140px" overflow="hidden" textOverflow="ellipsis">{chat?.lastMessage.message || ''}</Text>
