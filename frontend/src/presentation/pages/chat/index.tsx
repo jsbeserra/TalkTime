@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
-import { Flex, HStack, Heading, Circle, Text, VStack, Input, InputGroup, InputRightElement, Divider, Button } from '@chakra-ui/react'
-import { SearchIcon, ArrowForwardIcon, } from '@chakra-ui/icons'
-import ContentMessages from './components/content-messages'
-import HeaderCurrentChat from './components/header-current-chat'
+import { Flex, HStack, Heading, Circle, Text, VStack, Input, InputGroup, InputRightElement, Divider } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
 import MakeSideMenu from '@main/factories/sideMenu-factory'
 import MakeContentContacts from '@main/factories/content-contacts-factory'
 import { useSideMenu } from '@main/context/side-menu-context'
 import MakeSearchContacts from '@main/factories/search-contacts-factory'
 import MakeNotifications from '@main/factories/notification-factory'
+import ChatContainerMessages from './components/chat-container-messages'
+import { useContacts } from '@main/context/contacts-context'
+
 
 
 const Chat: React.FC = () => {
 	const [showUserDetails, setShowUserDetails] = useState<boolean>(false)
 	const {isOpenContentContacts} = useSideMenu()
+	const {current} = useContacts()
+
 	function showContact() {
 		setShowUserDetails(!showUserDetails)
 	}
@@ -41,23 +44,7 @@ const Chat: React.FC = () => {
 				<MakeContentContacts />
 			</HStack>
 			<Divider orientation='vertical' />
-			<HStack bg='#FAFCFF' h={'100%'} flex='1' width={'auto'} flexDir={'column'} >
-				<HeaderCurrentChat showUser={showContact} />
-				<Divider orientation='horizontal' m={'0 !important'} />
-				<ContentMessages />
-				<HStack h='80px' w='50%'>
-					<InputGroup pb='3'>
-						<InputRightElement
-							pointerEvents='none'
-							children={
-								<Button bg='#191A1E' color='white'>
-									<ArrowForwardIcon />
-								</Button>}
-						/>
-						<Input variant='default' type='tel' placeholder='Mensagem...' />
-					</InputGroup>
-				</HStack>
-			</HStack>
+			<ChatContainerMessages recipientUsername={current?.username} showDetails={showContact}/>
 			<Divider orientation='vertical' />
 			{showUserDetails && (
 				<HStack bg='#FAFCFF' h={'100%'} minW={300} alignItems='flex-start' justifyContent='center'>
