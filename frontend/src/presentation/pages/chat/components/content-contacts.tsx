@@ -4,6 +4,7 @@ import ContactUi from './contact'
 import { UseCase } from '@aplication/usecase/use-case'
 import { AppStorage } from '@domain/appStorage'
 import Contact from '@domain/entities/contact'
+import { useContacts } from '@main/context/contacts-context'
 
 interface IContentContacts {
     listContacts:UseCase
@@ -12,10 +13,10 @@ interface IContentContacts {
 const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage }) => {
 	const [contacts,setContacts] = useState<Contact[]>([])
 	const ownerUsername = appStorage.getUser().username
+	const {setCurrentContact} = useContacts()
 	const getContacts = async() => {
 		const contacts = await listContacts.handle(ownerUsername)
 		setContacts(contacts.value)
-		console.log(contacts.value)
 	}
 	useEffect(()=>{
 		getContacts()
@@ -23,7 +24,7 @@ const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage }
 
 	return (
 		<VStack w='100%' spacing='4' p='5' overflowY="auto">
-			{contacts.map(contact => <ContactUi key={contact.username} name={contact.name} username={contact.username} />)}	
+			{contacts.map(contact => <ContactUi key={contact.username} name={contact.name} username={contact.username} select={()=>setCurrentContact(contact)}/>)}	
 		</VStack>
 	)
 }
