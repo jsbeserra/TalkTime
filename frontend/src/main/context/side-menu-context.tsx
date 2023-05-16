@@ -5,7 +5,9 @@ interface SideMenuContextData {
     openContentContacts(value: boolean): void
     isOpenContentContacts: boolean
 	openNotifications(value: boolean): void
-	isopenNotifications: boolean
+	isopenNotifications: boolean,
+	notifications:number,
+	setNotifications:React.Dispatch<React.SetStateAction<number>>,
 }
 
 const SideMenuContext = createContext<SideMenuContextData>({} as SideMenuContextData)
@@ -17,7 +19,8 @@ interface PropsSideMenuContextProvider {
 export const SideMenuProvider: React.FC<PropsSideMenuContextProvider> = ({ children }) => {
 	const [isOpenContentContacts, setIsOpenContentContacts] = useState<boolean>(true)
 	const [isopenNotifications, setIsopenNotifications] = useState<boolean>(false)
-	
+	const [notifications,setNotifications] = useState<number>(0)
+
 	const openContentContacts = (value = false) =>{
 		setIsOpenContentContacts(value)
 	}
@@ -26,7 +29,7 @@ export const SideMenuProvider: React.FC<PropsSideMenuContextProvider> = ({ child
 	}
 
 	return (
-		<SideMenuContext.Provider value={{ openContentContacts, isOpenContentContacts, isopenNotifications, openNotifications }}>
+		<SideMenuContext.Provider value={{ openContentContacts, isOpenContentContacts, isopenNotifications, openNotifications,notifications,setNotifications }}>
 			{children}
 		</SideMenuContext.Provider>
 	)

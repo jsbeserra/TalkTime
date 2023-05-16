@@ -3,7 +3,6 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 import { AppStorage } from '@domain/appStorage'
 import { useSideMenu } from '@main/context/side-menu-context'
 import React, { useCallback, useEffect, useState } from 'react'
-import InviteItem from './components/invite-item'
 import { invite } from '@domain/entities/invite'
 import MakeInviteItem from '@main/factories/invite-item-factory'
 
@@ -14,7 +13,7 @@ interface INotifications {
 
 const Notifications: React.FC <INotifications>= ({listInvites,appStorage}) => {
 	const { isOpen,onOpen, onClose } = useDisclosure()
-	const {isopenNotifications,openNotifications} = useSideMenu()
+	const {isopenNotifications,openNotifications,setNotifications} = useSideMenu()
 	const [invites,setInvites] = useState<invite[]>([])
 
 	const closeModal = () => {
@@ -31,9 +30,17 @@ const Notifications: React.FC <INotifications>= ({listInvites,appStorage}) => {
     
 	const findInvites = useCallback(async () => {
 		const ownerUsername = appStorage.getUser().username
-		const usersList = await listInvites.handle(ownerUsername)
-		if (usersList.isRight()) setInvites(usersList.value)
+		const invites = await listInvites.handle(ownerUsername)
+		if (invites.isRight()) setInvites(invites.value)
+		setNotifications(invites.value.length)
 	}, [])
+
+	useEffect(()=>{
+		const interval = setInterval(async() => {
+			await findInvites()		
+		}, 60000)
+		return () => clearInterval(interval)
+	},[])
 
 	return (
 		<Modal isCentered isOpen={isOpen} onClose={closeModal}>
