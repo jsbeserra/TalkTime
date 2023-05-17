@@ -10,7 +10,7 @@ export default class SignGateway implements ISignGateway {
 
 	async singIn(email: string, password: string): Promise<Either<ResponseError, Account>> {
 		const result = await this.httpClient.post('/sign-in', { email, password })
-		if (result.isLeft()) return left(new ResponseError(result.value.message,result.value.statusCode))
+		if (result.isLeft()) return left(new ResponseError('Falha ao realizar login',result.value.statusCode))
 		return right(new Account(result.value.username, result.value.name, result.value.email, result.value.token))
 	}
 
