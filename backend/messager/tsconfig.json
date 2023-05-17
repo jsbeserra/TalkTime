@@ -9,5 +9,9 @@
     "isolatedModules": false,
     "types": ["node", "jest"],
     "resolveJsonModule":true
-  }
+  },
+  "exclude": [
+    "test",
+    "jest.config.js"
+  ]
 }

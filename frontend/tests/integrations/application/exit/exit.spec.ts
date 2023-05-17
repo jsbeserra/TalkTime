@@ -11,7 +11,7 @@ describe('Exit',()=>{
 			username: 'fakeUsername'
 		})
 		const sut = new Exit(sessionStorageAdpter)
-		const result = await sut.handle()
+		const result = await sut.handle(()=>{console.log('fake callback')})
 		expect(result.value).toBeUndefined()
 	})
 })

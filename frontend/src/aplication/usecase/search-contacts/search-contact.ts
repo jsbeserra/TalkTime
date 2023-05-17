@@ -11,8 +11,7 @@ export default class SearchContactsUseCase implements UseCase{
 	async handle(input:InputSearchContacts): Promise<Either<ResponseError, Contact[]>> {
 		const contact = await this.contactsGateway.find(input.identifier,input.ownerUsername)
 		if (contact.isLeft()) return left(contact.value)
-		if (contact.value) return right(contact.value)
-		return right([])
+		return right(contact.value ?? [])
 	}
     
 }

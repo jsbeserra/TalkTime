@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from 'axios'
 import { Either, right, left } from '@shared/either'
 import ResponseError from '@shared/response-error'
 export default class AxiosAdapter implements HttpClient {
-	private apiAxios: AxiosInstance
+	readonly apiAxios: AxiosInstance
 
 	constructor(private baseurl: string) {
 		const axiosInstance = axios.create({})
