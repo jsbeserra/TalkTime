@@ -7,7 +7,7 @@ import ConnectionMongoDb from '../../../../src/infra/connection/connectionMongoD
 import MessagesRepositoryMongoDb from '../../../../src/infra/repository/messages-repository-mongo'
 import UserRepositoryMongo from '../../../../src/infra/repository/user-repository-mongo'
 
-describe('GetMessages', () => {
+describe('GetMessagesByContact', () => {
 	let userRepository: UserRepositoryMongo
 	let messagesRepository: MessagesRepository
 	let connection: ConnectionMongoDb
@@ -57,17 +57,17 @@ describe('GetMessages', () => {
 		await sendMessage.exec({ senderUsername: 'fakeUser', recipientUsername: 'sanoj', message: 'Olá meu chapa', send_at: new Date() })
 		await sendMessage.exec({ senderUsername: 'sanoj', recipientUsername: 'fakeUser', message: 'Olá meu camarada', send_at: new Date() })
 		await sendMessage.exec({ senderUsername: 'sanoj', recipientUsername: 'fakeUser', message: 'Bom dia', send_at: new Date() })
-		const result = await sut.exec({ recipientUsername: 'fakeUser', senderUsername: 'sanoj' })
+		const result = await sut.handle({ recipientUsername: 'fakeUser', senderUsername: 'sanoj' })
 		expect(result.length).toBe(3)
 	})
 
 	test('Não deve buscar uma mensagem se o recipient não existir', async () => {
 		await sendMessage.exec({ senderUsername: 'fakeUser', recipientUsername: 'sanoj', message: 'Olá meu chapa', send_at: new Date() })
-		expect(async()=>await sut.exec({ recipientUsername: 'bil', senderUsername: 'sanoj' })).rejects.toThrow(new Error('Recipient not found'))
+		expect(async()=>await sut.handle({ recipientUsername: 'bil', senderUsername: 'sanoj' })).rejects.toThrow(new Error('Recipient not found'))
 	})
 
 	test('Não deve buscar uma mensagem se o recipient não existir', async () => {
 		await sendMessage.exec({ senderUsername: 'fakeUser', recipientUsername: 'sanoj', message: 'Olá meu chapa', send_at: new Date() })
-		expect(async()=>await sut.exec({ recipientUsername: 'sanoj', senderUsername: 'fakeName' })).rejects.toThrow(new Error('Sender not found'))
+		expect(async()=>await sut.handle({ recipientUsername: 'sanoj', senderUsername: 'fakeName' })).rejects.toThrow(new Error('Sender not found'))
 	})
 })
