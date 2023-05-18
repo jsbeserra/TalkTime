@@ -1,17 +1,17 @@
 import 'dotenv/config'
-
-import express from 'express'
-import { createServer } from 'http'
 import { makeSocketIo } from './factories/socketio-factory'
 import KafkaAdpter from 'src/infra/queue/kafka/kafka-adpter'
 import { makeSaveMessagesQueueConsumerUseCase } from './factories/save-messages-queue'
+import ExpressHttpServer from 'src/infra/http/express/ExpressHttpServer'
 
-const app = express()
-const httpServer = createServer(app)
+
+const server = new ExpressHttpServer()
+
 const kafkaAdpter = new KafkaAdpter(process.env.CLIENTID,[process.env.BROKERS])
 const socket = makeSocketIo(kafkaAdpter)
 makeSaveMessagesQueueConsumerUseCase(kafkaAdpter)
-socket.start(httpServer)
-httpServer.listen(process.env.PORT, () => {
+socket.start(server.httpServer)
+
+server.httpServer.listen(process.env.PORT, () => {
 	console.log('Servidor Socket.IO está ouvindo na porta ' + process.env.PORT)
 })
