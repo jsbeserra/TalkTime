@@ -5,6 +5,8 @@ import { Socket, io } from 'socket.io-client'
 
 import {store} from '@infra/adpters/redux/store'
 import { addMessage } from './redux/messages-slice'
+import { v4 } from 'uuid'
+
 export default class SocketIoClientAdpter implements AppSocket{
 	
 	private _socket:Socket | undefined
@@ -29,7 +31,7 @@ export default class SocketIoClientAdpter implements AppSocket{
 
 			this._socket.on('messages',(data)=>{
 				const {message,senderUsername,id,send_at} = data
-				store.dispatch(addMessage({username:senderUsername,message,me:false,sendAt: new Date(send_at).getTime()}))
+				store.dispatch(addMessage({username:senderUsername,message,me:false,sendAt: new Date(send_at).getTime(),id:v4()}))
 			})
 		}
 		

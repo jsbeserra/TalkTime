@@ -8,6 +8,7 @@ export interface MessagesCache{
 }
 
 interface Message {
+	id:string
     me?:boolean
     message:string,
 	sendAt:number
@@ -21,6 +22,7 @@ const initialState:MessagesCacheState = {
 	chat:[]
 }
 interface inputMessage {
+	id:string
     username:string
     me?:boolean
     message:any,
@@ -31,20 +33,24 @@ export const MessagesCacheSlice= createSlice({
 	initialState,
 	reducers:{
 		addMessage:(state,action:PayloadAction<inputMessage>)=>{
-			const {username,message,me,sendAt} = action.payload
+			const {username,message,me,sendAt,id} = action.payload
 			const exist = state.chat.find(e=>e.username === username)
+			const existisMessage = exist?.messages.find(e=>e.id === id)
+			if (existisMessage) return
 			if (!exist){
 				state.chat.push({
 					messages:[{
 						message,
 						me,
-						sendAt
+						sendAt,
+						id
 					}],
 					username:username,
 					lastMessage:{
 						message,
 						sendAt,
-						me
+						me,
+						id
 					},
 					amountOfNewMessages: 1
 				})
@@ -53,12 +59,14 @@ export const MessagesCacheSlice= createSlice({
 			exist.messages.push({
 				message,
 				me,
-				sendAt
+				sendAt,
+				id
 			})
 			exist.lastMessage = {
 				message,
 				sendAt,
-				me
+				me,
+				id
 			}
 			exist.amountOfNewMessages += 1
 		},

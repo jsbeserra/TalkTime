@@ -4,10 +4,10 @@ import { Either, left, right } from '@shared/either'
 import ResponseError from '@shared/response-error'
 import HttpClient from '../../http/http-client'
 import { invite } from '@domain/entities/invite'
+import { userContact } from '@domain/entities/userContact'
 
 export default class ContactsGateway implements IContactsGateway {
 	constructor(readonly httpClient: HttpClient){}
-
 
 	async find(identifier: string,ownerUsername:string): Promise<Either<ResponseError, Contact[]>>{
 		const result = await this.httpClient.get(`users?identifier=${identifier}&ownerUsername=${ownerUsername}`)
@@ -15,15 +15,10 @@ export default class ContactsGateway implements IContactsGateway {
 		const users:Contact[] = []
 		if (result.value){
 			for (const user of result.value){
-				console.log(user)
 				users.push(new Contact(user.email,user.name,user.username,user.id,user.isAContact,user.invited,user.invitePending))
 			}
 		}
 		return right(users)
-	}
-
-	async add(username: string): Promise<Either<ResponseError, void>>{
-		return right(undefined)
 	}
 
 	async invite(requester_username: string, targuet_username: string): Promise<Either<ResponseError, any>> {
@@ -34,13 +29,18 @@ export default class ContactsGateway implements IContactsGateway {
 		return await this.httpClient.get(`invites?username=${username}`)
 	}
 
-	async listContacts(username: string): Promise<Either<ResponseError, Contact[]>> {
+	async listContacts(username: string): Promise<Either<ResponseError, userContact[]>> {
 		const result = await this.httpClient.get(`contacts?username=${username}`)
 		if (result.isLeft()) return left(new ResponseError(result.value.message,result.value.statusCode))
-		const users:Contact[] = []
+		const users:userContact[] = []
 		if (result.isRight()){
 			for (const user of result.value){
-				users.push(new Contact(user.email,user.name,user.username,user.id,user.isAContact,user.invited,user.invitePending))
+				users.push({
+					id:user.username,
+					email:user.email,
+					name:user.name,
+					username:user.username
+				})
 			}
 		}
 		return right(users)

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {MessagesCacheSlice} from './messages-slice'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
+import { ContactsSlice } from './contacts-slice'
 
 export const store = configureStore({
 	reducer:{
-		messagesCache:MessagesCacheSlice.reducer
+		messagesCache:MessagesCacheSlice.reducer,
+		contacts:ContactsSlice.reducer
 	}
 })
 

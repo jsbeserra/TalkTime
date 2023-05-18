@@ -1,10 +1,10 @@
-import Contact from '@domain/entities/contact'
+import { userContact } from '@domain/entities/userContact'
 import React, { createContext, useContext, useState } from 'react'
 
 
 interface ContactsContextData {
- current:Contact | null
- setCurrentContact(contact:Contact):void
+ current:userContact | null
+ setCurrentContact(contact:userContact):void
 }
 
 const ContactsContext = createContext<ContactsContextData>({} as ContactsContextData)
@@ -14,8 +14,8 @@ interface PropsContactsContextProvider {
 }
 
 export const ContactsProvider: React.FC<PropsContactsContextProvider> = ({ children }) => {
-	const [current,setCurrent] = useState<Contact | null>(null)
-	const setCurrentContact = (contact:Contact) => {
+	const [current,setCurrent] = useState<userContact | null>(null)
+	const setCurrentContact = (contact:userContact) => {
 		setCurrent(contact)
 	}
 	return (

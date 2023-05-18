@@ -4,7 +4,7 @@ import { useAuth } from './auth-context'
 import { AppSocket } from '@domain/appSocket'
 import { useAppDispatch } from '@infra/adpters/redux/store'
 import { addMessage } from '@infra/adpters/redux/messages-slice'
-
+import {v4} from 'uuid'
 
 interface SocketContextData {
  sendMessage:(recipientUsername:string,message:string)=>void
@@ -29,7 +29,7 @@ export const SocketProvider: React.FC<PropsSocketContextProvider> = ({ children,
 
 	const sendMessage = useCallback(async(recipientUsername:string,message:string)=>{
 		await sendMessageUseCase.handle({recipientUsername,message})
-		dispatch(addMessage({username:recipientUsername,message,me:true,sendAt:new Date().getTime()}))
+		dispatch(addMessage({username:recipientUsername,message,me:true,sendAt:new Date().getTime(),id:v4()}))
 	},[dispatch])
 
 	return (
