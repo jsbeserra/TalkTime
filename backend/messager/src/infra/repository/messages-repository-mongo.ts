@@ -18,21 +18,32 @@ export default class MessagesRepositoryMongoDb implements MessagesRepository {
 
 	async getMessages(senderId: string, recipientId: string): Promise<Message[]>{
 		const collection = await this.connectionMongoDb.getCollection('messages')
-		const messagesSender = await collection.find({
-			senderId:senderId,
-			recipientId:recipientId,
-		}).sort({send_at:1}).toArray()
-		const messagesRecipient = await collection.find({
-			senderId:recipientId,
-			recipientId:senderId,
-		}).sort({send_at:1}).toArray()
-		const messages = [...messagesSender,...messagesRecipient]
-		messages.sort(function (a, b) {
-			return a.send_at < b.send_at ? -1 : a.send_at > b.send_at ? 1 : 0
-		})
+
+		const messages = await collection.aggregate([
+			{
+				$match: {
+					$or: [
+						{ senderId: senderId, recipientId: recipientId},
+						{ senderId: recipientId, recipientId: senderId },
+					]
+				}
+			},
+			{
+				$addFields: {
+					me: {
+						$cond: {
+							if: { $eq: ['$senderId', senderId] },
+							then: true,
+							else: false
+						}
+					}
+				}
+			}
+		
+		]).toArray()
 		const messagesArray:Message[] = []
 		for (const message of messages){
-			messagesArray.push(new Message(message.senderId,message.recipientId,message.message,message.send_at))
+			messagesArray.push(new Message(message.senderId,message.recipientId,message.message,message.send_at,message._id,message.me))
 		}
 		return messagesArray
 	}

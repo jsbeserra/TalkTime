@@ -12,6 +12,7 @@ export class WebController {
 	public async handle (request: HttpRequest): Promise<HttpResponse> {
 		try {
 			const missingParams: string = WebController.getMissingParams(request, this.controllerOp.requiredParams)
+			console.log(request)
 			if (missingParams) {
 				return badRequest(new MissingParamError(missingParams))
 			}
@@ -24,9 +25,17 @@ export class WebController {
 	public static getMissingParams (request: HttpRequest, requiredParams: string[]): string {
 		const missingParams: string[] = []
 		requiredParams.forEach(function (name) {
-			if (!Object.keys(request.body).includes(name)) {
-				missingParams.push(name)
+			let notExistParam = false
+			if (request.body && Object.keys(request.body).includes(name)) {
+				if (!notExistParam) notExistParam = true
 			}
+			if (request.query && Object.keys(request?.query)?.includes(name)) {
+				if (!notExistParam) notExistParam = true
+			}
+			if (request.params && Object.keys(request?.params).includes(name)) {
+				if (!notExistParam) notExistParam = true
+			}
+			if (!notExistParam) missingParams.push(name)
 		})
 		return missingParams.join(', ')
 	}
