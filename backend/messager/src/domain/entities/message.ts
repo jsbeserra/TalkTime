@@ -1,6 +1,6 @@
 export default class Message {
 
-	constructor(readonly senderId: string, readonly recipientId: string,readonly message: string, readonly send_at:Date) {
+	constructor(readonly senderId: string, readonly recipientId: string,readonly message: string, readonly send_at:Date,readonly id?:string, readonly me?:boolean) {
 		this.isValidSenderId(senderId)
 		this.isValidRecipientId(recipientId)
 		this.isValidMessage(message)
