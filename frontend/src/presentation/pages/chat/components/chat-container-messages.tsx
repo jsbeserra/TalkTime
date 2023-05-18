@@ -21,7 +21,7 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 
 	useEffect(()=>{
 		if (recipientUsername) store.dispatch(resetAmountOfNewMessages({username:recipientUsername}))
-	},[])
+	},[recipientUsername])
 	
 	const sendMessage = (message:any) =>{
 		if (message == null || recipientUsername == null) return
