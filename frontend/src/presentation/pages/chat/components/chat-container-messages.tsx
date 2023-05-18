@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { HStack, Button, Divider, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
 import {useSocket} from '@main/context/socket-context'
@@ -18,7 +18,11 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 	const buttonRef = useRef<HTMLButtonElement>(null)
 	const socketContext = useSocket()
 	const messages = useAppSelector(state=>state.messagesCache.chat.find(e=>e.username == recipientUsername))
-	if (recipientUsername) store.dispatch(resetAmountOfNewMessages({username:recipientUsername}))
+
+	useEffect(()=>{
+		if (recipientUsername) store.dispatch(resetAmountOfNewMessages({username:recipientUsername}))
+	},[])
+	
 	const sendMessage = (message:any) =>{
 		if (message == null || recipientUsername == null) return
 		if (inputMessage.current && inputMessage.current.value != ''){
@@ -38,7 +42,7 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 			<HeaderCurrentChat showUser={showDetails} />
 			<Divider orientation='horizontal' m={'0 !important'} />
 			<VStack flex={1} w='100%' bg='#F6F8FC' overflowY="auto" margin={'0 !important'} padding={5}>
-				{messages?.messages.map(e=> <Message key={e.message} message={e.message} me={e.me} sendAt={e.sendAt}/>)}
+				{messages?.messages.map(e=> <Message key={e.id} message={e.message} me={e.me} sendAt={e.sendAt}/>)}
 			</VStack> 
 			<HStack h='80px' w='50%'>
 				<InputGroup pb='3'>
