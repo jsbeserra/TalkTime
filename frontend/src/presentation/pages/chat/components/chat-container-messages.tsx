@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useLayoutEffect } from 'react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { HStack, Button, Divider, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
 import {useSocket} from '@main/context/socket-context'
@@ -18,8 +18,12 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 	const buttonRef = useRef<HTMLButtonElement>(null)
 	const socketContext = useSocket()
 	const messages = useAppSelector(state=>state.messagesCache.chat.find(e=>e.username == recipientUsername))
+	const bottomRef = useRef<HTMLDivElement>(null)
 
 	useEffect(()=>{
+		if (bottomRef){
+			bottomRef.current?.scrollIntoView({behavior: 'auto'})
+		}
 		if (recipientUsername) store.dispatch(resetAmountOfNewMessages({username:recipientUsername}))
 	},[recipientUsername])
 	
@@ -43,6 +47,7 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 			<Divider orientation='horizontal' m={'0 !important'} />
 			<VStack flex={1} w='100%' bg='#F6F8FC' overflowY="auto" margin={'0 !important'} padding={5}>
 				{messages?.messages.map(e=> <Message key={e.id} message={e.message} me={e.me} sendAt={e.sendAt}/>)}
+				<div ref={bottomRef} />
 			</VStack> 
 			<HStack h='80px' w='50%'>
 				<InputGroup pb='3'>
