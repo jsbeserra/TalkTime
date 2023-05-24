@@ -1,6 +1,6 @@
-import User from 'src/domain/entities/user'
-import { ContactsRepository } from 'src/domain/repository/contacts-repository'
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import User from '@domain/entities/user'
+import { ContactsRepository } from '@domain/repository/contacts-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import { OutputFindContacts } from './output-find-contacts'
 export default class FindContatcs implements UseCase {

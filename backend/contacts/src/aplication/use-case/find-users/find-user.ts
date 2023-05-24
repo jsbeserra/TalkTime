@@ -1,10 +1,9 @@
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import OutputFindUser from './output-find-User'
-import { ContactsRepository } from 'src/domain/repository/contacts-repository'
+import { ContactsRepository } from '@domain/repository/contacts-repository'
 import { InputFindUsers } from './input-find-users'
-import { InviteRepository } from 'src/domain/repository/users/invite-repository'
-import Invite from 'src/domain/entities/invite'
+import { InviteRepository } from '@domain/repository/users/invite-repository'
 
 export default class FindUsers implements UseCase {
 

@@ -1,8 +1,8 @@
-import ConnectionMongoDb from 'src/infra/connection/connectionMongoDb'
-import UserRepositoryMongo from 'src/infra/repository/user-repository-mongo'
+import ConnectionMongoDb from '@infra/connection/connectionMongoDb'
+import UserRepositoryMongo from '@infra/repository/user-repository-mongo'
 import { environment } from '../config/config'
-import SendInvite from 'src/aplication/use-case/send-invite/send-invite'
-import InviteRepositoryMongoDb from 'src/infra/repository/invite-repository'
+import SendInvite from '@aplication/use-case/send-invite/send-invite'
+import InviteRepositoryMongoDb from '@infra/repository/invite-repository'
 
 
 export const makeSendInviteUseCase = () => {

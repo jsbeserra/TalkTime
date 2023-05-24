@@ -1,7 +1,7 @@
-import { InviteRepository } from 'src/domain/repository/users/invite-repository'
+import { InviteRepository } from '@domain/repository/users/invite-repository'
 import { UseCase } from '../use-case'
 import { outputListInvites } from './output-list-invites'
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 
 export default class ListInvites implements UseCase {
 	constructor(private inviteRepository: InviteRepository,private usersRepository: UserRepository) {}

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { adaptRoute } from 'src/infra/http/express/express-route-adapter'
+import { adaptRoute } from '@infra/http/express/express-route-adapter'
 import { makeAddContactController } from '../factories/add-contact-factory'
 import { makeFindContactController } from '../factories/find-contacts-factory'
 

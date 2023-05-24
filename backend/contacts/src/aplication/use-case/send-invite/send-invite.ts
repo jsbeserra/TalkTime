@@ -1,6 +1,6 @@
-import Invite from '../../../domain/entities/invite'
-import { InviteRepository } from '../../../domain/repository/users/invite-repository'
-import { UserRepository } from '../../../domain/repository/users/user-repository'
+import Invite from '@domain/entities/invite'
+import { InviteRepository } from '@domain/repository/users/invite-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import { inputSendInvite } from './input-send-invite'
 

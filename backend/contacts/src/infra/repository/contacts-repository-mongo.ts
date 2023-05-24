@@ -1,5 +1,5 @@
-import Contacts from '../../domain/entities/contacts'
-import { ContactsRepository } from '../../domain/repository/contacts-repository'
+import Contacts from '@domain/entities/contacts'
+import { ContactsRepository } from '@domain/repository/contacts-repository'
 import ConnectionMongoDb from '../connection/connectionMongoDb'
 
 export default class ContactsRepositoryMongo implements ContactsRepository {
