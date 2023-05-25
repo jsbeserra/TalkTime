@@ -1,7 +1,7 @@
-import { Queue } from 'src/infra/queue/queue'
-import SaveMessage from 'src/aplication/use-case/messages/save-message/save-message'
-import MessagesRepositoryMongoDb from 'src/infra/repository/messages-repository-mongo'
-import ConnectionMongoDb from 'src/infra/connection/connectionMongoDb'
+import { Queue } from '@infra/queue/queue'
+import SaveMessage from '@aplication/use-case/messages/save-message/save-message'
+import MessagesRepositoryMongoDb from '@infra/repository/messages-repository-mongo'
+import ConnectionMongoDb from '@infra/connection/connectionMongoDb'
 import { environment } from '../config/config'
 
 

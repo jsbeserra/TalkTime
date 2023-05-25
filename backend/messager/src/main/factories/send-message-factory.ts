@@ -1,8 +1,8 @@
-import SendMessage from 'src/aplication/use-case/messages/send-message/send-message'
-import Messenger from 'src/domain/messenger'
-import ConnectionMongoDb from 'src/infra/connection/connectionMongoDb'
-import MessagesRepositoryMongoDb from 'src/infra/repository/messages-repository-mongo'
-import UserRepositoryMongo from 'src/infra/repository/user-repository-mongo'
+import SendMessage from '@aplication/use-case/messages/send-message/send-message'
+import Messenger from '@domain/messenger'
+import ConnectionMongoDb from '@infra/connection/connectionMongoDb'
+import MessagesRepositoryMongoDb from '@infra/repository/messages-repository-mongo'
+import UserRepositoryMongo from '@infra/repository/user-repository-mongo'
 import { environment } from '../config/config'
 
 export const makeSendMessage = (messenger:Messenger) => {

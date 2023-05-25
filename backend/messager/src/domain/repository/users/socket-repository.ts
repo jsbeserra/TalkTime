@@ -1,4 +1,4 @@
-import { userSocket } from 'src/domain/entities/userSocket'
+import { userSocket } from '@domain/entities/userSocket'
 
 export interface SocketRepository {
     add(username:string,id:string):Promise<void>

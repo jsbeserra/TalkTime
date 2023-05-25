@@ -1,10 +1,10 @@
-import MessagesRepositoryMongoDb from 'src/infra/repository/messages-repository-mongo'
-import ConnectionMongoDb from 'src/infra/connection/connectionMongoDb'
+import MessagesRepositoryMongoDb from '@infra/repository/messages-repository-mongo'
+import ConnectionMongoDb from '@infra/connection/connectionMongoDb'
 import { environment } from '../config/config'
-import UserRepositoryMongo from 'src/infra/repository/user-repository-mongo'
-import GetMessages from 'src/aplication/use-case/messages/get-messages/get-messages'
-import { WebController } from 'src/infra/http/web-controller'
-import { MessagesController } from 'src/presentation/messages'
+import UserRepositoryMongo from '@infra/repository/user-repository-mongo'
+import GetMessages from '@aplication/use-case/messages/get-messages/get-messages'
+import { WebController } from '@infra/http/web-controller'
+import { MessagesController } from '@presentation/messages'
 
 
 export const makeGetMessagesUseCase = (): WebController => {

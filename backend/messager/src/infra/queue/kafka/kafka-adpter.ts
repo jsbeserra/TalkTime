@@ -1,6 +1,6 @@
 import { Kafka, Producer } from 'kafkajs'
 import { Queue } from '../queue'
-import { UseCase } from 'src/aplication/use-case/use-case'
+import { UseCase } from '@aplication/use-case/use-case'
 
 export default class KafkaAdpter implements Queue {
 	private _kafka: Kafka

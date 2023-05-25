@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import { makeSocketIo } from './factories/socketio-factory'
-import KafkaAdpter from 'src/infra/queue/kafka/kafka-adpter'
+import KafkaAdpter from '@infra/queue/kafka/kafka-adpter'
 import { makeSaveMessagesQueueConsumerUseCase } from './factories/save-messages-queue'
-import ExpressHttpServer from 'src/infra/http/express/ExpressHttpServer'
+import ExpressHttpServer from '@infra/http/express/ExpressHttpServer'
 
 
 const server = new ExpressHttpServer()

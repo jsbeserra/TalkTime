@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { adaptRoute } from 'src/infra/http/express/express-route-adapter'
+import { adaptRoute } from '@infra/http/express/express-route-adapter'
 import { makeGetMessagesUseCase } from '../factories/get-messages'
 
 export default (router: Router): void => {

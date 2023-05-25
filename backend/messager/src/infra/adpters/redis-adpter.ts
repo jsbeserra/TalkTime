@@ -1,5 +1,5 @@
 import Redis from 'ioredis'
-import {environment} from 'src/main/config/config'
+import {environment} from '@main/config/config'
 import { promisify } from 'util'
 
 export default class RedisAdpter{
