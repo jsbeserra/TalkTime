@@ -8,10 +8,10 @@
     "allowJs": true,
     "baseUrl": ".",
     "isolatedModules": false,
-    "types":["vitest/globals"]
-    // "include": [
-    //   "src",
-    //   "test"
-    // ]
+    "types":["vitest/globals"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@test/*": ["test/*"]
+    } 
   }
 }

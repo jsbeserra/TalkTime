@@ -1,5 +1,5 @@
-import { Authentication } from "src/domain/authentication";
-import { UserRepository } from "src/domain/repository/users/user-repository";
+import { Authentication } from "../../../domain/authentication";
+import { UserRepository } from "../../../domain/repository/users/user-repository";
 import { UseCase } from "../use-case";
 import { InputSignIn } from "./input-sign-in";
 import { OutputSignIn } from "./output-sign-in";
