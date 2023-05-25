@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "types": ["node", "jest","@testing-library/jest-dom"],
     "rootDirs": ["src", "tests"],
     "useDefineForClassFields": true,
@@ -20,6 +21,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
+      "@public/*":["./public/*"],
       "@domain/*":["./src/domain/*"],
       "@aplication/*":["./src/aplication/*"],
       "@infra/*":["./src/infra/*"],
