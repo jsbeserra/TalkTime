@@ -1,8 +1,8 @@
 
-import Message from 'src/domain/entities/message'
+import Message from '@domain/entities/message'
 import { UseCase } from '../../use-case'
 import { InputSaveMessage } from './input-save-message'
-import { MessagesRepository } from 'src/domain/repository/users/messages-repository'
+import { MessagesRepository } from '@domain/repository/users/messages-repository'
 
 export default class SaveMessage implements UseCase {
 

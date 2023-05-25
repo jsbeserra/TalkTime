@@ -1,7 +1,7 @@
-import RedisAdpter from 'src/infra/adpters/redis-adpter'
-import SocketIoAdpter from 'src/infra/adpters/socketio-adpter'
-import { Queue } from 'src/infra/queue/queue'
-import SocketRepositoryRedis from 'src/infra/repository/socket-repository-redis'
+import RedisAdpter from '@infra/adpters/redis-adpter'
+import SocketIoAdpter from '@infra/adpters/socketio-adpter'
+import { Queue } from '@infra/queue/queue'
+import SocketRepositoryRedis from '@infra/repository/socket-repository-redis'
 
 export const makeSocketIo = (queue:Queue) => {
 	const redisAdpter = new RedisAdpter()

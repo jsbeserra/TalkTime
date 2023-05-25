@@ -1,4 +1,4 @@
-import Messenger from 'src/domain/messenger'
+import Messenger from '@domain/messenger'
 import Message from '../../../../domain/entities/message'
 import { MessagesRepository } from '../../../../domain/repository/users/messages-repository'
 import { UserRepository } from '../../../../domain/repository/users/user-repository'

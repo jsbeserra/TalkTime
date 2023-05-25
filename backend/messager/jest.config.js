@@ -11,6 +11,11 @@ module.exports = {
 	resetMocks: true,
 	moduleNameMapper: {
 		'^src/(.*)$': '<rootDir>/src/$1',
+		'^@domain/(.*)$': '<rootDir>/src/domain/$1',
+		'^@aplication/(.*)$': '<rootDir>/src/aplication/$1',
+		'^@infra/(.*)$': '<rootDir>/src/infra/$1',
+		'^@main/(.*)$': '<rootDir>/src/main/$1',
+		'^@presentation/(.*)$': '<rootDir>/src/presentation/$1',
 	},
 	setupFiles: ['dotenv/config'],
 }

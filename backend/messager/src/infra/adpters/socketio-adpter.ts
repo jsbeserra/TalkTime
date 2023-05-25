@@ -1,7 +1,7 @@
 import { Server as ServerHttp } from 'http'
-import { AppSocket } from 'src/domain/appSocket'
+import { AppSocket } from '@domain/appSocket'
 import { Server, Socket } from 'socket.io'
-import { SocketRepository } from 'src/domain/repository/users/socket-repository'
+import { SocketRepository } from '@domain/repository/users/socket-repository'
 import { Queue } from '../queue/queue'
 
 

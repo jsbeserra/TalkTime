@@ -1,6 +1,6 @@
-import { SocketRepository } from 'src/domain/repository/users/socket-repository'
+import { SocketRepository } from '@domain/repository/users/socket-repository'
 import RedisAdpter from '../adpters/redis-adpter'
-import { userSocket } from 'src/domain/entities/userSocket'
+import { userSocket } from '@domain/entities/userSocket'
 
 export default class SocketRepositoryRedis implements SocketRepository{
 

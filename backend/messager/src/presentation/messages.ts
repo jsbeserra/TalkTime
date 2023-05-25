@@ -1,6 +1,6 @@
-import { UseCase } from 'src/aplication/use-case/use-case'
-import { ControllerOperation, HttpRequest, HttpResponse } from 'src/infra/http/ports'
-import { badRequest, ok } from 'src/infra/http/util'
+import { UseCase } from '@aplication/use-case/use-case'
+import { ControllerOperation, HttpRequest, HttpResponse } from '@infra/http/ports'
+import { badRequest, ok } from '@infra/http/util'
 
 
 export class MessagesController implements ControllerOperation {

@@ -1,4 +1,4 @@
-import Messenger from 'src/domain/messenger'
+import Messenger from '@domain/messenger'
 
 export default class FakeMessager implements Messenger{
 
