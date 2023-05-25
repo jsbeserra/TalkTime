@@ -1,4 +1,4 @@
-import { TokenManager } from "src/domain/token-manager";
+import { TokenManager } from "../../../domain/token-manager";
 import { UseCase } from "../use-case";
 
 export default class ValidateTokenUseCase implements UseCase {

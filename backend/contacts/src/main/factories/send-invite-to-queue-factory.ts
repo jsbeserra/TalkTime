@@ -1,7 +1,7 @@
-import { WebController } from 'src/infra/http/web-controller'
-import SendToQueue from 'src/aplication/use-case/send-to-queue/send-to-queue'
-import KafkaAdpter from 'src/infra/queue/kafka/kafka-adpter'
-import { SendInviteController } from 'src/presentation/controllers/send-invite'
+import { WebController } from '@infra/http/web-controller'
+import SendToQueue from '@aplication/use-case/send-to-queue/send-to-queue'
+import KafkaAdpter from '@infra/queue/kafka/kafka-adpter'
+import { SendInviteController } from '@presentation/controllers/send-invite'
 import { environment } from '../config/config'
 
 export const makeSendInviteToQueueController = (): WebController => {

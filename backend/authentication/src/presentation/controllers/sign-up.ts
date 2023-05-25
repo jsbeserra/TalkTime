@@ -1,5 +1,5 @@
-import { UseCase } from "src/aplication/use-case/use-case";
-import { ControllerOperation, HttpRequest, HttpResponse } from "src/infra/http/ports";
+import { UseCase } from "../../aplication/use-case/use-case";
+import { ControllerOperation, HttpRequest, HttpResponse } from "../../infra/http/ports";
 import { badRequest, created } from "../../infra/http/util";
 
 export class SignUpController implements ControllerOperation {

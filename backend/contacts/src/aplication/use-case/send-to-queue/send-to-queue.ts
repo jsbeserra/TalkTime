@@ -1,4 +1,4 @@
-import { Queue } from 'src/infra/queue/queue'
+import { Queue } from '@infra/queue/queue'
 import { UseCase } from '../use-case'
 
 export default class SendToQueue implements UseCase{

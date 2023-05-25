@@ -1,6 +1,6 @@
 
-import { ContactsRepository } from 'src/domain/repository/contacts-repository'
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import { ContactsRepository } from '@domain/repository/contacts-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import { InputAddContactUseCase } from './input-add-contact-use-case'
 

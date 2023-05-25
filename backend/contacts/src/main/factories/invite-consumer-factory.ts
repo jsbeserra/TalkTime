@@ -1,5 +1,5 @@
 
-import KafkaAdpter from 'src/infra/queue/kafka/kafka-adpter'
+import KafkaAdpter from '@infra/queue/kafka/kafka-adpter'
 import { environment } from '../config/config'
 import { makeSendInviteUseCase } from './send-invite-factory'
 

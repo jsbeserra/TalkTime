@@ -1,10 +1,10 @@
-import ConnectionMongoDb from 'src/infra/connection/connectionMongoDb'
+import ConnectionMongoDb from '@infra/connection/connectionMongoDb'
 import { environment } from '../config/config'
-import InviteRepositoryMongoDb from 'src/infra/repository/invite-repository'
-import ListInvites from 'src/aplication/use-case/list-invites/list-invites'
-import { WebController } from 'src/infra/http/web-controller'
-import { ListInviteController } from 'src/presentation/controllers/list-invite'
-import UserRepositoryMongo from 'src/infra/repository/user-repository-mongo'
+import InviteRepositoryMongoDb from '@infra/repository/invite-repository'
+import ListInvites from '@aplication/use-case/list-invites/list-invites'
+import { WebController } from '@infra/http/web-controller'
+import { ListInviteController } from '@presentation/controllers/list-invite'
+import UserRepositoryMongo from '@infra/repository/user-repository-mongo'
 
 
 export const makeListInviteController = (): WebController => {

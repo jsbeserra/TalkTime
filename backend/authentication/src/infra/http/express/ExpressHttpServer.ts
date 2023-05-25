@@ -1,7 +1,7 @@
 import HttpServer from "./HttpServer";
 import express,{Express} from "express";
 import cors from "cors";
-import setupRoutes from "src/main/config/setup-routes";
+import setupRoutes from "../../../main/config/setup-routes";
 
 export default class ExpressHttpServer implements HttpServer {
 	app: Express;

@@ -1,5 +1,5 @@
-import Invite from '../../domain/entities/invite'
-import { InviteRepository } from '../../domain/repository/users/invite-repository'
+import Invite from '@domain/entities/invite'
+import { InviteRepository } from '@domain/repository/users/invite-repository'
 import ConnectionMongoDb from '../connection/connectionMongoDb'
 
 export default class InviteRepositoryMongoDb implements InviteRepository{

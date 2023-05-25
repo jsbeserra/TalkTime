@@ -1,6 +1,6 @@
 
-import User from '../../domain/entities/user'
-import { UserRepository } from '../../domain/repository/users/user-repository'
+import User from '@domain/entities/user'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import ConnectionMongoDb from '../connection/connectionMongoDb'
 export default class UserRepositoryMongo implements UserRepository {
 

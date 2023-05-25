@@ -1,9 +1,9 @@
-import { ContactsRepository } from 'src/domain/repository/contacts-repository'
-import { InviteRepository } from 'src/domain/repository/users/invite-repository'
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import { ContactsRepository } from '@domain/repository/contacts-repository'
+import { InviteRepository } from '@domain/repository/users/invite-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import { InputAcceptContact } from './input-accept-contact'
-import { Queue } from 'src/infra/queue/queue'
+import { Queue } from '@infra/queue/queue'
 
 export default class AcceptContact implements UseCase {
 	constructor(private userRepository: UserRepository, private inviteRepository: InviteRepository, private contactsRepository: ContactsRepository, private queue: Queue) { }

@@ -1,4 +1,4 @@
-import { UserRepository } from 'src/domain/repository/users/user-repository'
+import { UserRepository } from '@domain/repository/users/user-repository'
 import { UseCase } from '../use-case'
 import OutputFindUserByEmail from './output-find-User-by-email'
 
