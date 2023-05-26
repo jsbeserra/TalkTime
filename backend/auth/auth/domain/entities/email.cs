@@ -1,9 +1,9 @@
 using System.Text.RegularExpressions;
 public class Email {
-    public string _value {get;}
+    public string value {get;}
     public Email(string value){
         if(!this.validade(value)) throw new ArgumentException("Invalid email");
-        this._value = value;
+        this.value = value;
     }
 
     private bool validade(string value){

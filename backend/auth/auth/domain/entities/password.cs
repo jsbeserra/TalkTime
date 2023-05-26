@@ -1,13 +1,13 @@
 using System.Text.RegularExpressions;
 public class Password {
-    public string _value {get;}
+    public string value {get;}
     public Password(string value){
         if (!this.ValidLength(value))throw new ArgumentException("Invalid length, password must contain at least 6 characters");
         if (!ExistSpecialCharacter(value)) throw new ArgumentException("Password must contain at least one special character");
         if (!ContainACapitalLetter(value)) throw new ArgumentException("Must contain a capital letter");
         if (!ContainALowercaseLetter(value)) throw new ArgumentException("Must contain a lowercase letter");
         if (!ContainANumber(value)) throw new ArgumentException("Must contain numbers");
-        this._value = value;
+        this.value = value;
     }
 
 
