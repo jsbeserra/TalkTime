@@ -5,7 +5,7 @@ public class EmailTest {
         {
             string email = "test@example.com";
             Email emailObj = new Email(email);
-            Assert.Equal(email, emailObj._value);
+            Assert.Equal(email, emailObj.value);
         }
 
         [Fact(DisplayName = "should give 'Invalid email' error if the email is invalid")]
