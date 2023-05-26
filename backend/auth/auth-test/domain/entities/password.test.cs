@@ -7,7 +7,7 @@ public class PasswordTest
     {
         string password = "123@Mudar";
         Password passwordObj = new Password(password);
-        Assert.Equal(password, passwordObj._value);
+        Assert.Equal(password, passwordObj.value);
     }
 
     [Fact(DisplayName = "Should not create password with less than 6 characters")]
