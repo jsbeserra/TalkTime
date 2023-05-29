@@ -1,20 +1,21 @@
 public class PasswordTest
 {
+    private HashPassword hashPassword = new HashPasswordBcryptAdpter();
     public PasswordTest() { }
-
     [Fact(DisplayName = "Should create valid password")]
     public void ShouldCreateValidPassword()
     {
         string password = "123@Mudar";
-        Password passwordObj = new Password(password);
-        Assert.Equal(password, passwordObj.value);
+        Password passwordObj = new Password(password,hashPassword);
+        Assert.NotNull(passwordObj.value);
+        Assert.NotNull(passwordObj.salt);
     }
 
     [Fact(DisplayName = "Should not create password with less than 6 characters")]
     public void ShouldNotCreatePasswordWithLessThan6Characters()
     {
         string password = "123@M";
-        var exception = Assert.Throws<ArgumentException>(() => new Password(password));
+        var exception = Assert.Throws<ArgumentException>(() => new Password(password,hashPassword));
         Assert.Equal("Invalid length, password must contain at least 6 characters", exception.Message);
     }
 
@@ -22,7 +23,7 @@ public class PasswordTest
     public void ShouldNotCreatePasswordIfNoSpecialCharactersAreProvided()
     {
         string password = "123Mudar";
-        var exception = Assert.Throws<ArgumentException>(() => new Password(password));
+        var exception = Assert.Throws<ArgumentException>(() => new Password(password,hashPassword));
         Assert.Equal("Password must contain at least one special character", exception.Message);
     }
 
@@ -30,7 +31,7 @@ public class PasswordTest
     public void ShouldNotCreateInvalidIfNotContainACapitalLetter()
     {
         string password = "123@mudar";
-        var exception = Assert.Throws<ArgumentException>(() => new Password(password));
+        var exception = Assert.Throws<ArgumentException>(() => new Password(password,hashPassword));
         Assert.Equal("Must contain a capital letter", exception.Message);
     }
 
@@ -38,7 +39,7 @@ public class PasswordTest
     public void ShouldNotCreatePasswordIfNotContainALowercaseLetter()
     {
         string password = "123@MUDAR";
-        var exception = Assert.Throws<ArgumentException>(() => new Password(password));
+        var exception = Assert.Throws<ArgumentException>(() => new Password(password,hashPassword));
         Assert.Equal("Must contain a lowercase letter", exception.Message);
     }
 
@@ -47,7 +48,7 @@ public class PasswordTest
     public void ShouldNotCreatePasswordIfNotContainNumbers()
     {
         string password = "aaa@MUDAR";
-        var exception = Assert.Throws<ArgumentException>(() => new Password(password));
+        var exception = Assert.Throws<ArgumentException>(() => new Password(password,hashPassword));
         Assert.Equal("Must contain numbers", exception.Message);
     }
 
