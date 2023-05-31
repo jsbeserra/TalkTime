@@ -36,7 +36,7 @@ using Newtonsoft.Json;
             var payload = new
             {
                 name = "fakeName",
-                username = "fakeUsername",
+                username = "fakeUsernameX",
                 email = "fake@email.com",
                 password = "Fake@123"
             };
