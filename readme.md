@@ -5,14 +5,34 @@
 
 <!-- ABOUT THE PROJECT -->
 ## Sobre o projeto
-Este projeto é um chat desenvolvido para facilitar a troca de mensagens entre usuários. O back-end foi completamente construído utilizando o Node.js e consiste em microserviços, incluindo autenticação, contatos e mensagens. O front-end é implementado com React, e ambos os lados utilizam TypeScript e seguem conceitos de arquitetura limpa (clean architecture), SOLID, DDD e TDD.
+Este projeto é uma aplicação de chat desenvolvida com o objetivo de estudos. Nele, abordamos conceitos como Clean Architecture, SOLID, TDD, DDD, Microserviços, Mensageria, Estratégias de Cache, Comunicação em Tempo Real, Escalabilidade e Resiliência.
 
-Nesse projeto, demos prioridade à qualidade do código e à modularização, seguindo as melhores práticas de desenvolvimento. A utilização do TypeScript proporciona maior segurança e facilita a manutenção do código. A arquitetura limpa nos permite separar as responsabilidades de forma clara, resultando em um código mais organizado e testável.
 
-Além disso, aplicamos os princípios do SOLID, que nos ajudam a desenvolver um código flexível, escalável e facilmente extensível. Utilizamos o DDD (Domain-Driven Design) para mapear e organizar os conceitos de negócio da aplicação, mantendo-os isolados das camadas de infraestrutura. Por fim, adotamos o TDD (Test-Driven Development) para garantir a qualidade do código, escrevendo os testes antes mesmo de implementar as funcionalidades.
+## Microserviços e Escalabilidade
+O back-end da nossa aplicação foi desenvolvido utilizando microserviços em Node.js e C# ASP.NET Core 7. Essa abordagem nos permite dividir a lógica em serviços independentes, tornando o sistema mais flexível e escalável. Cada microserviço é responsável por uma funcionalidade específica, como autenticação, gerenciamento de contatos e troca de mensagens.
 
-Todas essas práticas e conceitos foram incorporados com o objetivo de criar um chat robusto, de fácil manutenção e com potencial de expansão no futuro.
+Para possibilitar a comunicação entre esses microserviços, utilizamos um mecanismo de mensageria. Através dessa abordagem, os serviços trocam mensagens entre si, permitindo a coordenação e o compartilhamento de informações de forma assíncrona e desacoplada. Essa comunicação baseada em mensageria contribui para uma arquitetura distribuída mais robusta e resiliente.
 
+
+## 🚀Tecnologias utilizadas
+Back-end
+* [Node](https://nodejs.org/en)
+* [C# ASP.NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-7.0?view=aspnetcore-7.0)
+* [Entity Framework](https://learn.microsoft.com/pt-br/ef/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [MongoDB](https://www.mongodb.com/)
+* [Redis](https://redis.io/)
+* [Kafka](https://kafka.apache.org/)
+* [Jest](https://jestjs.io/pt-BR/)
+* [xUnit](https://xunit.net/)
+
+Front-end
+* [ReactJS](https://pt-br.reactjs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Vite](https://vitejs.dev/)
+* [Jest](https://jestjs.io/pt-BR/)
+* [Chakra-Ui](https://chakra-ui.com/)
+</br>
 ## Tela principal
 <h1 align="center">
   <img alt="movielist" title="#movielist" src="images/tela principal.png" />
@@ -37,18 +57,6 @@ Todas essas práticas e conceitos foram incorporados com o objetivo de criar um 
 <h1 align="center">
   <img alt="movielist" title="#movielist" src="images/cadastro.png" />
 </h1>
-
-### 🚀Tecnologias utilizadas
-
-* [ReactJS](https://pt-br.reactjs.org/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [Node](https://nodejs.org/en)
-* [MongoDB](https://www.mongodb.com/)
-* [Redis](https://redis.io/)
-* [Kafka](https://kafka.apache.org/)
-* [Vite](https://vitejs.dev/)
-* [Jest](https://jestjs.io/pt-BR/)
-* [Chakra-Ui](https://chakra-ui.com/)
 
 
 ## Deseja testar?
