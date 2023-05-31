@@ -1,19 +1,17 @@
 using System.Text.RegularExpressions;
 public class Password {
     public string value {get;}
-    public string salt {get;}
-    public Password(string value, HashPassword hashPassword){
+    public Password(string value){
         if (!this.ValidLength(value))throw new ArgumentException("Invalid length, password must contain at least 6 characters");
         if (!ExistSpecialCharacter(value)) throw new ArgumentException("Password must contain at least one special character");
         if (!ContainACapitalLetter(value)) throw new ArgumentException("Must contain a capital letter");
         if (!ContainALowercaseLetter(value)) throw new ArgumentException("Must contain a lowercase letter");
         if (!ContainANumber(value)) throw new ArgumentException("Must contain numbers");
-        this.salt = hashPassword.GenerateSalt();
-        this.value = hashPassword.Hash(value,this.salt);
+        this.value = value;
     }
 
 
-     private bool ValidLength(string value) {
+    private bool ValidLength(string value) {
         if (value.Length < 6) return false;
         return true;
     }
