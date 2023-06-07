@@ -5,9 +5,16 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.Services.AddDbContext<DataContext>(options =>
-            options.UseInMemoryDatabase("YourDatabaseName")
-        );
+        bool testMode = args.Contains("--ENVIRONMENT=test");
+        if(!testMode){
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseNpgsql("Server=localhost;Port=5432;Database=accounts;User Id=admin;Password=123@Mudar;")
+            );
+        }else{
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseInMemoryDatabase("YourDatabaseName")
+            );
+        }
 
         builder.Services.AddScoped<DataContext, DataContext>();
 
