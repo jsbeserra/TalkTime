@@ -21,7 +21,7 @@ public class CreateAccount : UseCase<InputCreateAccount, object>
         string salt = this.hashPassword.GenerateSalt(); 
         string hashedPassword = this.hashPassword.Hash(password.value,salt);
         Password encriptyPassword = new Password(hashedPassword);
-        Account account = new Account(name, username, email, password, salt);
+        Account account = new Account(name, username, email, encriptyPassword, salt);
         await this.repository.Create(account);
         return null;
     }
