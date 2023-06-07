@@ -7,21 +7,21 @@ public class AccountRepositoryAdpterEntityFramework:UsersRepository
 
     public async Task<bool> Create(Account account)
     {
-        AccountModel model = new AccountModel(){
+        Accounts model = new Accounts(){
             username = account.username.value,
             name = account.name.value,
             email = account.email.value,
             password = account.password.value,
             salt = account.salt,
         };
-       this.dbcontext._AccountModel.Add(model);
+       this.dbcontext.Accounts.Add(model);
        int affectedRows = await this.dbcontext.SaveChangesAsync();
        return affectedRows > 0;
     }
 
     public async Task<Account?> FindOne(string email)
     {
-        var accountModel = this.dbcontext._AccountModel.Where(e=> e.email == email).FirstOrDefault();
+        var accountModel = this.dbcontext.Accounts.Where(e=> e.email == email).FirstOrDefault();
         if(accountModel == null) return null;
         Name name = new Name(accountModel.name);
         Username username = new Username(accountModel.username);
@@ -33,7 +33,7 @@ public class AccountRepositoryAdpterEntityFramework:UsersRepository
 
     public async Task<Account?> FindOneByUsername(string username)
     {
-        var accountModel = this.dbcontext._AccountModel.Where(e=> e.username == username).FirstOrDefault();
+        var accountModel = this.dbcontext.Accounts.Where(e=> e.username == username).FirstOrDefault();
         if(accountModel == null) return null;
         Name name = new Name(accountModel.name);
         Username _username = new Username(accountModel.username);

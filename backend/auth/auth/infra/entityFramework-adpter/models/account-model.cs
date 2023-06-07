@@ -1,4 +1,4 @@
-public class AccountModel
+public class Accounts
 {
     public int id { get; set; }
     public string name { get; set; } = "";

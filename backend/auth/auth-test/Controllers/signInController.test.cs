@@ -13,6 +13,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     private readonly IServiceScope _serviceScope;
     public SignInControllerTest(WebApplicationFactory<Program> factory)
     {
+        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "test");
         var app = new WebApplicationFactory<Program>();
 
         _client = app.CreateClient();
@@ -25,8 +26,8 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     }
 
     private void clearDbTable(){
-        var registros = _serviceScope.ServiceProvider.GetRequiredService<DataContext>()._AccountModel.ToList();
-        _serviceScope.ServiceProvider.GetRequiredService<DataContext>()._AccountModel.RemoveRange(registros);
+        var registros = _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.ToList();
+        _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.RemoveRange(registros);
         _serviceScope.ServiceProvider.GetRequiredService<DataContext>().SaveChangesAsync();
     }
 
@@ -60,7 +61,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     {
         clearDbTable();
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
-        _serviceScope.ServiceProvider.GetRequiredService<DataContext>()._AccountModel.Add( new AccountModel(){
+        _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.Add( new Accounts(){
             email = "fake@email.com",
             name = "fakename",
             password = "Fake@123",
@@ -89,7 +90,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     public async Task ShouldFailToLoginIfPasswordIsInvalidReturnBadrequest()
     {
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
-        _serviceScope.ServiceProvider.GetRequiredService<DataContext>()._AccountModel.Add( new AccountModel(){
+        _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.Add( new Accounts(){
             email = "fake@email.com",
             name = "fakename",
             password = "Fake@123",

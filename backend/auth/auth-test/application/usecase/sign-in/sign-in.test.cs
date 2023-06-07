@@ -12,7 +12,7 @@ public class SigninUserTest
     }
 
     private void ClearAccounts(){
-        var registros = dbcontext._AccountModel.ToList();
+        var registros = dbcontext.Accounts.ToList();
         dbcontext.RemoveRange(registros);
         dbcontext.SaveChangesAsync();
     }

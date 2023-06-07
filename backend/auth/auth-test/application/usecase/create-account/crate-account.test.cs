@@ -12,12 +12,12 @@ public class CreateUserTest
     }
 
     private void clearAccounts(){
-        var registros = dbcontext._AccountModel.ToList();
+        var registros = dbcontext.Accounts.ToList();
         dbcontext.RemoveRange(registros);
         dbcontext.SaveChangesAsync();
     }
 
-    private void AddAccounts(AccountModel account){
+    private void AddAccounts(Accounts account){
         dbcontext.Add(account);
         dbcontext.SaveChangesAsync();
     }
@@ -44,7 +44,7 @@ public class CreateUserTest
         HashPassword hashPassword = new HashPasswordBcryptAdpter();
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
         AccountRepositoryAdpterEntityFramework repository = new AccountRepositoryAdpterEntityFramework(dbcontext);
-        var account = new AccountModel(){
+        var account = new Accounts(){
             email = "fake@email.com",
             name = "fakename",
             password = "Fake@123",
@@ -66,7 +66,7 @@ public class CreateUserTest
         HashPassword hashPassword = new HashPasswordBcryptAdpter();
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
         AccountRepositoryAdpterEntityFramework repository = new AccountRepositoryAdpterEntityFramework(dbcontext);
-        var account = new AccountModel(){
+        var account = new Accounts(){
             email = "fxake@email.com",
             name = "fakename",
             password = "Fake@123",
