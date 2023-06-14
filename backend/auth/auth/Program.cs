@@ -46,7 +46,12 @@ public class Program
         app.UseAuthorization();
 
         app.UseRouting();
-
+        app.UseCors(builder =>
+        {
+            builder.WithOrigins("http://localhost:5173")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
