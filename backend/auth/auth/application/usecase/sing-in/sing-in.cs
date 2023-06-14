@@ -15,7 +15,7 @@ public class SingIn : UseCase<InputSingIn, OutputSingIn>
         Account account = await this.repository.FindOne(input.email);
         if(account == null) throw new ArgumentException("Account not found");
         string hashedPassword = this.hashPassword.Hash(input.password,account.salt);
-        bool isValidPassword = this.hashPassword.Verify(account.password.value,hashedPassword);
+        bool isValidPassword = this.hashPassword.Verify(input.password,account.password.value);
         if(!isValidPassword) throw new ArgumentException("Account not found");
         string token = this.tokenManager.Sign(account);
         OutputSingIn output = new OutputSingIn(account.username.value,account.name.value,account.email.value,account.salt);
