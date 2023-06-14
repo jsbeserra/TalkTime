@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 public class Accounts
 {
     public int id { get; set; }
@@ -6,5 +8,10 @@ public class Accounts
     public string email { get; set; } = "";
     public string password { get; set; } = "";
     public string salt { get; set; } = "";
+    [Column(TypeName = "timestamp with time zone")]
+    public DateTime? created_at { get; set; }
+    [Column(TypeName = "timestamp with time zone")]
+    public DateTime? updated_at { get; set; }
+
 
 }
