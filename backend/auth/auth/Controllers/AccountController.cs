@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace auth.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("sign-up")]
 public class AccountController : ControllerBase
 {
 
-    [HttpPost(Name = "account")]
+    [HttpPost]
     public async Task<OkResult> CreateAccount(InputCreateAccount input, [FromServices] DataContext dbContext)
     {
         CreateAccountFactory accountFactory = new CreateAccountFactory(dbContext);
