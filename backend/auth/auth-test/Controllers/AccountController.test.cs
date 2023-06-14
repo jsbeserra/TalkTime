@@ -1,7 +1,6 @@
 using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -37,7 +36,7 @@ public class AccountControllerTest : IClassFixture<WebApplicationFactory<Program
             email = "string",
             password = "string"
         };
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Account");
+        var request = new HttpRequestMessage(HttpMethod.Post, "/sign-up");
         request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
         var response = await _client.SendAsync(request);
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -54,7 +53,7 @@ public class AccountControllerTest : IClassFixture<WebApplicationFactory<Program
             email = "fake@email.com",
             password = "Fake@123"
         };
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Account");
+        var request = new HttpRequestMessage(HttpMethod.Post, "/sign-up");
         request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
         var response = await _client.SendAsync(request);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
