@@ -6,12 +6,7 @@ import EnvironmentPlugin from 'vite-plugin-environment'
 export default defineConfig({
 	plugins: [react(),EnvironmentPlugin('all')],
 	define: {
-		'process.env': {
-			VITE_API_URL:'http://localhost:5050/api/',
-			VITE_API_AUTHENTICATION_URL:'http://localhost:5050/api/',
-			VITE_API_CONTACTS_URL:'http://localhost:5051/api/',
-			VITE_API_MESSAGER:'http://localhost:5055'
-		}
+
 	},
 	resolve: {
 		alias: {
