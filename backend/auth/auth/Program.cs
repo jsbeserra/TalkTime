@@ -2,20 +2,28 @@ using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
+
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         bool testMode = args.Contains("--ENVIRONMENT=test");
         if(!testMode){
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            string _connectionString = configuration["DefaultConnection"];
             builder.Services.AddDbContext<DataContext>(options =>
-                options.UseNpgsql("Server=localhost;Port=5432;Database=accounts;User Id=admin;Password=123@Mudar;")
+                options.UseNpgsql(_connectionString)
             );
         }else{
             builder.Services.AddDbContext<DataContext>(options =>
                 options.UseInMemoryDatabase("YourDatabaseName")
             );
         }
-
+        
         builder.Services.AddScoped<DataContext, DataContext>();
 
         builder.Services.AddControllers();
@@ -27,7 +35,12 @@ public class Program
         });
 
         var app = builder.Build();
-
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider
+                .GetRequiredService<DataContext>();
+            dbContext.Database.Migrate();
+        }
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -58,5 +71,4 @@ public class Program
         });
         app.Run();
     }
-
 }
