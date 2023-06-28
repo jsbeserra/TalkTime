@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace auth.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230613182859_accounts")]
+    [Migration("20230627201613_accounts")]
     partial class accounts
     {
         /// <inheritdoc />
@@ -26,13 +26,12 @@ namespace auth.Migrations
 
             modelBuilder.Entity("Accounts", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("created_at")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
