@@ -7,6 +7,7 @@ public class AccountsConfiguration : IEntityTypeConfiguration<Accounts>
     {
         builder.Property(x => x.created_at)
             .HasDefaultValueSql("NOW()")
+            .IsRequired()
             .ValueGeneratedOnAdd();
 
         builder.Property(x => x.updated_at)
