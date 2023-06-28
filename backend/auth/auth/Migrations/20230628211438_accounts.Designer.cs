@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace auth.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230627201613_accounts")]
+    [Migration("20230628211438_accounts")]
     partial class accounts
     {
         /// <inheritdoc />
