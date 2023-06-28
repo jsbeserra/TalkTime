@@ -14,7 +14,7 @@ public class Program
             .AddJsonFile("appsettings.json")
             .Build();
 
-            string _connectionString = configuration["DefaultConnection"];
+            string _connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<DataContext>(options =>
                 options.UseNpgsql(_connectionString)
             );
@@ -41,9 +41,9 @@ public class Program
                 .GetRequiredService<DataContext>();
             dbContext.Database.Migrate();
         }
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
+        // if (app.Environment.IsDevelopment())
+        // {
+            //app.UseDeveloperExceptionPage();
 
             app.UseSwagger();
 
@@ -52,7 +52,7 @@ public class Program
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
                 c.RoutePrefix = string.Empty;
             });
-        }
+        // }
         app.UseMiddleware<ErrorHandlingMiddleware>();
         app.UseHttpsRedirection();
 
@@ -61,9 +61,9 @@ public class Program
         app.UseRouting();
         app.UseCors(builder =>
         {
-            builder.WithOrigins("http://localhost:5173")
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
         });
         app.UseEndpoints(endpoints =>
         {
