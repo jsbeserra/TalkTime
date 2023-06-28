@@ -23,6 +23,8 @@ Back-end
 * [MongoDB](https://www.mongodb.com/)
 * [Redis](https://redis.io/)
 * [Kafka](https://kafka.apache.org/)
+* [Kafka Connect](https://docs.confluent.io/platform/current/connect/index.html)
+* [Postgres](https://www.postgresql.org/)
 * [Jest](https://jestjs.io/pt-BR/)
 * [xUnit](https://xunit.net/)
 
@@ -61,20 +63,20 @@ Front-end
 
 ## Deseja testar?
 
-1 - Para isso basta ir até a pasta back-end abrir o terminal e rodar o comando
+1 - Para isso basta ir até a pasta environment abrir o terminal e rodar o comando
 
 **docker-compose up**
 #
-2 - Abra cada uma das pastas dentro da pasta back-end (authentication, contacts, messager), depois abra um terminal para cada uma delas.
-agora em cada um dos terminais rode o comando.
+2 - Acesse o url http://localhost:9021/
 
-**yarn** ou **npm i** para instalar as dependências
-quando finalizar rode o comando yarn dev ou npm run dev
-#
-3 - Agora abra a pasta front-end, abra um terminal para ela e digite os comandos 
+3 - Quando carregar vá até a opção connect na barra lateral, depois clique em 
+connect-default.
 
-**yarn** ou **npm i** para instalar as dependências
-quando finalizar rode o comando yarn dev ou npm run dev
+4 - Agora clique em Upload connector config file, vá até a pasta environment selecione postgresql.properties e confirme, role a página até o final e clique em
+next, depois em launch, caso nada tenha aparecido na tela aperte F5.
 
-#
-Futuramente sera possível rodar tudo com um só comando.
+5 - Repita o passo 4 para mongo-sink-postgresql.properties e depois para mongo-sink-postgresql-messager.properties
+
+6 - Com tudo finalizado basta acessar a url http://localhost:8081
+
+
