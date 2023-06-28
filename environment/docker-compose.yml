@@ -192,7 +192,7 @@ services:
     networks: 
       - kafka-network
     environment:
-      - MONGODB_NAME=mongodbMessages://admin:admin@mongo:27018
+      - MONGODB_URI=mongodb://admin:admin@mongo:27017
 
   frontend:
     container_name: front
