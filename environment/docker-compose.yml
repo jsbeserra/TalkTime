@@ -42,13 +42,13 @@ services:
     container_name: mongodb-Messages
     restart: always
     ports:
-      - 27018:27018
+      - 27018:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     networks:
       - kafka-network 
-      
+        
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.0
     container_name: zookeeper
@@ -192,7 +192,7 @@ services:
     networks: 
       - kafka-network
     environment:
-      - MONGODB_URI=mongodb://admin:admin@mongo:27017
+      - MONGODB_URI=mongodb://admin:admin@mongodbMessages:27017
 
   frontend:
     container_name: front

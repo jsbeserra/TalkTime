@@ -8,7 +8,7 @@ export default class UserRepositoryMongo implements UserRepository {
 	constructor(readonly connectionMongoDb: ConnectionMongoDb) { }
 
 	async findByUserName(username: string): Promise<User | undefined> {
-		const collection = await this.connectionMongoDb.getCollection('users')
+		const collection = await this.connectionMongoDb.getCollection('Accounts')
 		const result = await collection.findOne({
 			username: username
 		})
@@ -18,7 +18,7 @@ export default class UserRepositoryMongo implements UserRepository {
 	}
 
 	async findByEmail(email: string): Promise<User | undefined> {
-		const collection = await this.connectionMongoDb.getCollection('users')
+		const collection = await this.connectionMongoDb.getCollection('Accounts')
 		const result = await collection.findOne({
 			email: email
 		})
