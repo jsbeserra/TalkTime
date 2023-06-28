@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace auth.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("sign-in")]
 public class SignInController : ControllerBase
 {
 
-    [HttpPost(Name = "signin")]
+    [HttpPost]
     public async Task<IActionResult> CreateAccount(InputSingIn input, [FromServices] DataContext dbContext)
     {
         SingInFactory signinFactory = new SingInFactory(dbContext);

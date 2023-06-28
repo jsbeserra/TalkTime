@@ -45,7 +45,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
             email = "fake@email.com",
             password = "Fake@123"
         };
-        var request = new HttpRequestMessage(HttpMethod.Post, "/signin");
+        var request = new HttpRequestMessage(HttpMethod.Post, "/sign-in");
         request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
 
         var response = await _client.SendAsync(request);
@@ -61,10 +61,11 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     {
         clearDbTable();
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
+        string passwordhashed = new HashPasswordBcryptAdpter().Hash("Fake@123",salt);
         _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.Add( new Accounts(){
             email = "fake@email.com",
             name = "fakename",
-            password = "Fake@123",
+            password = passwordhashed,
             username = "fakeUsername",
             salt = salt
         });
@@ -75,7 +76,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
             email = "fake@email.com",
             password = "Fake@123"
         };
-        var request = new HttpRequestMessage(HttpMethod.Post, "/signin");
+        var request = new HttpRequestMessage(HttpMethod.Post, "/sign-in");
         request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
 
         var response = await _client.SendAsync(request);
@@ -90,10 +91,11 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
     public async Task ShouldFailToLoginIfPasswordIsInvalidReturnBadrequest()
     {
         var salt = new HashPasswordBcryptAdpter().GenerateSalt();
+        string passwordhashed = new HashPasswordBcryptAdpter().Hash("Fake@123",salt);
         _serviceScope.ServiceProvider.GetRequiredService<DataContext>().Accounts.Add( new Accounts(){
             email = "fake@email.com",
             name = "fakename",
-            password = "Fake@123",
+            password = passwordhashed,
             username = "fakeUsername",
             salt = salt
         });
@@ -103,7 +105,7 @@ public class SignInControllerTest : IClassFixture<WebApplicationFactory<Program>
             email = "fake@email.com",
             password = "Fake@4002"
         };
-        var request = new HttpRequestMessage(HttpMethod.Post, "/signin");
+        var request = new HttpRequestMessage(HttpMethod.Post, "/sign-in");
         request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
         var response = await _client.SendAsync(request);
         var content = await response.Content.ReadAsStringAsync();

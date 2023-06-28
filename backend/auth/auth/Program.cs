@@ -2,20 +2,28 @@ using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
+
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         bool testMode = args.Contains("--ENVIRONMENT=test");
         if(!testMode){
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            string _connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<DataContext>(options =>
-                options.UseNpgsql("Server=localhost;Port=5432;Database=accounts;User Id=admin;Password=123@Mudar;")
+                options.UseNpgsql(_connectionString)
             );
         }else{
             builder.Services.AddDbContext<DataContext>(options =>
                 options.UseInMemoryDatabase("YourDatabaseName")
             );
         }
-
+        
         builder.Services.AddScoped<DataContext, DataContext>();
 
         builder.Services.AddControllers();
@@ -27,10 +35,15 @@ public class Program
         });
 
         var app = builder.Build();
-
-        if (app.Environment.IsDevelopment())
+        using (var scope = app.Services.CreateScope())
         {
-            app.UseDeveloperExceptionPage();
+            var dbContext = scope.ServiceProvider
+                .GetRequiredService<DataContext>();
+            dbContext.Database.Migrate();
+        }
+        // if (app.Environment.IsDevelopment())
+        // {
+            //app.UseDeveloperExceptionPage();
 
             app.UseSwagger();
 
@@ -39,19 +52,23 @@ public class Program
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
                 c.RoutePrefix = string.Empty;
             });
-        }
+        // }
         app.UseMiddleware<ErrorHandlingMiddleware>();
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
 
         app.UseRouting();
-
+        app.UseCors(builder =>
+        {
+            builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+        });
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
         app.Run();
     }
-
 }
