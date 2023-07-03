@@ -5,6 +5,8 @@ import React, { createContext, useContext, useState } from 'react'
 interface ContactsContextData {
  current:userContact | null
  setCurrentContact(contact:userContact):void
+ refreshContacts:()=>void
+ refresh:boolean
 }
 
 const ContactsContext = createContext<ContactsContextData>({} as ContactsContextData)
@@ -15,11 +17,16 @@ interface PropsContactsContextProvider {
 
 export const ContactsProvider: React.FC<PropsContactsContextProvider> = ({ children }) => {
 	const [current,setCurrent] = useState<userContact | null>(null)
+	const [refresh,setRefresh] = useState<boolean>(false)
+	
 	const setCurrentContact = (contact:userContact) => {
 		setCurrent(contact)
 	}
+	const refreshContacts = () =>{
+		setRefresh(!refresh)
+	}
 	return (
-		<ContactsContext.Provider value={{current, setCurrentContact }}>
+		<ContactsContext.Provider value={{current, setCurrentContact, refreshContacts, refresh }}>
 			{children}
 		</ContactsContext.Provider>
 	)

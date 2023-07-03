@@ -17,8 +17,10 @@ interface IContentContacts {
 }
 const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage,getMessages }) => {
 	const contacts = useAppSelector(state=>state.contacts).contacts
+	const {refresh} = useContacts()
 	const ownerUsername = appStorage.getUser().username
 	const {setCurrentContact} = useContacts()
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const fetchedContacts = await getContacts()
@@ -26,7 +28,7 @@ const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage,g
 			await getMessagesByContacts(fetchedContacts)
 		}
 		fetchData()
-	}, [])
+	}, [refresh])
 
 	const getContacts = async() => {
 		const contacts = await listContacts.handle(ownerUsername)
