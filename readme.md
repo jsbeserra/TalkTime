@@ -81,5 +81,4 @@ next, depois em launch, caso nada tenha aparecido na tela aperte F5.
 
 ### Observação (Quando adicionar um contato e ele aceitar atualize a página para que ele possa aparecer na sua lista de contatos)
 
-O bug mencionado será corrigido na próxima atualização
 
