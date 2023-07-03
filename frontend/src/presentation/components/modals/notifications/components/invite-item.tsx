@@ -4,6 +4,7 @@ import { BsCheckCircleFill } from 'react-icons/bs'
 import {FcCancel} from 'react-icons/fc'
 import { UseCase } from '@aplication/usecase/use-case'
 import { AppStorage } from '@domain/appStorage'
+import { useContacts } from '@main/context/contacts-context'
 
 
 interface IInviteItem {
@@ -15,6 +16,7 @@ interface IInviteItem {
 
 const InviteItem: React.FC<IInviteItem> = ({ name, username, acceptInvite, appStorage }) => {
 	const [isVisible,setIsVisible] = useState(true)
+	const {refreshContacts} = useContacts()
 	const toast = useToast()
 	const accept = async() =>{
 		const requester_username = appStorage.getUser().username
@@ -38,6 +40,7 @@ const InviteItem: React.FC<IInviteItem> = ({ name, username, acceptInvite, appSt
 			duration: 2000,
 			isClosable: true,
 		})
+		refreshContacts()
 		setIsVisible(false)
 	}
 	return (
