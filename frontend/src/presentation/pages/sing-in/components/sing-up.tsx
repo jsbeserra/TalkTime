@@ -1,4 +1,4 @@
-import { VStack, FormControl, FormLabel, Input, Button, Flex, Divider, Heading, Text, useToast } from '@chakra-ui/react'
+import { VStack, FormControl, FormLabel, Input, Button, Text, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { object, string } from 'yup'
 import { useFormik } from 'formik'
@@ -7,10 +7,10 @@ import SignInUseCase from '@aplication/usecase/sign-in/sign-in'
 import { useAuth } from '@main/context/auth-context'
 
 const userSchema = object().shape({
-	name: string().min(4, 'Minímo de 4 letras').required('Campo obrigatório'),
-	username: string().min(4, 'Minímo de 4 letras').required('Campo obrigatório'),
-	email: string().email().required('Campo obrigatório'),
-	password: string().min(6, 'Minímo de 6 letras').required('Campo obrigatório'),
+	name: string().min(4, 'Minímo de 4 letras.').required('Campo obrigatório'),
+	username: string().min(4, 'Minímo de 4 letras.').required('Campo obrigatório'),
+	email: string().email('E-mail inválido.').required('Campo obrigatório.'),
+	password: string().min(6, 'Minímo de 6 caracteres.').required('Campo obrigatório.'),
 })
 
 interface ISingUp {
@@ -64,44 +64,29 @@ const SignUp: React.FC<ISingUp> = ({ signUpUseCase, signInUseCase }) => {
 	}
 
 	return (
-		<VStack w={'50%'} spacing={4} justifyContent='center' alignItems={'center'} p='10'>
-			<Flex minW='350' flexDir={'column'} justifyContent={'center'} alignItems='center'>
-				<VStack spacing={4} w='100%' marginBottom={5}>
-					<Heading variant={'h1'}>
-                        BEM VINDO
-					</Heading>
-					<Divider />
-					<Heading variant={'h2'}>
-                        Cadastrar
-					</Heading >
-				</VStack>
-				<form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-					<VStack spacing='1' w='100%'>
-						<FormControl h='96px'>
-							<FormLabel>Nome</FormLabel>
-							<Input name='name' onChange={formik.handleChange} />
-							{formik.errors.name ? <Text variant={'error'}>{formik.errors.name}</Text> : null}
-						</FormControl>
-						<FormControl h='96px'>
-							<FormLabel>User name</FormLabel>
-							<Input name='username' onChange={formik.handleChange} />
-							{formik.errors.username ? <Text variant={'error'}>{formik.errors.username}</Text> : null}
-						</FormControl >
-						<FormControl h='96px'>
-							<FormLabel>E-mail</FormLabel>
-							<Input name='email' onChange={formik.handleChange} placeholder="Email" />
-							{formik.errors.email ? <Text variant={'error'}>{formik.errors.email}</Text> : null}
-						</FormControl>
-						<FormControl h='96px'>
-							<FormLabel>Senha</FormLabel>
-							<Input type='password' name='password' placeholder="Password" onChange={formik.handleChange} />
-							{formik.errors.password ? <Text variant={'error'}>{formik.errors.password}</Text> : null}
-						</FormControl>
-						<Button type='submit' variant={'default'} w='100%'>Cadastrar</Button>
-					</VStack>
-				</form>
-			</Flex>
-		</VStack>
+		<form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+			<VStack spacing='4' w='100%'>
+				<FormControl >
+					<FormLabel variant={'flex-b'}>Nome {formik.errors.name ? <Text variant={'error'}>{formik.errors.name}</Text> : null}</FormLabel>
+					<Input bg='transparent' name='name' onChange={formik.handleChange} />	
+				</FormControl>
+				<FormControl>
+					<FormLabel variant={'flex-b'}>User name {formik.errors.username ? <Text variant={'error'}>{formik.errors.username}</Text> : null}</FormLabel>
+					<Input bg='transparent' name='username' onChange={formik.handleChange} />
+				</FormControl >
+				<FormControl>
+					<FormLabel variant={'flex-b'}>E-mail {formik.errors.email ? <Text variant={'error'}>{formik.errors.email}</Text> : null}</FormLabel>
+					<Input bg='transparent' name='email' onChange={formik.handleChange} placeholder="Email" />
+				</FormControl>
+				<FormControl bg='transparent'>
+					<FormLabel variant={'flex-b'}>Senha {formik.errors.password ? <Text variant={'error'}>{formik.errors.password}</Text> : null}</FormLabel>
+					<Input type='password' name='password' placeholder="Password" onChange={formik.handleChange} />
+				</FormControl>
+				<br/>
+				<Button type='submit' variant={'default'} w='100%'>Sign Up</Button>
+			</VStack>
+		</form>
+
 	)
 }
 
