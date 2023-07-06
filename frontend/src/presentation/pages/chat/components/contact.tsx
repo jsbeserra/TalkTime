@@ -9,11 +9,6 @@ interface IContactUi{
 }
 const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 	const chat = useAppSelector(state=>state.messagesCache.chat.find(e=>e.username == username))
-	let time: Date = new Date()
-	useEffect(()=>{
-		if (chat?.lastMessage)
-			time = new Date(chat?.lastMessage.sendAt)
-	},[chat])
 
 	return (
 		<Button bg='white' padding={2} borderRadius={8} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
@@ -27,7 +22,7 @@ const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 				<HStack w='100%' justifyContent='space-between'>
 					<Heading fontSize='5xs' fontWeight={'medium'}>{name}</Heading >
 					{chat?.lastMessage && (
-						<Text fontSize='14px'>{chat?.lastMessage != null && time.getHours() + ':' + time.getSeconds() }</Text>
+						<Text fontSize='14px'>{chat?.lastMessage != null && new Date(chat?.lastMessage.sendAt).getHours() + ':' + new Date(chat?.lastMessage.sendAt).getSeconds() }</Text>
 					)}
 				</HStack>
 				<HStack w='100%' justifyContent='space-between' >
