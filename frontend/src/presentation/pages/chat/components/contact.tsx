@@ -9,14 +9,9 @@ interface IContactUi{
 }
 const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 	const chat = useAppSelector(state=>state.messagesCache.chat.find(e=>e.username == username))
-	let time: Date = new Date()
-	useEffect(()=>{
-		if (chat?.lastMessage)
-			time = new Date(chat?.lastMessage.sendAt)
-	},[chat])
 
 	return (
-		<Button bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
+		<Button bg='white' padding={2} borderRadius={8} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
 			<Image
 				borderRadius='full'
 				boxSize='60px'
@@ -27,12 +22,12 @@ const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 				<HStack w='100%' justifyContent='space-between'>
 					<Heading fontSize='5xs' fontWeight={'medium'}>{name}</Heading >
 					{chat?.lastMessage && (
-						<Text fontSize='14px'>{chat?.lastMessage != null && time.getHours() + ':' + time.getSeconds() }</Text>
+						<Text fontSize='14px'>{chat?.lastMessage != null && new Date(chat?.lastMessage.sendAt).getHours() + ':' + new Date(chat?.lastMessage.sendAt).getSeconds() }</Text>
 					)}
 				</HStack>
 				<HStack w='100%' justifyContent='space-between' >
 					<Text textColor="#909294" maxW="140px" overflow="hidden" textOverflow="ellipsis">{chat?.lastMessage.message || ''}</Text>
-					{chat && chat.amountOfNewMessages > 0 && <Circle bg='green' size='20px' color='white' fontSize='14px'>{chat.amountOfNewMessages}</Circle>}
+					{chat && chat.amountOfNewMessages > 0 && <Circle bg='#059183' size='20px' color='white' fontSize='14px' pt='0.5'>{chat.amountOfNewMessages}</Circle>}
 				</HStack>
 			</VStack>
 		</Button>

@@ -19,7 +19,7 @@ const Message: React.FC<Message> = ({ me = true,message,sendAt }) => {
 	}
 	return (
 		<HStack p='2' minW='100%' justifyContent={me ? 'flex-end' : 'flex-start'}>
-			<Card maxW='sm' height='auto' boxShadow='md' >
+			<Card maxW='sm' height='auto' boxShadow='md' bg='#F6F8FC'>
 				<CardBody padding={2} margin={0} minW={'60px'}>
 					{/* <Image
 						src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
