@@ -20,16 +20,19 @@ export const AuthProvider: React.FC<PropsAuthProvider> = ({ children }) => {
 	useEffect(()=>{
 		hasAuthenticated()
 	},[])
+	useEffect(()=>{
+		if (authenticated == true) hasAuthenticated()
+	},[authenticated])
 	const authenticate = (value = false) =>{
 		setAuthenticated(value)
 	}
 	const hasAuthenticated = () => {
 		const token = sessionStorage.getItem('token')
-		const name =sessionStorage.getItem('name')
+		const nameuser =sessionStorage.getItem('name')
 		const username =sessionStorage.getItem('username')
 		const email =sessionStorage.getItem('email')
-		if (name) setname(name)
-		if (token && name && username && email) setAuthenticated(true)
+		if (nameuser) setname(nameuser)
+		if (token && username && username && email) setAuthenticated(true)
 	}
 	return (
 		<AuthContext.Provider value={{ authenticate, authenticated, name }}>
