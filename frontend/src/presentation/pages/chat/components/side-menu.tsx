@@ -30,7 +30,7 @@ const SideMenu: React.FC<ISideMenu>= ({exit}) => {
 			<Button variant={'icon'} borderRadius={'full'} w={'40px'} h={'40px'} p={0} onClick={()=>openNotification()}>
 				<IoNotifications size={25} />
 				<Text 
-					bg={'green.500'}
+					bg={'#059183'}
 					textAlign={'center'}
 					color={'white'}
 					fontSize={10}
@@ -43,6 +43,7 @@ const SideMenu: React.FC<ISideMenu>= ({exit}) => {
 					display={'flex'}
 					justifyContent={'center'}
 					alignItems={'end'}
+					pb='0.5'
 				>
 					{notifications}					
 				</Text>

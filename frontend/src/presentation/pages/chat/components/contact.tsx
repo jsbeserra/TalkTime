@@ -16,7 +16,7 @@ const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 	},[chat])
 
 	return (
-		<Button bg='white' padding={2} borderRadius={11} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
+		<Button bg='white' padding={2} borderRadius={8} flexDir={'row'} w='100%' h='auto' onClick={()=>select()}>
 			<Image
 				borderRadius='full'
 				boxSize='60px'
@@ -32,7 +32,7 @@ const ContactUi: React.FC <IContactUi>= ({name,username, select}) => {
 				</HStack>
 				<HStack w='100%' justifyContent='space-between' >
 					<Text textColor="#909294" maxW="140px" overflow="hidden" textOverflow="ellipsis">{chat?.lastMessage.message || ''}</Text>
-					{chat && chat.amountOfNewMessages > 0 && <Circle bg='green' size='20px' color='white' fontSize='14px'>{chat.amountOfNewMessages}</Circle>}
+					{chat && chat.amountOfNewMessages > 0 && <Circle bg='#059183' size='20px' color='white' fontSize='14px' pt='0.5'>{chat.amountOfNewMessages}</Circle>}
 				</HStack>
 			</VStack>
 		</Button>

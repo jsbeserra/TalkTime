@@ -33,13 +33,47 @@ export const customtheme = extendTheme({
 			}
 		},
 		Button:{
+			baseStyle: {
+				outline:'none',
+				_focus:{ outline: 'none' },
+				_hover: {
+					borderColor: 'transparent',
+					'svg path':{
+						fill:'#059183',
+					},
+					
+				},
+			},
 			variants: {
+				sendmessage:{
+					fontWeight: 'bold',
+					fontSize:18,
+					bg:'red',
+					outline: 'none',
+					'svg path':{
+						fill:'#3D3D3D',
+						opacity:0.5
+					},
+					_hover: {
+						bg: 'transparent',
+						borderColor: 'transparent',
+						'svg path':{
+							opacity:1,
+							fill:'#059183'
+						}
+					},
+					_focus: {
+						outline: 'none',
+					},
+					padding:'0px'
+				},
 				default: {
 					bg:'#059183',
 					color:'#FAFCFF',
 				},
 				icon:{
-					color:'#011640'
+					//color:'#011640'
+					//color:'#059183'
 				},
 				transparent:{
 					fontWeight: 'bold',
@@ -107,6 +141,28 @@ export const customtheme = extendTheme({
 					},
 				}
 			},
+			variants:{
+				inputmessage:{
+					field: {
+						fontWeight: 'normal',
+						fontSize:18,
+						color:'#3D3D3D',
+						outline: 'none',
+						borderWidth:'1px',
+						padding:5,
+						_hover: {
+							bg: 'transparent',
+							color: '#3D3D3D', 
+							borderColor: 'rgba(61,61,61,0.4)',
+							borderOpacity:0.1
+						},
+						_focus: {
+							//outline: 'none',
+						},
+						
+					}
+				}
+			}
 		},
 		
 	}

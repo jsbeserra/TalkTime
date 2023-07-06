@@ -51,7 +51,7 @@ const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage,g
 
 
 	return (
-		<VStack w='100%' spacing='4' p='5' overflowY="auto">
+		<VStack w='100%' spacing='4' p='0' overflowY="auto">
 			{contacts.map(contact => <ContactUi key={contact.username} name={contact.name} username={contact.username} select={()=>setCurrentContact(contact)}/>)}	
 		</VStack>
 	)

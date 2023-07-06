@@ -4,6 +4,7 @@ import { useState } from 'react'
 interface AuthContextData {
     authenticate(value: boolean): void;
     authenticated: boolean;
+	name?: string
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -14,6 +15,8 @@ interface PropsAuthProvider {
 
 export const AuthProvider: React.FC<PropsAuthProvider> = ({ children }) => {
 	const [authenticated, setAuthenticated] = useState<boolean>(false)
+	const [name,setname] = useState<string>()
+
 	useEffect(()=>{
 		hasAuthenticated()
 	},[])
@@ -25,10 +28,11 @@ export const AuthProvider: React.FC<PropsAuthProvider> = ({ children }) => {
 		const name =sessionStorage.getItem('name')
 		const username =sessionStorage.getItem('username')
 		const email =sessionStorage.getItem('email')
+		if (name) setname(name)
 		if (token && name && username && email) setAuthenticated(true)
 	}
 	return (
-		<AuthContext.Provider value={{ authenticate, authenticated }}>
+		<AuthContext.Provider value={{ authenticate, authenticated, name }}>
 			{children}
 		</AuthContext.Provider>
 	)

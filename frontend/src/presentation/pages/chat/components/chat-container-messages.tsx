@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useLayoutEffect } from 'react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
-import { HStack, Button, Divider, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
+import { HStack, Button, Divider, Input, InputGroup, InputRightElement, VStack, Box } from '@chakra-ui/react'
 import {useSocket} from '@main/context/socket-context'
 import HeaderCurrentChat from './header-current-chat'
 import { store, useAppSelector } from '@infra/adpters/redux/store'
 import Message from './message'
 import { resetAmountOfNewMessages } from '@infra/adpters/redux/messages-slice'
+import background from '@public/assets/vback.jpg'
 
 
 type IChatContent = {
@@ -44,21 +45,31 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 	return (
 		<HStack bg='#FAFCFF' h={'100%'} flex='1' width={'auto'} flexDir={'column'} >
 			<HeaderCurrentChat showUser={showDetails} />
-			<Divider orientation='horizontal' m={'0 !important'} />
-			<VStack flex={1} w='100%' bg='#F6F8FC' overflowY="auto" margin={'0 !important'} padding={5}>
+			<VStack flex={1} w='100%' bg={'#F6F8FC' } overflowY="auto" margin={'0 !important'} padding={5} position={'relative'}>
+				<Box
+					position="absolute"
+					top={0}
+					left={0}
+					right={0}
+					bottom={0}
+					bg={`url(${background})`}
+					opacity={0.2} // Defina a opacidade desejada aqui para a imagem de fundo
+					backgroundSize="cover"
+					zIndex={0}
+				/>
 				{messages?.messages.map(e=> <Message key={e.id} message={e.message} me={e.me} sendAt={e.sendAt}/>)}
 				<div ref={bottomRef} />
 			</VStack> 
-			<HStack h='80px' w='50%'>
+			<HStack h='80px' w='90%'>
 				<InputGroup pb='3'>
 					<InputRightElement
 						pointerEvents='auto'
 						children={
-							<Button type='submit' bg='#191A1E' color='white' ref={buttonRef} onClick={()=>sendMessage(inputMessage)}>
-								<ArrowForwardIcon />
+							<Button variant='sendmessage'type='submit' bg='transparent' color='white' ref={buttonRef} onClick={()=>sendMessage(inputMessage)}>
+								<ArrowForwardIcon/>
 							</Button>}
 					/>
-					<Input variant='default' type='tel' placeholder='Mensagem...' ref={inputMessage} onKeyPress={handleKeyPress} onChange={(e)=>e.target.value}/>
+					<Input variant='inputmessage' placeholder='Mensagem...' ref={inputMessage} onKeyPress={handleKeyPress} onChange={(e)=>e.target.value}/>
 				</InputGroup>
 			</HStack>
 		</HStack>
