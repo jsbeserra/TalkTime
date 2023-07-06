@@ -68,7 +68,7 @@ export const MessagesCacheSlice= createSlice({
 				me,
 				id
 			}
-			exist.amountOfNewMessages += 1
+			if (!me) exist.amountOfNewMessages += 1
 		},
 		resetAmountOfNewMessages:(state,action:PayloadAction<{username:string}>)=>{
 			const {username} = action.payload

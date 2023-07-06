@@ -53,7 +53,7 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 					right={0}
 					bottom={0}
 					bg={`url(${background})`}
-					opacity={0.2} // Defina a opacidade desejada aqui para a imagem de fundo
+					opacity={0.2}
 					backgroundSize="cover"
 					zIndex={0}
 				/>
