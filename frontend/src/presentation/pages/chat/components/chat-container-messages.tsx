@@ -45,18 +45,7 @@ const ChatContainerMessages: React.FC<IChatContent> = ({recipientUsername,showDe
 	return (
 		<HStack bg='#FAFCFF' h={'100%'} flex='1' width={'auto'} flexDir={'column'} >
 			<HeaderCurrentChat showUser={showDetails} />
-			<VStack flex={1} w='100%' bg={'#F6F8FC' } overflowY="auto" margin={'0 !important'} padding={5} position={'relative'}>
-				<Box
-					position="absolute"
-					top={0}
-					left={0}
-					right={0}
-					bottom={0}
-					bg={`url(${background})`}
-					opacity={0.2}
-					backgroundSize="cover"
-					zIndex={0}
-				/>
+			<VStack flex={1} w='100%' backgroundImage={background} backgroundSize={'cover'} overflowY="auto" margin={'0 !important'} padding={5}>
 				{messages?.messages.map(e=> <Message key={e.id} message={e.message} me={e.me} sendAt={e.sendAt}/>)}
 				<div ref={bottomRef} />
 			</VStack> 
