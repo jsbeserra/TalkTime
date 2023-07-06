@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 interface ContactsContextData {
  current:userContact | null
- setCurrentContact(contact:userContact):void
+ setCurrentContact(contact?:userContact):void
  refreshContacts:()=>void
  refresh:boolean
 }

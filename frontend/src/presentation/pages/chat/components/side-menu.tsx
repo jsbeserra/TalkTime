@@ -11,6 +11,7 @@ import { useSideMenu } from '@main/context/side-menu-context'
 import { store } from '@infra/adpters/redux/store'
 import { clearContacts } from '@infra/adpters/redux/contacts-slice'
 import { clearMessages } from '@infra/adpters/redux/messages-slice'
+import { useContacts } from '@main/context/contacts-context'
 
 interface ISideMenu {
     exit:Exit
@@ -20,11 +21,13 @@ const SideMenu: React.FC<ISideMenu>= ({exit}) => {
 	const {toogle} = useSearchContacts()
 	const {openContentContacts,isOpenContentContacts,isopenNotifications,openNotifications,notifications,setNotifications} = useSideMenu()
 	const {authenticate} = useAuth()
-
+	const {setCurrentContact} = useContacts()
+	
 	const loggof =()=> {
 		exit.handle(authenticate)
 		store.dispatch(clearContacts())
 		store.dispatch(clearMessages())
+		setCurrentContact()
 	}
 	const openNotification = () =>{
 		openNotifications(!isopenNotifications)

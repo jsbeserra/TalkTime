@@ -36,6 +36,7 @@ const ContentContacts: React.FC<IContentContacts> = ({ listContacts,appStorage,g
 		for (const contact of contacts.value){
 			store.dispatch(addContact({email:contact.email,id:contact.id,name:contact.name,username:contact.username}))
 		}
+		setCurrentContact(contacts.value[0])
 		return contacts.value
 	}
 
