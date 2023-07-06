@@ -25,9 +25,12 @@ export const ContactsSlice= createSlice({
 				state.contacts.push({email,id,name,username})
 				return
 			}
+		},
+		clearContacts:(state)=>{
+			state.contacts = []
 		}
 	}
 })
 
 export default ContactsSlice.reducer
-export const {addContact} = ContactsSlice.actions
+export const {addContact,clearContacts} = ContactsSlice.actions

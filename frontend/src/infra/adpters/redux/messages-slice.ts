@@ -74,9 +74,12 @@ export const MessagesCacheSlice= createSlice({
 			const {username} = action.payload
 			const chat =state.chat.find(x=>x.username === username)
 			if (chat) chat.amountOfNewMessages = 0
+		},
+		clearMessages:(state)=>{
+			state.chat = []
 		}
 	}
 })
 
 export default MessagesCacheSlice.reducer
-export const {addMessage,resetAmountOfNewMessages} = MessagesCacheSlice.actions
+export const {addMessage,resetAmountOfNewMessages,clearMessages} = MessagesCacheSlice.actions
