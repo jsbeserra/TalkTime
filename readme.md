@@ -79,6 +79,6 @@ next, depois em launch, caso nada tenha aparecido na tela aperte F5.
 
 6 - Com tudo finalizado basta acessar a url http://localhost:8081
 
-### Observação (Quando adicionar um contato e ele aceitar atualize a página para que ele possa aparecer na sua lista de contatos)
+## Observação (Quando adicionar um contato e ele aceitar atualize a página para que ele possa aparecer na sua lista de contatos), isto não é um erro, mas sim uma feature ainda não desenvolvida.
 
 
