@@ -1,4 +1,4 @@
-<h4 align="movielist"> 
+<h4 align="talktime"> 
 	🚧 Em desenvolvimento... 🚧
 </h4>
 
@@ -13,6 +13,10 @@ O back-end da nossa aplicação foi desenvolvido utilizando microserviços em No
 
 Para possibilitar a comunicação entre esses microserviços, utilizamos um mecanismo de mensageria. Através dessa abordagem, os serviços trocam mensagens entre si, permitindo a coordenação e o compartilhamento de informações de forma assíncrona e desacoplada. Essa comunicação baseada em mensageria contribui para uma arquitetura distribuída mais robusta e resiliente.
 
+## Arquitetura
+<h1 align="center">
+  <img alt="talktime" title="#arquitetura" src="./Architecture.jpg" />
+</h1>
 
 ## 🚀Tecnologias utilizadas
 Back-end
@@ -37,27 +41,27 @@ Front-end
 </br>
 ## Tela principal
 <h1 align="center">
-  <img alt="movielist" title="#movielist" src="images/tela principal.png" />
+  <img alt="talktime" title="#talktime" src="images/tela principal.png" />
 </h1>
 
 ## Modal de notificações
 <h1 align="center">
-  <img alt="movielist" title="#movielist" src="images/convite.png" />
+  <img alt="talktime" title="#talktime" src="images/convite.png" />
 </h1>
 
 ## Modal para pesquisa de novos contatos
 <h1 align="center">
-  <img alt="movielist" title="#movielist" src="images/busca de contatos.png" />
+  <img alt="talktime" title="#talktime" src="images/busca de contatos.png" />
 </h1>
 
 ## Tela de login
 <h1 align="center">
-  <img alt="movielist" title="#movielist" src="images/login.png" />
+  <img alt="talktime" title="#talktime" src="images/login.png" />
 </h1>
 
 ## Tela de cadastro
 <h1 align="center">
-  <img alt="movielist" title="#movielist" src="images/cadastro.png" />
+  <img alt="talktime" title="#talktime" src="images/cadastro.png" />
 </h1>
 
 
